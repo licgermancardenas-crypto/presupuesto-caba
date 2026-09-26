@@ -1,0 +1,755 @@
+jur,ue,ue_desc
+1,10,Secretaria Administrativa
+2,20,Auditoria Ciudad De Buenos Aires
+3,30,Defensoria Del Pueblo
+5,70,Ministerio Publico
+5,71,Ministerio Público Fiscal
+6,50,Tribunal Superior
+7,51,Consejo De La Magistratura
+8,81,Sindicatura General De La Ciudad De Buenos Aires
+9,730,Procuracion General De La Ciudad
+20,60,Oficina De Integridad Pública
+20,61,Subsecretaría De Posicionamiento Y Gestión De Eventos
+20,62,Dirección General Planificación Y Vinculación Estratégica De Eventos
+20,63,Dirección General Coordinación De Eventos Y Transformación Territorial
+20,64,Dirección General Celebraciones Y Eventos Centrales
+20,72,Unidad De Analisis Prospectivo
+20,73,Unidad De Asuntos Públicos
+20,76,Dirección General Seguimiento Organismos De Control Y Acceso A La Información
+20,83,Subsecretaría De Asuntos Jurídicos
+20,84,Dirección General Coordinación Legal
+20,85,Dirección General Coordinación Y Consolidación Normativa
+20,96,Dirección General Acceso A La Información Y Gobierno Abierto
+20,100,Jefe De Gobierno
+20,101,Secretaria Legal Y Tecnica
+20,112,"Consejo De Los Derechos De Las Niñas, Niños Y Adolescentes"
+20,113,Ente Regulador De Los Servicios Publicos
+20,118,Direccion General De Escribania General
+20,127,Ente Regulador De Los Servicios Públicos
+20,138,Secretaria De Bienestar Integral
+20,139,Dirección General Personas Mayores
+20,141,Direccion General Promocion Y Bienestar Social
+20,142,Direccion General Politicas Asistenciales Para Personas Mayores
+20,144,Dirección General Competencias Comunales Y Talleres
+20,146,"Dir.Gral.Mesa De Entradas, Salidas Y Archivo"
+20,168,Unidad De Coordinacion Del Plan Estrategico
+20,174,Direccion General Planificacion Estrategica Y Control De Gestion
+20,175,Unidad De Formación En Estrategias Urbanas Y Redes De Ciudades
+20,204,Dirección General Relacionamiento Internacional
+20,205,Subsecretaría De Promoción Y Desarrollo Universitario
+20,206,Dirección General Vinculación Universitaria
+20,207,Dirección General Desarrollo Universitario
+20,214,Secretaria De Medios
+20,220,Unidad De Coordinacion Del Plan Estrategico
+20,227,Subsecretaría De Relaciones Estratégicas Y Análisis Prospectivo
+20,228,Subsecretaría De Servicios Al Ciudadano
+20,229,Subsecretaría De Gestión Comunal
+20,230,Secretaría De Atención Ciudadana Y Gestión Comunal
+20,243,Direccion General Promocion De Políticas Para Personas Con Discapacidad
+20,244,Dir. Gral. Coordinación Legal Y De Recursos Físicos En Bienestar
+20,245,Dir. Gral. Responsabilidad Social
+20,246,Subsecretaría De Comunicación Digital
+20,247,Dirección General Planificación Estratégica
+20,248,Dirección General Coordinación De Información
+20,249,Dirección General Coordinación De Acciones De Comunicación Y Enlace
+20,257,Subsecretaría De De Proyectos Estratégicos Y Relación Con Organismos Multilaterales
+20,259,Unidad De Asuntos Politicos
+20,261,Instituto Superior De La Carrera
+20,265,Dirección General Ciudad Amigable
+20,268,Dirección General Cooperación Y Fortalecimiento Institucional
+20,271,Upe Instituto De Formación Política Y Gestión Pública
+20,284,Subsecretaría De Relacionamiento Político
+20,297,Dirección General Sanidad Y Cuidado Responsable De Caninos Y Felinos Domésticos
+20,299,Dirección General Gestión Animal
+20,344,Subsecretaría De Asuntos Estratégicos
+20,346,Subsecretaría De Análisis Prospectivo
+20,1032,Secretaría De Asuntos Estratégicos
+20,1033,Dirección General Protocolo Y Ceremonial
+20,1034,Dirección General Cooperación Bilateral
+20,1035,Dirección General Cooperación Multilateral
+20,1036,Dirección General Relaciones Institucionales
+20,1040,Dirección General Cercanía Y Vinculación Digital
+20,1041,Subsecretaria De Relaciones Institucionales Y Comunicación
+20,1042,Dirección General Relaciones Institucionales Y Entidades
+20,1043,Dirección General Comunicación
+20,1044,Subsecretaría De Cultura Ciudadana Y Responsabilidad Social
+20,1045,Dirección General Transformación Cultural
+20,1046,Dirección General De La Mujer
+20,1054,Consejo De Planeamiento Estratégico
+20,1061,Subsecretaría De Gestión Comunal
+20,1062,Dirección General De Obras Comunales
+20,1063,Dirección General Espacios Verdes Y Arbolado
+20,1064,Dirección General De Cementerios
+20,1107,Subsecretaria De Desarrollo Ciudadano
+20,1112,"Consejo De Los Derechos De Las Niñas, Niños Y Adolescentes"
+20,2003,Direccion General Calidad Institucional Y Gobierno Abierto
+20,2004,Subsecretaria De Relaciones Internacionales E Institucionales
+20,2007,Secretaria De Desarrollo Ciudadano
+20,2010,Subs.Derechos Humanos Y Pluralismo Cultural
+20,2013,Consejo De Gestion Del Parque De La Memoria
+20,2022,Direccion General Relaciones Internacionales Y Cooperacion
+20,2024,Subsecretaria De Relaciones Internacionales
+20,2028,Direccion General Proyeccion Internacional
+20,2029,Subsecretaria De Relaciones Institucionales
+20,2030,Dirección General Relaciones Con El Tercer Sector Y Organismos Públicos
+20,2031,Dirección General Relaciones Con El Sector Privado
+20,2032,Unidad Para La Igualdad De Género Y Asuntos Institucionales
+20,2066,Direccion General Promocion De Derechos Para Personas Mayores
+20,2067,Dirección General Investigación De Políticas Para Personas Con Discapacidad
+20,2069,Dirección General Promoción De Derechos De Las Mujeres
+20,2401,Comuna 1
+20,2402,Comuna 2
+20,2403,Comuna 3
+20,2404,Comuna 4
+20,2405,Comuna 5
+20,2406,Comuna 6
+20,2407,Comuna 7
+20,2408,Comuna 8
+20,2409,Comuna 9
+20,2410,Comuna 10
+20,2411,Comuna 11
+20,2412,Comuna 12
+20,2413,Comuna 13
+20,2414,Comuna 14
+20,2415,Comuna 15
+20,2500,Ls1 Radio De La Ciudad Y Fm 2x4
+20,2501,Señal De Cable Ciudad Abierta
+20,2505,Subsecretaria De Medios Y Prensa
+20,2506,Direccion General Planeamiento De Medios
+20,2508,Subsecretaría De Posicionamiento Y Gestión De Eventos
+20,2512,Subsecretaría Comunicación Social
+20,3101,Comuna 1
+20,3102,Comuna 2
+20,3103,Comuna 3
+20,3104,Comuna 4
+20,3105,Comuna 5
+20,3106,Comuna 6
+20,3107,Comuna 7
+20,3108,Comuna 8
+20,3109,Comuna 9
+20,3110,Comuna 10
+20,3111,Comuna 11
+20,3112,Comuna 12
+20,3113,Comuna 13
+20,3114,Comuna 14
+20,3115,Comuna 15
+20,3151,Subsecretaria De La Mujer
+20,3153,Comisión Para La Plena Participación E Integración De Personas Con Discapacidad
+20,3156,Subseecretaría De Transformación Cultural Y Responsabilidad Social
+20,3157,Órgano Garante Del Derecho De Acceso A La Información
+20,3158,Subsecretaría De Cultura Ciudadana Y Derechos Humanos
+20,3159,Subecretaría De Ambiente
+20,3160,Dirección General Desarrollo Sostenible Y Economía Circular
+20,3161,Dirección General Áreas De Conservación Y Restauración Ambiental
+20,3162,Upe Ecoparque
+20,3163,Agencia Ambiental
+20,3164,Dirección General De Control Ambiental
+20,3165,Dirección General De Evaluación Ambiental
+20,3166,Dirección General De Política Y Estrategia Ambiental
+20,3167,Dirección General Políticas De Juventud
+20,3169,Dir. Gral. Convivencia En La Diversidad
+20,3170,Direccion General De Política Y Estrategia Ambiental
+20,3171,Direccion General Vida Independiente E Inclusión Económica
+20,3172,Direccion General De Accesibilidad Universal
+20,3230,Dg.Mediación Y Convivencia Vecinal
+20,3231,Subs.Servicios Al Ciudadano
+20,3232,Subsecretaría De Asuntos Públicos Territoriales
+20,3233,Dirección General Participación Ciudadana Y Cercanía
+20,3234,Subsecretaria De Articulación Y Fortalecimiento Territorial
+20,3235,Subsecretaria De Relaciones Federales
+20,3236,Dirección General Representaciones De La Ciudad
+20,3237,Dirección General Registro Civil Y Capacidad De Las Personas
+20,3238,Direccion General Colectividades Y Migrantes
+20,3239,Direccion General Entidades
+20,3242,Subsecretaría De Relaciones Internacionales
+20,3244,Secretaría General
+20,3245,Subsecretaria De Relaciones Institucionales
+20,3246,Dirección General Cultos
+20,3247,Direccion General Cultura Del Servicio Publico
+20,3248,Direccion General Innovacion En Transformacion Cultural
+20,3249,Direccion General Fortalecimiento Politicas De Igualdad De Género
+20,3250,Direccion General Autonomía Económica De La Mujer
+20,3260,Dirección General Análisis Prospectivo
+20,3261,Dirección General Proyectos Estratégicos
+20,3262,Subsecretaría De Gobierno
+20,3263,Subsecretaría De Servicios
+20,3264,Subsecretaria De Vinculación Ciudadana
+20,3267,Unidad De Relaciones Federales Y Vinculación Interjurisdiccional
+20,3269,Dirección General Arbolado
+20,3270,Dirección General Espacios Verdes
+20,3400,Secretaría De Comunicación
+20,3401,Ls1 Radio De La Ciudad Y Fm 2x4
+20,3402,Subsecretaría De Medios Y Prensa
+20,3403,Dirección General Planeamiento De Medios
+20,3404,Dirección General De Prensa
+20,3405,Dirección General Actos De Gobierno Y Agenda
+20,3406,Señal De Cable De La Ciudad
+20,3407,Subsecretaría De Comunicación Social
+20,3408,Dirección General Discurso Y Planificación Comunicacional
+20,3409,Dirección General Investigación Y Opinión Ciudadana
+20,3410,"Subsecretaria De Estrategias De La Comunicación, Contenido Y Producción"
+20,3411,Dirección General Contenidos
+20,3412,"Dirección General Arte, Creatividad Y Producción"
+20,3413,Dirección General Análisis Y Datos
+20,3414,Dirección General Activos Digitales
+20,4800,Sec. De Gobierno Y Vinculación Ciudadana
+20,7185,Dg.Entidades Y Culto
+20,7186,Ss.Gob.Abierto Y Rend. De Cuentas
+20,7187,Dg.Comprom.Gob Y.Rendición De Cuentas
+20,7188,Ss.Coop.Urbana Federal
+20,7189,Dg.Interc.De GestiÃ³n
+20,7190,Dg.Relac.Federales Y Productivas
+20,7191,Upe Diálogo Social
+20,7207,Agencia Ambiental
+20,7208,Dg.De Control
+20,7209,Dg.Evaluación Ambiental
+20,7210,Dg.Política Y Estrategia Ambiental
+20,7211,Upe Ecoparque
+20,7212,Secretaría De Ambiente
+20,7213,Ss.Pol.Inf.Verde Urbana Y Des Sostenible
+20,7214,Dg.Áreas De Conservación
+20,7215,Dg.Res.Eco Y Rec.Ambiental
+20,7216,Dg.Prom.Para El Des Sostenible
+20,7217,Sec.Com.Cont. Y Particip.Ciudadana
+20,7219,Dg.Public.Y Herram.ComunicaciÃ³n Directa
+20,7220,Dg.Op.PÃºbl.Investig Y MÃ©tr
+20,7221,Dg.Comun.Y Contenidos
+20,7223,Dg.Prensa
+20,7224,Dg.Actos Y Agenda De Gob
+20,7225,F/N Señal De Cable De La Ciudad
+20,7300,Sec.Asuntos Estratégicos
+20,7345,Subsecretaría De Asuntos Públicos Estratégicos
+20,7346,DirecciÃ³n General ArticulaciÃ³n De Proyectos EstratÃ©gicos
+20,7347,DirecciÃ³n General CoordinaciÃ³n Y VinculaciÃ³n EstratÃ©gica
+20,7348,Dir. Gral. Planificacion Y Discurso
+20,7350,Subsecretaria De VinculaciÃ³n Y ParticipaciÃ³n Ciudadana
+20,7351,Dirección General Participación Ciudadana Y Cercanía
+20,7352,DirecciÃ³n General Estrategia Y VinculaciÃ³n Gubernamental
+20,7353,Subsecretaria De Proyeccion Estrategica
+20,7354,Dirección General Opinión Pública
+20,7355,Subsecretaria De Contenido Y Producción
+20,7356,Dirección General Contenidos
+20,7357,"Dirección General Arte, Creatividad Y Producción"
+20,7358,Subsecretaria De Comunicación Y Participación Ciudadana
+20,7359,Dirección General Análisis Y Desarrollo
+20,7360,Dirección General Comunicación
+20,7361,Subsecretaria De Vinculación Y Comunicación Interjurisdiccional
+20,7362,Dirección General Comunicación Interjurisdiccional
+20,7363,Dirección General Vinculación Directa
+20,7364,Dirección General Comunicación Con El Sector Privado Y El Tercer Sector
+20,7451,Unidad Para La Igualdad De Genero
+20,8100,Oficina De Integridad Publica
+20,8106,Subsecretaria De Deportes
+20,8116,Unidad De Deportes
+20,9266,Ente De Turismo
+20,9601,Subsecr.Comunicaciòn Social
+20,9611,Vicejefatura De Gobierno
+20,9619,Ãrgano Garante Del Derecho De Acceso A La InformaciÃ³n
+20,9750,Sec.Gral. Y Relaciones Internacionales
+20,9959,Subsecretaria De Comunicacion Y Contenidos
+20,9989,Direccion General Deporte Social Y Desarrollo Deportivo
+20,9990,Direccion General De Infraestructura Deportiva
+20,9992,Direccion General De Desarrollo Familiar
+20,9997,Upe Autodromo De La Ciudad De Buenos Aires
+21,47,Subsecretaria De Innovación Administrativa
+21,129,Secretaria De Deportes
+21,130,Dirección General Deporte Social Y Desarrollo Deportivo
+21,131,Dirección General De Infraestructura
+21,132,Upe Autódromo De La Ciudad De Buenos Aires
+21,133,Dirección General Deporte De Elite Y Alto Rendimiento
+21,158,Upe Instituto De Formación Política Y Gestión Pública
+21,231,Dirección General Interpretación Urbanística
+21,260,Subsecretaría De Relacionamiento Político Y Gestión De Programas Transversales
+21,608,Instituto Superior De La Carrera Administrativa
+21,620,Subsecretaría De Vinculación Operativa Con El Sistema Estadístico De Ciudad.
+21,682,Dir.Gral. De Infraestructura
+21,683,Dir.Gral.De Integración De Sistemas
+21,686,Coordinación General Servicios
+21,687,Direccion General De Seguridad Informatica
+21,785,Secretaría De Gestión Y Desarrollo Urbano
+21,786,Corporacion Buenos Aires Sur S.E
+21,1016,Vicejefatura De Gabinete De Ministros
+21,1022,Consejo Social
+21,2051,Jefatura De Gabinete De Ministros
+21,2624,Instituto De Estadísticas Y Censos De La Ciudad Autónoma De Buenos Aires
+21,2700,Secretaría De Higiene
+21,2701,Dirección General Reciclado
+21,2702,Direccion General De Limpieza
+21,2704,Secretaría De Ordenamiento Urbano
+21,2706,Dirección General Fiscalización
+21,2707,Ente De Higiene Urbana
+21,7309,Sec.Transf.Cultural
+21,7310,Sec.De Innov.Transf.
+21,7311,Subs.Pol.Públ.Bás.Evidencias
+21,7312,Ss.Experiencia Digital
+21,7313,Ss.Cudad Inteligente
+21,7314,Sec.At.Ciud.Y Gest. Comunal
+21,7315,Ss.Servs.Al Ciudadano
+21,7316,Sec.Desarrollo Urbano
+21,7317,Dg.Diseño E Implementación
+21,7318,Dg.Planif.Uso Y Evaluación
+21,7319,Dg.Cuerpo De Agtes Tránsito
+21,7320,Dg Gest..Servs De Movilidad
+21,7321,Upe Infra De La Movilidad
+21,7323,Sec.Transp.Obras Públicas
+21,7324,Ss.Gestión De La Movilidad
+21,7325,Ss.Planif. De La Movilidad
+21,7326,Consejo Del Pl.Urb.Ambiental
+21,7328,Dg.Planeamiento Urbano
+21,7332,Subterráneos De Bs.As.
+21,7333,Ss.De Obras
+21,7334,Dg.Ingeniería Y Arquitectura
+21,7335,Dg.Infraest.Urbana
+21,7336,Dg.Infra.Transporte
+21,7337,Dg.Antropología Urbana
+21,7338,Dg.Proyec.De Arquitectura
+21,8030,Subsecretaria De Gestion Comunal
+21,8056,Agencia Sistemas De Informacion
+21,8619,Organo Garante Del Derecho De Acceso A La Información
+21,9101,Comuna 1
+21,9102,Comuna 2
+21,9103,Comuna 3
+21,9104,Comuna 4
+21,9105,Comuna 5
+21,9106,Comuna 6
+21,9107,Comuna 7
+21,9108,Comuna 8
+21,9109,Comuna 9
+21,9110,Comuna 10
+21,9111,Comuna 11
+21,9112,Comuna 12
+21,9113,Comuna 13
+21,9114,Comuna 14
+21,9115,Comuna 15
+21,9740,Subsecretaria De Gestion Urbana
+21,9741,Subsecretaría De Gestión Y Desarrollo Urbano
+21,9760,Sec.Planificacion Evaluacion Y Coordinacion De Gestion
+21,9765,Subsecretaria Autodromo De La Ciudad Auntonoma De Bs As
+21,9766,Subsecretaría De Integración Y Desarrollo Del Sur
+24,232,Dirección General De Empleo
+24,233,Dirección General Relaciones Del Trabajo
+24,234,Dirección General Protección Del Trabajo
+24,235,Dirección General Asuntos Gremiales Y Relación Con Cámaras Empresariales
+24,236,Direccion General Innovación Y Simplificación De Procesos
+24,237,Direccion General Acceso A La Justicia
+24,238,Dirección General Política Criminal Y Asuntos Penitenciarios
+24,239,Dirección General Asistencia A La Víctima
+24,240,Dirección General Asuntos Registrales
+24,241,Dirección General Métodos Alternativos De Resolución De Conflictos
+24,242,Subsecretaria De Relaciones Gubernamentales
+24,253,Dirección General Control Y Seguimiento De Gestión
+24,254,Dirección General Articulación Laboral Federal
+24,255,Dirección General Vinculación Con La Comunidad
+24,288,Subsecretaría Política Criminal Y Asuntos Penitenciarios
+24,289,Subsecretaría De Trabajo Y Empleo
+24,1037,Subsecretaria De Asuntos Judiciales
+24,1038,Dirección General De Derechos Humanos
+24,1039,Consejo De Gestión Del Parque Memoria Y Monumento A Las Víctimas Del Terrorismo De Estado
+24,1065,Dirección General Mediación Y Convivencia Vecinal
+24,2630,Dirección General Gestión Administrativa Penitenciaria
+24,2631,Servicio Penitenciario Y De Reintegración Social
+24,2632,Subsecretaría Política Criminal Y Asuntos Penitenciarios
+24,3118,Unidad De Enlace Electoral
+24,3168,Secretaría De Trabajo Y Empleo
+24,3174,Ministerio De Justicia
+24,3175,Coordinación De Enlace Electoral
+24,3176,Subsecretaria Registro Y Métodos Alternativos De Resolución De Conflictos
+24,3177,Dirección General Administración De Infracciones
+24,3178,Dirección General Asuntos Políticos Y Electorales
+24,3179,Dg.Transferencias De Competencias Y Asuntos Interjurisdiccionales
+24,3180,Dirección General Gobernanza Metropolitana
+24,3181,Agencia Gubernamental De Control
+24,3182,Dirección General Fiscalización Y Control
+24,3183,Dirección General Higiene Y Seguridad Alimentaria
+24,3184,Dirección General De Habilitaciones Y Permisos
+24,3185,Dirección General Fiscalización Y Control De Obras
+24,3186,Registro Público De Comercio Y Contralor De Personas Jurídicas
+24,3187,Instituto De Gestión Electoral
+24,3205,Secretaría De Justicia
+26,124,"Secretaría De Administración, Justicia Y Soporte Operativo De Seguridad"
+26,152,Dir.Gral.Guardia De Auxilio Y Emergencias
+26,153,Dir.Gral.De Defensa Civil
+26,155,Direccion General Planeamiento De Emergencia Y Coordinacion De Bomberos
+26,226,Instituto De Gestión Electoral
+26,282,Ministerio De Justicia Y Seguridad
+26,291,Dirección General Cooperación E Intercambio De Información
+26,292,Dirección General Búsqueda De Personas
+26,677,Dirección General De Logística
+26,678,Subsecretaria De Emergencias
+26,763,Subsecretaria De Justicia
+26,793,"Dir.Gral Justicia, Registros Y Mediacion"
+26,866,Dir.Gral Administracion De Infracciones
+26,869,Instituto Superior De Seguridad Publica
+26,896,Unidad Enlace Consejo De Seguridad Y Prevencion Del Delito
+26,1181,Subsecretaría De Prevención Y Vinculación Ciudadana En Seguridad
+26,1182,Dirección General Coordinación Operativa Del Cuerpo De Agentes De Prevención
+26,1183,Subsecretaría De Seguridad Ciudadana Y Orden Público
+26,2183,SubsecretarÃ­a Seguridad Ciudadana
+26,2196,Direccion General Coordinacion Operativa
+26,2211,Direccion General Contencion Primaria De La Ciudadania Ante Delitos
+26,7194,Dg.Est.Criminal Y Mapa Del Delito
+26,7195,Dg.Seg. Comunal E Investig. Criminal
+26,7196,Dg.Planificación Y Evaluación De Recursos
+26,7197,Dg.Art.Com.Y Part.Ciudad.Comisarías
+26,7198,Ss.Prom.Ptrv.Asis.Ciu.Turista
+26,7199,Ss.Conviv Y Orden PÃºblico
+26,7200,Dg.Orden Público Y Coor. De Agentes
+26,7201,Subsecretaria De Gestion Administrativa
+26,7202,Ss.Seg.Com.E Investig Crim
+26,7203,Dg.Prev.Delito Y Exp.Ciu.Seguridad
+26,7204,Dg.Violencia De Género
+26,7205,Ss.Part.Ciud.En Seguridad
+26,7339,Dg.Seg.Priv.Custodia Bienes
+26,8070,Registro Publico Comercio Y Contralor Pers.Jur
+26,8262,Agencia Gubernamental De Control
+26,8341,Dir.Gral Fiscalizacion Y Control
+26,8548,Dirección General Coordinación Operativa De Detenidos
+26,8549,Subsecretaria De Coordinacion De Asuntos Estrategicos
+26,8652,Direccion General Higiene Y Seguridad Alimentaria
+26,8653,Direccion General De Habilitaciones Y Permisos
+26,8654,Direccion General De Fiscalizacion Y Control De Obras
+26,8655,Secretaria De Seguridad
+28,122,Instituto De Gestión Electoral
+28,128,Instituto De Gestion Electoral
+28,167,Direccion General De Asuntos Legislativos
+28,193,Dirección General Control Y Seguimiento De Gestión
+28,194,Dirección General Estrategia De Vinculación Federal
+28,196,Subsecretaría De Asuntos Políticos
+28,202,Subsecretaría De Asuntos Metropolitanos Y Transferencia De Competencias
+28,203,Dirección General Gestión Metropolitana Y Transferencia De Competencias
+28,286,Dirección General Gestión Metropolitana
+28,287,Dirección General Transferencia De Competencias
+28,2155,Subsecretaria De Gobierno
+28,2180,Ministerio De Gobierno
+28,2803,Dirección General Relaciones Con Las Provincias Y Municipios
+28,2804,Subs. Reforma Politica Y Asuntos Legislativos
+28,2805,Subs. Asuntos Interjurisdiccionales Y Politica Metropolitana
+28,2807,Subsecretaria De Articulacion Y Fortalecimiento De Gestion
+28,2808,Direccion General Articulacion Territorial
+28,2809,Direccion General Estrategia Y Fortalecimiento Territorial
+28,2810,Subsecretaría De Asuntos Interjurisdiccionales
+28,2811,Dir. Gral. Transferencias De Competencias
+28,2812,Direccion General Articulacion Interjurisdiccional
+28,2813,SubsecretarÃ­a De Asuntos Metropolitanos
+28,2814,DirecciÃ³n General ArticulaciÃ³n Cuenca Matanza Riachuelo
+28,7405,Upe Inst Form Pol Y G.Públic
+28,7422,Dcion Gral Prog De Cooperación Federal
+28,7423,Dcion Gral Representaciones De La Ciudad
+28,9606,D.G.Seguimiento Organismos Control Y Acceso A La Informaciòn
+28,9612,D.G.Reforma Polìtica Y Electoral
+28,9935,Dir.Gral.Registro Civil Y Capacidad De Las Personas
+28,9994,Direccion General Asuntos Interjurisdiccionales Y Transferencias De Competencias
+29,794,Dirección General Alcaidías
+29,1021,"Subsecretaría De Activos Digitales, Tecnología E Informatica"
+29,1023,Subsecretaría De Capital Humano
+29,1024,Dirección General Eventos Públicos
+29,1025,Dirección General Seguridad Ciudadana Y Asistencia Al Turista
+29,1026,Subsecretaría De Relaciones Con La Comunidad Y Atención A La Víctima
+29,1027,Secretaría De Seguridad
+29,1031,Subsecretaría De Tecnología E Informatica
+29,1047,Subsecretaría De Seguridad En Eventos Masivos Y Deportivos
+29,1048,Dirección General Seguridad En Eventos Públicos
+29,1049,Dirección General Investigación Criminal
+29,1050,Subsecretaría De Seguridad Comunal Y Orden Público
+29,1051,Dirección General Procom
+29,1055,Dirección General Análisis Estratégico
+29,1056,Subs.Relaciones Con La Comunidad Y Asuntos Interjurisdiccionales E Internacionales En Seg.
+29,3202,Ministerio De Seguridad
+29,3204,Subsecretaría De Gestión Administrativa
+29,3206,Subsecretaría De Emergencias
+29,3207,Dirección General Guardia De Auxilio Y Emergencias
+29,3208,Dirección General Defensa Civil
+29,3209,Dirección General Planeamiento De Emergencia Y Coordinación De Bomberos
+29,3210,Dirección General Logística
+29,3211,Dirección General Políticas De Género En Seguridad
+29,3212,Unidad Enlace Consejo De Seguridad Y Prevención Del Delito
+29,3213,Dg. Coordinación Operativa Del Cuerpo De Agentes De Prevención
+29,3214,Subsecretaría De Seguridad Ciudadana Y Orden Público
+29,3215,Dirección General Coordinación Operativa
+29,3216,Dirección General Estadística Criminal Y Mapa Del Delito
+29,3217,Dirección General Seguridad Comunal E Investigación Criminal
+29,3218,Dirección General Planificación Y Evaluación De Recursos
+29,3219,Dirección General Articulación Comunal Y Participación Ciudadana En Comisarías
+29,3220,Dirección General De Orden Público
+29,3221,Subsecretaría De Investigación Y Estadística Criminal
+29,3222,Dirección General Seguridad Privada Y Custodia De Bienes
+29,3223,Secretaria De Coordinación
+29,3224,Instituto Superior De Seguridad Pública
+31,1057,Subsecretaría De Planeamiento Urbano
+31,1058,Dirección General Planeamiento Urbano
+31,1059,Dirección General Antropología Urbana
+31,1060,Dirección General Arquitectura
+31,3116,Dirección General Obras
+31,3117,Dirección General Proyectos
+31,3125,Ministerio De Movilidad E Infraestructura
+31,3126,Subterráneos De Buenos Aires
+31,3127,Subsecretaría De Proyectos Y Obras
+31,3128,Dirección General Ingeniería Y Arquitectura
+31,3129,Dirección General Infraestructura Urbana
+31,3130,Secretaría De Transporte
+31,3131,Subsecretaría De Planificación De La Movilidad
+31,3132,Dirección General Información Territorial De La Movilidad
+31,3133,Subsecretaría De Gestión De La Movilidad
+31,3134,Dirección General Gestión De Servicios De Movilidad
+31,3135,Subsecretaría De Tránsito
+31,3136,Dirección General Cuerpo De Agentes De Tránsito
+31,3337,Direccion General Diseño Y Planificacion De La Movilidad
+31,3338,Dir. Gral. Seguridad Vial
+31,3638,Subsecretaría De Planificación De La Movilidad Y La Seguridad Vial
+31,3639,Dir. Gral. Transporte Colectivo De Pasajeros
+31,3640,Subsecretaría De Gestión Y Control De La Movilidad
+31,3641,Dirección General Control De La Movilidad
+31,3642,Secretaría De Tránsito
+31,3643,Dirección General Gestión Integral Del Tránsito
+35,1017,Subsecretaría De Ordenamiento Urbano
+35,1018,Dirección General Permisos Y Ferias
+35,1019,Secretaría De Mantenimiento Urbano
+35,1020,Dirección General De Obras Comunales
+35,1066,Secretaría De Orden E Higiene
+35,2355,Dir. Gral. Regeneracion Urbana
+35,2504,Dir. Gral. Sistema Pluvial
+35,3137,Dirección General Parque De La Ciudad
+35,3138,Dirección General De Reciclado
+35,3140,Dirección General Fiscalización
+35,3142,Secretaría De Mantenimiento Urbano
+35,3143,Subsecretaría Mantenimiento
+35,3144,Subsecretaría De Gestión Comunal
+35,3146,Dirección General Espacios Verdes Y Arbolado
+35,3147,Dirección General De Cementerios
+35,3154,Subsecretaría De Higiene
+35,7008,Dir.Gral.Obras Regeneracion Urbana
+35,7158,Ss.Mantenimiento Urbano
+35,7159,Dg.Fiscalización Urbana
+35,7160,Ss.Paisaje Urbano
+35,7162,Min.Esp.Público E Hig. Urbana
+35,7164,Dg.Monitoreo Y Sistemas
+35,7165,Dg.Planif.Y Coor De Int Urbanas
+35,7166,Dg.Obras En Vías Peatonales
+35,7168,Ss. De Administración
+35,7406,Direccion General Conservacion Del Pasaje Urbano
+35,8013,Dg.Tecnico Administrativa Y Legal
+35,8729,Dir. Gral. Comunicación
+35,8736,Ente De Higiene Urbana
+35,8737,Direccion General De Limpieza
+35,8750,Dir.Gral. Control De Gestion
+35,8807,Dirección General Alumbrado
+35,8811,Ente De Mantenimiento Urbano Integral
+35,8837,Subsecretaria De Higiene Urbana
+35,8941,Direccion General Operacion De Reciclado
+35,9733,Dg.Reciclado Y Economìa Circular
+40,400,Dir. Gral. Desarrollo Saludable
+40,401,Ministerio De Salud
+40,404,Dir.Gral.De Recursos Fisicos En Salud
+40,407,Dirección General Ciudad Amigable Para Personas Mayores
+40,410,Htal.Teodoro Alvarez
+40,411,Htal. Torcuato De Alvear
+40,412,Htal. Cosme Argerich
+40,413,Htal. Jose T. Borda
+40,414,Htal. Maria Curie
+40,415,Htal. Odontologico Jose Dueñas
+40,416,Htal. Carlos G. Durand
+40,417,Htal. Pedro De Elizalde
+40,418,Htal. Juan A. Fernandez
+40,419,Htal. Maria Ferrer
+40,420,Htal. Ricardo Gutierrez
+40,421,Htal. Pedro Lagleyze
+40,422,Htal. Braulio Moyano
+40,423,Htal. Francisco J.Muñiz
+40,424,Htal.De Odontologia
+40,425,Htal. Jose M. Penna
+40,426,Htal. Parmenio Piñero
+40,427,Htal. Ignacio Pirovano
+40,428,Htal. De Quemados
+40,429,Htal. Odontologico Quinquela Martin
+40,430,Htal. Jose M.Ramos Mejia
+40,431,Htal. Bernardino Rivadavia
+40,432,Htal. Manuel Rocca
+40,433,Htal. Santa Lucia
+40,434,Htal.Donacion Francisco Santojanni
+40,435,Htal. Ramon Sarda
+40,436,Talleres Protegidos De Rehab.Psiquiat.
+40,437,Htal. Carolina Tobar Garcia
+40,438,Htal. Enrique Tornu
+40,439,Htal. Bonorino Udaondo
+40,440,Htal. Dalmacio Velez Sarsfield
+40,441,Htal. Abel Zubizarreta
+40,443,Centro De Salud Ameghino
+40,445,Instituto Pasteur
+40,446,Instituto De Rehabilitacion Psicofica
+40,448,Direccion General Promocion Social Y Bienestar
+40,449,Dir.Gral.Adjunta Same
+40,450,Ctro.De Salud Nº 1 Hugo Rosario
+40,451,Direccion General Politicas Asistenciales Para Personas Mayores
+40,455,Cai Cecilia Grierson
+40,552,Subsecretaria De Administracion Del Sistema De Salud
+40,4000,Subsecretaría De Atención Hospitalaria
+40,4001,Subsecretaria Atencion Primaria Ambulatoria Y Comunitaria
+40,4002,Ente Autarquico Instituto De Transplante
+40,4004,Centro De Salud 34
+40,4005,Centros Salud 22 38
+40,4006,Centros Salud 17 21 25 26
+40,4007,Centros Salud 2 12 27
+40,4008,Centros Salud 11 45
+40,4009,Centro Salud 33
+40,4010,Centro Salud 36
+40,4012,Cs 9 15 41
+40,4013,Cs. 1 8 10 16 30 32 35 39
+40,4014,Cs 6 14 19 20 24 31 40 43 44
+40,4015,Cs 3 4 5 7 28 29 37
+40,4017,Cemar 1 Paternal
+40,4018,Cemar 2 Barracas
+40,4019,"Cesacs 3,18,43"
+40,4020,Secretaria De Bienestar Integral
+40,4021,Subsecretaria Para Personas Mayores
+40,4022,Dirección General Coordinación Y Vinculación Para Personas Mayores
+40,4024,Cesac 50
+40,4025,Cemar 3
+40,4026,Cemar 4
+40,7307,Ss.Planif.Sanit.Gestión En Red
+45,171,Comision Plena Participacion E Integracion Personas Con Necesidades Especiales
+45,480,Dir.Gral.Mujer
+45,489,Upe Urbanizacion Barrio Padre Carlos Mugica
+45,498,Secretaria Integracion Social Para Personas Mayores
+45,1002,Consejo Social
+45,1003,Secretaria De Inclusion Social Y Atencion Inmediata
+45,1004,Dir.Gral. Atencion Integral Inmediata
+45,1005,Dir. Gral. Abordaje Comunitario
+45,1006,Dir.Gral. Desarrollo E Inclusion Social
+45,1007,Subsecretaria De Desarrollo Del Potencial Humano
+45,1008,Dir. Gral. Articulacion Publico-Privada
+45,1009,Dir.Gral. Politicas Alimentarias
+45,1010,Dir. Gral. Desarrollo De Infancias Y Adolescencias
+45,1012,Direccion General Coordinación Y Gestión Del Desarrollo Humano
+45,1013,Dirección General Autonomía Y Reivinculación
+45,1014,Dirección General Abordaje A Las Violencias Por Motivo De Género
+45,1015,Subsecretaría De Inclusión Social Y Atención Inmediata
+45,1028,Subsecretaría Abordaje Territorial Y Obras
+45,1029,Direccion General Abordaje Territorial Barrio Padre Carlos Mugica
+45,1030,Direccion General Infraestructura Social
+45,1067,Dirección General Estrategias Habitacionales
+45,1068,Dirección General Centros De Inclusión Social Y Abordaje Integral
+45,2033,"Dirección General Articulación Público, Privada Y Territorial"
+45,2034,Direccion General Economía Social Y Sociolaboral
+45,2035,Subsecretaria Familia Y Comunidad
+45,2036,"Direccion General Primera Infancia, Niñez Y Adolescencia"
+45,2037,Dirección General Proteccion Familiar Contra La Violencia
+45,2038,Subsecretaría Red De Atención E Inclusión Social
+45,2039,Direccion General Red De Atención
+45,2040,Direccion General Innovación Para El Desarrollo Del Bienestar Integral
+45,2041,Subsecretaría Personas Mayores
+45,2042,Dirección General Políticas Comunitarias Para Las Personas Mayores
+45,2043,Dirección General Políticas Asistenciales Para Las Personas Mayores
+45,2044,Dirección General Economía Plateada
+45,2045,Dirección General Promoción De Derechos Para Personas Mayores
+45,3152,Dg. Desarrollo Institucional Y Territorial
+45,3155,"Consejo De Los Derechos De Niñas, Niños Y Adolescentes"
+45,3600,Unidad Ejecutora Ex Au3 - Ley 3396
+45,3601,Corporación Bsas Sur
+45,7012,Dir.Gral.Politicas Sociales En Adicciones
+45,7327,Inst.De La Vivienda De La Ciudad
+45,7408,Direccion General Economia Popular Y Social
+45,7411,Min.Des.Humano Y Hábitat
+45,7413,"Subsecretaria De Fortalecimiento Personal, Familiar Y Comunitario"
+45,8017,Direccion General Planificacion Y Control De Gestion
+50,263,Subsecretaria De Políticas Culturales
+50,264,Dir. Gral. Investigación Y Proyectos Estratégicos Culturales
+50,500,Ministerio De Cultura
+50,507,Dir.Gral. De Festivales Y Eventos Centrales
+50,512,Dir. Gral De Ensenanza Artistica
+50,513,Dir. Gral De Musica
+50,515,Dirección General Desarrollo Cultural Y Creativo
+50,516,Dirección General Cooperación Cultural Internacional
+50,518,Subsecretaria De Patrimonio Y Desarrollo Cultural
+50,525,Dir.Gral.Patrimonio Museos Y Casco Historico
+50,535,Dir. Gral Centro Cultural Recoleta
+50,541,Ente Autarquico Teatro Colon
+50,542,Dir. Gral Complejo Teatral Ciudad De Buenos Aires
+50,543,Dir. Gral Centro Cultural General San Martin
+50,753,Subsecretaria De Gestion Cultural
+50,3189,Dirección General Cooperación Cultural
+50,3190,Dirección General Festivales Y Noches Culturales
+50,7304,Dg.Pro Libro Bibliot Cult
+50,7305,Dg.Planif.Y Seguim
+50,7306,Ss.Pol.Cult.Y Nuevas Audiencias
+50,8713,Direccion General Cultura Y Derechos Humanos
+50,9525,Upe Museo De Arte Moderno De Bs As
+50,9625,Dirección General Museo De Arte Modero De Buenos Aires
+55,295,Agencia De Habilidades Para El Futuro
+55,568,Direccion General Mejora Y Cuidado De Edificios Escolares
+55,570,Dir. Gral Educacion De Gestion Privada
+55,582,Dir.Gral. Servicios A Las Escuelas
+55,586,Subsecretaria De Coordinacion Pedagogica Y Equidad Educativa
+55,672,Subsecretaria De Gestion Economico Financiera Y Administracion De Recursos
+55,676,Subsecretaría De Gestión Administrativa
+55,3148,Subsecretaría Gestión Del Aprendizaje
+55,3149,Subsecretaria De Planeamiento E Innovación Educativa
+55,3150,Subsecretaría De Tecnología Educativa
+55,7180,Ss.Carrera Docente
+55,7181,Dg.Esc.Normales Sup.Y Art.
+55,7182,Ss.Ag.Aprend.A Lo Largo De La Vida
+55,7192,Ministro De Educación
+55,7340,Ss.Tecn.Educ Y Sustentab
+55,7342,Dg.Educ.Estatal
+55,9761,D.Gral.Infraestructura Escolar
+55,9762,U.Eval.Integral De La Calidad Y Equid.Educ.
+55,9764,Direccion General De Mantenimiento Escolar
+60,347,Dir. Gral. Relación Con Organismos Multilaterales
+60,351,Instituto Superior De La Carrera
+60,611,Dir.Gral.Oficina De Gestion Publica Y Presupuesto
+60,613,Dir.Gral.De Contaduria
+60,614,Dir.Gral.De Tesoreria
+60,615,Dir.Gral.De Credito Publico
+60,619,Dir.Gral. Redeterminación De Precios
+60,623,Dir.Gral.De Compras Y Contrataciones
+60,642,Subsecretaria De Gestión De Recursos Humanos
+60,817,Dir.Gral. Relaciones Fiscales
+60,3188,Subsecretaría De Administración De Bienes Inmuebles
+60,6638,Dirección General Unidad Informática De Administración Financiera
+60,7170,Ministerio De Hacienda Y Finanzas
+60,8612,Direccion General De Estadisticas Y Censos
+60,8618,Administ.Gubernamental De Ingresos Publicos
+60,9763,D.G.Gestiòn De La Flota Automotor
+70,353,Secretaria De Deportes
+70,354,Direccion General Deporte Social Y Desarrollo Deportivo
+70,355,Direccion General De Infraestructura
+70,356,Upe Autódromo De La Ciudad De Buenos Aires
+70,357,Dirección General Articulación Interjurisdiccional Del Deporte
+70,358,Dirección General Alto Rendimiento Y Legado
+70,7013,Subsecretaría De Cooperación Para El Desarrollo Económico Y La Producción
+70,7026,Subsecretaría De Políticas Gastronómicas
+70,7110,Unidad De Coordinación Gestión De Políticas Productivas
+70,7115,Ss.Trabajo Industria Y Comercio
+70,7116,Min. Desarrollo Económico Y Producción
+70,7117,Ss.Desarrolloeconómico
+70,7123,Ss.Administración De Bienes Inmuebles
+70,7126,Ss.Bienestar Ciudadano
+70,7129,Ss.Micro Peq Y Med.Empresas
+70,7131,Ss.Desarrollo Inclusivo
+70,7134,D.G.Políticas De Juventud
+70,7135,D.G.Políticas Energéticas
+70,7138,Upe Parque De La Innovación
+70,7139,Consejo Eco Y Soc De La Caba
+70,7140,Ue.Ex Auiii Ley 3396
+70,7141,Corporación Bs.As.Sur S.E.
+70,7143,Upe Simplificación Productiva
+70,7441,Ente Público No Estatal Parque De La Innovación
+75,208,Subsecretaría De Inversiones
+75,209,Dirección General Estrategia Productiva Y Regímenes De Promocion
+75,217,Dir. Gral. Economía E Innovación Social
+75,223,Dirección General Innovación Productiva
+75,224,Dirección General Simplificación Normativa
+75,225,Dirección General Industrias Creativas Audiovisuales Y Software
+75,298,Dirección General Ciencia Y Tecnología
+75,3191,Ministerio De Desarrollo Económico
+75,3192,Dirección General Desarrollo Gastronómico
+75,3193,Subsecretaría De Políticas Productivas
+75,3194,Dirección General Emprendedores
+75,3195,Dir. Gral. Promocion De Inversiones Y Comercio Exterior
+75,3196,"Dirección General Micro, Pequeñas Y Medianas Empresas"
+75,3197,Dirección General Políticas Energéticas
+75,3198,Upe Parque De La Innovación
+75,3199,Ente Público No Estatal Parque De La Innovación
+75,3200,Consejo Económico Y Social De La Ciudad De Buenos Aires
+75,3201,Ente De Turismo
+98,98,Ministerio De Hacienda Y Finanzas - Servicio De La Deuda Publica
+99,99,Ministerio De Hacienda Y Finanzas - Obligaciones Del Tesoro

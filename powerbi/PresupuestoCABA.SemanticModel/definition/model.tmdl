@@ -1,0 +1,23 @@
+model Model
+	culture: es-AR
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: es-AR
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation PBI_QueryOrder = ["CarpetaDatos", "_Medidas", "Hechos", "Año", "Carácter", "Jurisdicción", "Unidad ejecutora", "Programa", "Finalidad y función", "Objeto del gasto", "Fuente", "Geográfico"]
+
+annotation __PBI_TimeIntelligenceEnabled = 0
+
+ref table _Medidas
+ref table Hechos
+ref table Año
+ref table Carácter
+ref table Jurisdicción
+ref table 'Unidad ejecutora'
+ref table Programa
+ref table 'Finalidad y función'
+ref table 'Objeto del gasto'
+ref table Fuente
+ref table Geográfico

@@ -1,0 +1,53 @@
+inc,ppal,inc_desc,ppal_desc
+1,1,Gastos En Personal,Personal Permanente
+1,2,Gastos En Personal,Personal Transitorio
+1,3,Gastos En Personal,Servicios Extraordinarios
+1,4,Gastos En Personal,Asignaciones Familiares
+1,5,Gastos En Personal,Asistencia Social Al Personal
+1,6,Gastos En Personal,Beneficios Y Compensaciones
+1,7,Gastos En Personal,Gabinete De Autoridades Superiores
+1,8,Gastos En Personal,Contratos Por Tiempo Determinado
+2,1,Bienes De Consumo,"Productos Alimenticios, Agropecuarios Y Forestales"
+2,2,Bienes De Consumo,Textiles Y Vestuario
+2,3,Bienes De Consumo,"Pulpa,Papel, Cartón Y Sus Productos"
+2,4,Bienes De Consumo,Productos De Cuero Y Caucho
+2,5,Bienes De Consumo,"Productos Químicos, Combustibles Y Lubricantes"
+2,6,Bienes De Consumo,Productos De Minerales No Metálicos
+2,7,Bienes De Consumo,Productos Metálicos
+2,8,Bienes De Consumo,Minerales
+2,9,Bienes De Consumo,Otros Bienes De Consumo
+3,1,Servicios No Personales,Servicios Básicos
+3,2,Servicios No Personales,Alquileres Y Derechos
+3,3,Servicios No Personales,"Mantenimiento, Reparación Y Limpieza"
+3,4,Servicios No Personales,"Servicios Profesionales, Técnicos Y Operativos"
+3,5,Servicios No Personales,"Servicios Especializados, Comerciales Y Financieros"
+3,6,Servicios No Personales,Publicidad Y Propaganda
+3,7,Servicios No Personales,"Pasajes, Viáticos Y Movilidad"
+3,8,Servicios No Personales,"Impuestos, Derechos, Tasas Y Juicios"
+3,9,Servicios No Personales,Otros Servicios
+4,1,Bienes De Uso,Bienes Preexistentes
+4,2,Bienes De Uso,Construcciones
+4,3,Bienes De Uso,Maquinaria Y Equipo
+4,4,Bienes De Uso,Equipo De Seguridad
+4,5,Bienes De Uso,"Obras De Arte, Libros Y Elementos Coleccionables"
+4,8,Bienes De Uso,Activos Intangibles
+4,9,Bienes De Uso,Otros Bienes De Uso E Inversiones
+5,1,Transferencias,Transferencias Al Sector Privado Para Financiar Gastos Corrientes
+5,2,Transferencias,Transferencias Al Sector Privado Para Financiar Gastos De Capital
+5,3,Transferencias,Transf.Al Sector Público Nacional Para Financiar Gtos Corrientes
+5,5,Transferencias,Transferencias Al Sector Público Empresarial
+5,6,Transferencias,Transferencias A Universidades
+5,7,Transferencias,Transf A Instituciones Provinciales Y Municipales Para Financiar Gastos Corrientes
+5,8,Transferencias,Transf.A Instituciones Provinciales Y Municipales Para Financiar Gastos De Capital
+5,9,Transferencias,Transferencias Al Exterior
+6,1,Activos Financieros,Aportes De Capital
+6,2,Activos Financieros,Préstamos A Corto Plazo
+6,3,Activos Financieros,Préstamos A Largo Plazo
+6,9,Activos Financieros,Incremento De Activos Diferidos Y Adelantos A Proveedores Y Contratistas
+7,1,Servicio De La Deuda Y Disminución De Otros Pasivos,Servicio De La Deuda Interna
+7,2,Servicio De La Deuda Y Disminución De Otros Pasivos,Servicio De La Deuda Externa
+7,3,Servicio De La Deuda Y Disminución De Otros Pasivos,Intereses Por Préstamos Y Otras Deudas
+7,5,Servicio De La Deuda Y Disminución De Otros Pasivos,Disminución De Préstamos A Largo Plazo
+7,6,Servicio De La Deuda Y Disminución De Otros Pasivos,Disminución De Cuentas Y Documentos A Pagar
+8,4,Otros Gastos,Otras Pérdidas
+8,5,Otros Gastos,DisminuciÃ³n Del Patrimonio

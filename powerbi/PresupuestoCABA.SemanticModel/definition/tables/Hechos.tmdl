@@ -1,0 +1,192 @@
+/// Crédito y gasto por partida agregada. Montos NOMINALES; usar las medidas de _Medidas. 2026 es a junio (parcial).
+table Hechos
+	lineageTag: bee185b9-d552-54bf-8467-cbeff720b358
+
+	column anio
+		dataType: int64
+		formatString: 0
+		isHidden
+		lineageTag: ab50c543-36f1-53ed-88de-5d620862be1d
+		summarizeBy: none
+		sourceColumn: anio
+
+		annotation SummarizationSetBy = User
+
+	column car
+		dataType: int64
+		isHidden
+		lineageTag: 941680e4-498b-51ca-8edb-b5026491764e
+		summarizeBy: none
+		sourceColumn: car
+
+		annotation SummarizationSetBy = User
+
+	column jur
+		dataType: int64
+		isHidden
+		lineageTag: 36c52cbb-9467-5a82-a9bd-bf902483c350
+		summarizeBy: none
+		sourceColumn: jur
+
+		annotation SummarizationSetBy = User
+
+	column ue
+		dataType: int64
+		isHidden
+		lineageTag: a9248d97-08f1-58ad-bac2-402e0f5d69d4
+		summarizeBy: none
+		sourceColumn: ue
+
+		annotation SummarizationSetBy = User
+
+	column prog
+		dataType: int64
+		isHidden
+		lineageTag: 71482650-9f62-5744-8b40-13d3ca513a73
+		summarizeBy: none
+		sourceColumn: prog
+
+		annotation SummarizationSetBy = User
+
+	column fin
+		dataType: int64
+		isHidden
+		lineageTag: 81515666-7d05-516e-9d45-4ebde3bb64fe
+		summarizeBy: none
+		sourceColumn: fin
+
+		annotation SummarizationSetBy = User
+
+	column fun
+		dataType: int64
+		isHidden
+		lineageTag: a1be2df3-3763-5c8e-9970-3ecdfdf82baa
+		summarizeBy: none
+		sourceColumn: fun
+
+		annotation SummarizationSetBy = User
+
+	column inc
+		dataType: int64
+		isHidden
+		lineageTag: b7c6f145-3aa0-5d67-9405-961cabd1b0cb
+		summarizeBy: none
+		sourceColumn: inc
+
+		annotation SummarizationSetBy = User
+
+	column ppal
+		dataType: int64
+		isHidden
+		lineageTag: 9e2d15c5-231b-5880-9f7b-4d841e9b5d83
+		summarizeBy: none
+		sourceColumn: ppal
+
+		annotation SummarizationSetBy = User
+
+	column fte
+		dataType: int64
+		isHidden
+		lineageTag: 089dfc1a-3301-5482-be3f-f3bb53eacc24
+		summarizeBy: none
+		sourceColumn: fte
+
+		annotation SummarizationSetBy = User
+
+	column geo
+		dataType: int64
+		isHidden
+		lineageTag: 5c553bf8-ca99-5b4e-8df3-a1fc6336ea53
+		summarizeBy: none
+		sourceColumn: geo
+
+		annotation SummarizationSetBy = User
+
+	column sancionado
+		dataType: double
+		formatString: #,0
+		isHidden
+		lineageTag: 6c199e26-ebf3-5124-9c90-8826abb8a159
+		summarizeBy: none
+		sourceColumn: sancionado
+
+		annotation SummarizationSetBy = User
+
+	column vigente
+		dataType: double
+		formatString: #,0
+		isHidden
+		lineageTag: 237a5f0b-fe06-5d5f-8d05-6c8b6898788f
+		summarizeBy: none
+		sourceColumn: vigente
+
+		annotation SummarizationSetBy = User
+
+	column devengado
+		dataType: double
+		formatString: #,0
+		isHidden
+		lineageTag: 3dad5cd3-e799-551a-9723-3387835d4829
+		summarizeBy: none
+		sourceColumn: devengado
+
+		annotation SummarizationSetBy = User
+
+	column Corte
+		dataType: string
+		lineageTag: 18eb1f84-1674-5cc1-85c6-59148860a660
+		summarizeBy: none
+		sourceColumn: corte
+
+		annotation SummarizationSetBy = User
+
+	column ClaveUE
+		dataType: string
+		isHidden
+		lineageTag: 636ad96c-fc8f-5e56-8d4f-4767d62ca6d7
+		summarizeBy: none
+		sourceColumn: ClaveUE
+
+		annotation SummarizationSetBy = User
+
+	column ClaveProg
+		dataType: string
+		isHidden
+		lineageTag: 6b4da3b6-7d8e-5803-9963-0b28ee6d6b5b
+		summarizeBy: none
+		sourceColumn: ClaveProg
+
+		annotation SummarizationSetBy = User
+
+	column ClaveFinFun
+		dataType: string
+		isHidden
+		lineageTag: df58b697-d013-501c-bda6-38eedc4a9122
+		summarizeBy: none
+		sourceColumn: ClaveFinFun
+
+		annotation SummarizationSetBy = User
+
+	column ClaveObjeto
+		dataType: string
+		isHidden
+		lineageTag: fa9a2de4-7bdc-5bac-aa5c-ab15d0a45d05
+		summarizeBy: none
+		sourceColumn: ClaveObjeto
+
+		annotation SummarizationSetBy = User
+
+	partition Hechos = m
+		mode: import
+		source =
+				let
+					Origen = Csv.Document(File.Contents(CarpetaDatos & "hechos.csv"), [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+					Encabezados = Table.PromoteHeaders(Origen, [PromoteAllScalars = true]),
+					Tipos = Table.TransformColumnTypes(Encabezados, {{"anio", Int64.Type}, {"car", Int64.Type}, {"jur", Int64.Type}, {"ue", Int64.Type}, {"prog", Int64.Type}, {"fin", Int64.Type}, {"fun", Int64.Type}, {"inc", Int64.Type}, {"ppal", Int64.Type}, {"fte", Int64.Type}, {"geo", Int64.Type}, {"sancionado", type number}, {"vigente", type number}, {"devengado", type number}, {"corte", type text}}, "en-US"),
+					Agregar0 = Table.AddColumn(Tipos, "ClaveUE", each Text.From([jur]) & "|" & Text.From([ue]), type text),
+					Agregar1 = Table.AddColumn(Agregar0, "ClaveProg", each Text.From([jur]) & "|" & Text.From([prog]), type text),
+					Agregar2 = Table.AddColumn(Agregar1, "ClaveFinFun", each Text.From([fin]) & "|" & Text.From([fun]), type text),
+					Agregar3 = Table.AddColumn(Agregar2, "ClaveObjeto", each Text.From([inc]) & "|" & Text.From([ppal]), type text)
+				in
+					Agregar3
+

@@ -1,0 +1,70 @@
+/// Tabla de medidas. 'Real' = pesos del mes indicado en Año[Pesos de] (2026-08), con el promedio anual del IPC INDEC de cada ejercicio. 2026 es a junio (segundo trimestre): no se compara con un año cerrado.
+table _Medidas
+	lineageTag: 08b58efd-56e4-5525-ba57-843c4fd88ebb
+
+	/// Crédito aprobado por la Legislatura, en pesos corrientes de cada año. 2026 es a junio (segundo trimestre): no se compara con un año cerrado.
+	measure Sancionado = SUM(Hechos[sancionado])
+		formatString: \$ #,0
+		lineageTag: c22f7820-75ef-5ed0-b9a7-dac5a78c798c
+
+	/// Crédito vigente tras las modificaciones, en pesos corrientes. 2026 es a junio (segundo trimestre): no se compara con un año cerrado.
+	measure Vigente = SUM(Hechos[vigente])
+		formatString: \$ #,0
+		lineageTag: 627afe8c-f0da-5e48-a03c-e07c41e6a4f0
+
+	/// Gasto devengado (ejecutado), en pesos corrientes. 2026 es a junio (segundo trimestre): no se compara con un año cerrado.
+	measure Devengado = SUM(Hechos[devengado])
+		formatString: \$ #,0
+		lineageTag: e2b1fcdf-d200-54cd-97ad-99057b6d4387
+
+	/// Sancionado a pesos constantes. 'Real' = pesos del mes indicado en Año[Pesos de] (2026-08), con el promedio anual del IPC INDEC de cada ejercicio.
+	measure 'Sancionado real' = SUMX(Hechos, Hechos[sancionado] * RELATED('Año'[Factor a pesos de hoy]))
+		formatString: \$ #,0
+		lineageTag: 2be00cb4-72a9-5b2a-a35c-656d36350a51
+
+	/// Vigente a pesos constantes. 'Real' = pesos del mes indicado en Año[Pesos de] (2026-08), con el promedio anual del IPC INDEC de cada ejercicio.
+	measure 'Vigente real' = SUMX(Hechos, Hechos[vigente] * RELATED('Año'[Factor a pesos de hoy]))
+		formatString: \$ #,0
+		lineageTag: c91d6fbe-6afa-5d5f-9eb8-30c5cce9fbc6
+
+	/// Devengado a pesos constantes. 'Real' = pesos del mes indicado en Año[Pesos de] (2026-08), con el promedio anual del IPC INDEC de cada ejercicio. 2026 es a junio (segundo trimestre): no se compara con un año cerrado.
+	measure 'Devengado real' = SUMX(Hechos, Hechos[devengado] * RELATED('Año'[Factor a pesos de hoy]))
+		formatString: \$ #,0
+		lineageTag: 7c0d935e-c779-5e86-8724-31bddf615659
+
+	/// Devengado sobre vigente. 2026 es a junio (segundo trimestre): no se compara con un año cerrado.
+	measure '% Ejecución' = DIVIDE([Devengado], [Vigente])
+		formatString: 0.0 %
+		lineageTag: 8913efc2-6a09-52f7-a0ba-3f5a3a6f7ef4
+
+	/// Parte del devengado real total de lo que está seleccionado (respeta segmentadores y filtros).
+	measure 'Participación %' = DIVIDE([Devengado real], CALCULATE([Devengado real], ALLSELECTED(Hechos)))
+		formatString: 0.0 %
+		lineageTag: 375cef2b-e98c-5f0a-85fb-5b138fa1e2b2
+
+	/// Variación del devengado real contra el año anterior. Queda en blanco para 2026, que es parcial. 'Real' = pesos del mes indicado en Año[Pesos de] (2026-08), con el promedio anual del IPC INDEC de cada ejercicio.
+	measure 'Var. real interanual %' =
+			VAR anio = SELECTEDVALUE('Año'[Año])
+			VAR actual = [Devengado real]
+			VAR anterior = CALCULATE([Devengado real], 'Año'[Año] = anio - 1)
+			VAR parcial = CALCULATE(COUNTROWS(Hechos), 'Año'[Año] = anio, Hechos[Corte] <> "anual") > 0
+			RETURN
+				IF(NOT ISBLANK(anio) && NOT parcial && NOT ISBLANK(anterior), DIVIDE(actual - anterior, anterior))
+		formatString: 0.0 %
+		lineageTag: 35c30009-6006-559a-a126-d33081619cbb
+
+	column Columna
+		dataType: string
+		isHidden
+		lineageTag: 9b5cc072-38e2-5ade-810e-f524f2f514f5
+		summarizeBy: none
+		sourceColumn: Columna
+
+	partition _Medidas = m
+		mode: import
+		source =
+				let
+					Origen = #table(type table [Columna = text], {})
+				in
+					Origen
+

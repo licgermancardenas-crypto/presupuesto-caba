@@ -1,0 +1,31 @@
+/// Fuente de financiamiento.
+table Fuente
+	lineageTag: 57ce6152-ef40-54ac-b78c-37918cab6695
+
+	column fte
+		dataType: int64
+		isHidden
+		lineageTag: bcf1c400-7592-574f-b009-604ac6b797a3
+		summarizeBy: none
+		sourceColumn: fte
+
+		annotation SummarizationSetBy = User
+
+	column Fuente
+		dataType: string
+		lineageTag: ec505c25-7a4b-511a-a142-476108e2f181
+		summarizeBy: none
+		sourceColumn: fte_desc
+
+		annotation SummarizationSetBy = User
+
+	partition Fuente = m
+		mode: import
+		source =
+				let
+					Origen = Csv.Document(File.Contents(CarpetaDatos & "dim_fuente.csv"), [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+					Encabezados = Table.PromoteHeaders(Origen, [PromoteAllScalars = true]),
+					Tipos = Table.TransformColumnTypes(Encabezados, {{"fte", Int64.Type}, {"fte_desc", type text}}, "en-US")
+				in
+					Tipos
+

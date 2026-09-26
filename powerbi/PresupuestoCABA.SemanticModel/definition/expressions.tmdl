@@ -1,0 +1,5 @@
+/// Carpeta con los CSV que arma scripts/01_armar_datos.py. Termina en barra invertida.
+expression CarpetaDatos = "C:\presupuesto-caba\datos\" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=true]
+	lineageTag: 2af1cd2a-60a3-531a-ac8a-8fbddc687637
+
+	annotation PBI_ResultType = Text

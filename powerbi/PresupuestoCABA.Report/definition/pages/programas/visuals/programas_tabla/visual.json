@@ -1,0 +1,148 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
+  "name": "programas_tabla",
+  "position": {
+    "x": 270,
+    "y": 20,
+    "z": 0,
+    "height": 680,
+    "width": 990,
+    "tabOrder": 0
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Jurisdicción"
+                    }
+                  },
+                  "Property": "Jurisdicción"
+                }
+              },
+              "queryRef": "Jurisdicción.Jurisdicción",
+              "nativeQueryRef": "Jurisdicción"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Programa"
+                    }
+                  },
+                  "Property": "Programa"
+                }
+              },
+              "queryRef": "Programa.Programa",
+              "nativeQueryRef": "Programa"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Medidas"
+                    }
+                  },
+                  "Property": "Sancionado"
+                }
+              },
+              "queryRef": "_Medidas.Sancionado",
+              "nativeQueryRef": "Sancionado"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Medidas"
+                    }
+                  },
+                  "Property": "Vigente"
+                }
+              },
+              "queryRef": "_Medidas.Vigente",
+              "nativeQueryRef": "Vigente"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Medidas"
+                    }
+                  },
+                  "Property": "Devengado"
+                }
+              },
+              "queryRef": "_Medidas.Devengado",
+              "nativeQueryRef": "Devengado"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Medidas"
+                    }
+                  },
+                  "Property": "% Ejecución"
+                }
+              },
+              "queryRef": "_Medidas.% Ejecución",
+              "nativeQueryRef": "% Ejecución"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "_Medidas"
+                  }
+                },
+                "Property": "Vigente"
+              }
+            },
+            "direction": "Descending"
+          }
+        ],
+        "isDefaultSort": false
+      }
+    },
+    "drillFilterOtherVisuals": true,
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Programas · pesos corrientes del año elegido'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

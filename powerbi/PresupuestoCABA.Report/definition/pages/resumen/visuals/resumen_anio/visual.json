@@ -1,0 +1,75 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
+  "name": "resumen_anio",
+  "position": {
+    "x": 20,
+    "y": 20,
+    "z": 0,
+    "height": 160,
+    "width": 230,
+    "tabOrder": 0
+  },
+  "visual": {
+    "visualType": "slicer",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Año"
+                    }
+                  },
+                  "Property": "Año"
+                }
+              },
+              "queryRef": "Año.Año",
+              "nativeQueryRef": "Año"
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true,
+    "objects": {
+      "selection": [
+        {
+          "properties": {
+            "singleSelect": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Año'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

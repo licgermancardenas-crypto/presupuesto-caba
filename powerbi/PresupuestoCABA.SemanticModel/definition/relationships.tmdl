@@ -1,0 +1,35 @@
+relationship 4ba82ed1-f010-5693-ad6b-b4451815a243
+	fromColumn: Hechos.anio
+	toColumn: Año.Año
+
+relationship 313c4150-a5c3-5fe7-9aa7-96b3b0ffa205
+	fromColumn: Hechos.car
+	toColumn: Carácter.car
+
+relationship 0c7a24ad-fbad-5a45-87e1-62fec0aea7ec
+	fromColumn: Hechos.jur
+	toColumn: Jurisdicción.jur
+
+relationship bf1587f3-5bca-5cf4-99fb-f7058b9eeffe
+	fromColumn: Hechos.ClaveUE
+	toColumn: 'Unidad ejecutora'.ClaveUE
+
+relationship f63aeb2f-01e8-5f9f-8ba1-e22ed04ba5df
+	fromColumn: Hechos.ClaveProg
+	toColumn: Programa.ClaveProg
+
+relationship a68e3fad-f2ff-56c1-9fe2-c227d921fca5
+	fromColumn: Hechos.ClaveFinFun
+	toColumn: 'Finalidad y función'.ClaveFinFun
+
+relationship b659de80-ed7f-5625-a2f5-6731db4e391b
+	fromColumn: Hechos.ClaveObjeto
+	toColumn: 'Objeto del gasto'.ClaveObjeto
+
+relationship a2ea9efd-ed32-5255-9191-0b9fc17b9971
+	fromColumn: Hechos.fte
+	toColumn: Fuente.fte
+
+relationship 118a33f9-83c7-58e7-8184-ecdc01297d5d
+	fromColumn: Hechos.geo
+	toColumn: Geográfico.geo

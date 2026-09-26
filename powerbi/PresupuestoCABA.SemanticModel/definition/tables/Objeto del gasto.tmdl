@@ -1,0 +1,59 @@
+/// Clasificación por objeto: en qué se gasta (personal, bienes, servicios, transferencias...).
+table 'Objeto del gasto'
+	lineageTag: f3687c9c-5c4b-5ba4-a435-86f98b8e3211
+
+	column inc
+		dataType: int64
+		isHidden
+		lineageTag: e0b02fa3-6154-5f2a-841c-0662a258205e
+		summarizeBy: none
+		sourceColumn: inc
+
+		annotation SummarizationSetBy = User
+
+	column ppal
+		dataType: int64
+		isHidden
+		lineageTag: f2fdc032-9af2-5960-8bf5-b5fcc90f74ab
+		summarizeBy: none
+		sourceColumn: ppal
+
+		annotation SummarizationSetBy = User
+
+	column Inciso
+		dataType: string
+		lineageTag: c8ae07e5-7bdf-5177-9252-aa5a62b3ddde
+		summarizeBy: none
+		sourceColumn: inc_desc
+		sortByColumn: inc
+
+		annotation SummarizationSetBy = User
+
+	column 'Partida principal'
+		dataType: string
+		lineageTag: 440a86db-6d5a-51a8-8c3d-8b4f3de0ba99
+		summarizeBy: none
+		sourceColumn: ppal_desc
+
+		annotation SummarizationSetBy = User
+
+	column ClaveObjeto
+		dataType: string
+		isHidden
+		lineageTag: 9aa6120f-43a9-5c74-aa6a-e3ce4083d7bd
+		summarizeBy: none
+		sourceColumn: ClaveObjeto
+
+		annotation SummarizationSetBy = User
+
+	partition 'Objeto del gasto' = m
+		mode: import
+		source =
+				let
+					Origen = Csv.Document(File.Contents(CarpetaDatos & "dim_objeto_gasto.csv"), [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+					Encabezados = Table.PromoteHeaders(Origen, [PromoteAllScalars = true]),
+					Tipos = Table.TransformColumnTypes(Encabezados, {{"inc", Int64.Type}, {"ppal", Int64.Type}, {"inc_desc", type text}, {"ppal_desc", type text}}, "en-US"),
+					Agregar0 = Table.AddColumn(Tipos, "ClaveObjeto", each Text.From([inc]) & "|" & Text.From([ppal]), type text)
+				in
+					Agregar0
+

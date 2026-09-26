@@ -1,0 +1,78 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
+  "name": "resumen_serie",
+  "position": {
+    "x": 20,
+    "y": 470,
+    "z": 0,
+    "height": 230,
+    "width": 610,
+    "tabOrder": 0
+  },
+  "visual": {
+    "visualType": "clusteredColumnChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Año"
+                    }
+                  },
+                  "Property": "Año"
+                }
+              },
+              "queryRef": "Año.Año",
+              "nativeQueryRef": "Año"
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Medidas"
+                    }
+                  },
+                  "Property": "Devengado real"
+                }
+              },
+              "queryRef": "_Medidas.Devengado real",
+              "nativeQueryRef": "Devengado real"
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true,
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Devengado real por año (2026 a junio)'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

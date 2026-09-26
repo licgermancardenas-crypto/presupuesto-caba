@@ -1,0 +1,58 @@
+/// Programa presupuestario. El código se repite entre jurisdicciones: la clave es jurisdicción + programa.
+table Programa
+	lineageTag: 2715d749-e96c-55ba-86ad-bef87f4ce0af
+
+	column jur
+		dataType: int64
+		isHidden
+		lineageTag: 2c2bd275-3949-5d1d-98e8-e92e4e71fafe
+		summarizeBy: none
+		sourceColumn: jur
+
+		annotation SummarizationSetBy = User
+
+	column 'Código de programa'
+		dataType: int64
+		lineageTag: f777a43e-a7b4-5949-b6cd-a5a288a03954
+		summarizeBy: none
+		sourceColumn: prog
+
+		annotation SummarizationSetBy = User
+
+	column 'Descripción del programa'
+		dataType: string
+		lineageTag: abddd44b-5591-5480-9395-714e7db3318a
+		summarizeBy: none
+		sourceColumn: prog_desc
+
+		annotation SummarizationSetBy = User
+
+	column ClaveProg
+		dataType: string
+		isHidden
+		lineageTag: 1e787bd1-bf43-523b-bd76-b7ef70e59abc
+		summarizeBy: none
+		sourceColumn: ClaveProg
+
+		annotation SummarizationSetBy = User
+
+	column Programa
+		dataType: string
+		lineageTag: 9c28b42b-7c33-5b86-8bb5-1b8d3ad0ea4e
+		summarizeBy: none
+		sourceColumn: Programa
+
+		annotation SummarizationSetBy = User
+
+	partition Programa = m
+		mode: import
+		source =
+				let
+					Origen = Csv.Document(File.Contents(CarpetaDatos & "dim_programa.csv"), [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+					Encabezados = Table.PromoteHeaders(Origen, [PromoteAllScalars = true]),
+					Tipos = Table.TransformColumnTypes(Encabezados, {{"jur", Int64.Type}, {"prog", Int64.Type}, {"prog_desc", type text}}, "en-US"),
+					Agregar0 = Table.AddColumn(Tipos, "ClaveProg", each Text.From([jur]) & "|" & Text.From([prog]), type text),
+					Agregar1 = Table.AddColumn(Agregar0, "Programa", each Text.From([prog]) & " - " & [prog_desc], type text)
+				in
+					Agregar1
+

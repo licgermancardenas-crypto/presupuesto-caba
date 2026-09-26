@@ -1,0 +1,22 @@
+fin,fun,fin_desc,fun_desc
+1,1,Administración Gubernamental,Legislativa
+1,2,Administración Gubernamental,Judicial
+1,3,Administración Gubernamental,Dirección ejecutiva
+1,6,Administración Gubernamental,Administración fiscal
+1,7,Administración Gubernamental,Control de la gestión
+2,2,Servicios De Seguridad,Seguridad interior
+2,3,Servicios De Seguridad,Sistema penal
+3,1,Servicios Sociales,Salud
+3,2,Servicios Sociales,Promoción y acción social
+3,4,Servicios Sociales,Educación
+3,5,Servicios Sociales,Cultura
+3,6,Servicios Sociales,Trabajo
+3,7,Servicios Sociales,Vivienda y Urbanismo
+3,8,Servicios Sociales,Agua potable y alcantarillado
+3,9,Servicios Sociales,Servicios Urbanos
+4,3,Servicios Económicos,Transporte
+4,4,Servicios Económicos,Ecología
+4,5,Servicios Económicos,Turismo
+4,6,Servicios Económicos,Industria y Comercio
+5,1,Deuda Pública - Intereses Y Gastos,Deuda Pública - Intereses y Gastos
+9,1,Gastos No Clasificados,Gastos no clasificados

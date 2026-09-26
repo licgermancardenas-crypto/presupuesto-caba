@@ -1,0 +1,31 @@
+/// Ministerio, poder u organismo. Con la descripción del último año en que aparece el código.
+table Jurisdicción
+	lineageTag: e0c09b27-52b2-5ef9-84c1-8431693d0268
+
+	column jur
+		dataType: int64
+		isHidden
+		lineageTag: 294fd9d9-ad9e-563d-bdf9-021b2b2650ed
+		summarizeBy: none
+		sourceColumn: jur
+
+		annotation SummarizationSetBy = User
+
+	column Jurisdicción
+		dataType: string
+		lineageTag: 047a9770-401b-59d7-a9cb-8cf84dab817f
+		summarizeBy: none
+		sourceColumn: jur_desc
+
+		annotation SummarizationSetBy = User
+
+	partition Jurisdicción = m
+		mode: import
+		source =
+				let
+					Origen = Csv.Document(File.Contents(CarpetaDatos & "dim_jurisdiccion.csv"), [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+					Encabezados = Table.PromoteHeaders(Origen, [PromoteAllScalars = true]),
+					Tipos = Table.TransformColumnTypes(Encabezados, {{"jur", Int64.Type}, {"jur_desc", type text}}, "en-US")
+				in
+					Tipos
+

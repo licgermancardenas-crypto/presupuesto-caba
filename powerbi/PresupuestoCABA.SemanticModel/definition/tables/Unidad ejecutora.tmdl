@@ -1,0 +1,50 @@
+/// Unidad que ejecuta el gasto, dentro de su jurisdicción.
+table 'Unidad ejecutora'
+	lineageTag: dd8933f8-4257-571a-9f13-0539cb993fa9
+
+	column jur
+		dataType: int64
+		isHidden
+		lineageTag: 01c3c102-b6e7-5ca8-b48d-1804557bcf3e
+		summarizeBy: none
+		sourceColumn: jur
+
+		annotation SummarizationSetBy = User
+
+	column ue
+		dataType: int64
+		isHidden
+		lineageTag: e77c2ee5-9922-5300-a022-5a7e09b2dd7b
+		summarizeBy: none
+		sourceColumn: ue
+
+		annotation SummarizationSetBy = User
+
+	column 'Unidad ejecutora'
+		dataType: string
+		lineageTag: 09fdd35c-aca6-5a12-acca-4d057583e26f
+		summarizeBy: none
+		sourceColumn: ue_desc
+
+		annotation SummarizationSetBy = User
+
+	column ClaveUE
+		dataType: string
+		isHidden
+		lineageTag: f05fa992-5897-502e-8ba5-e8a35f574537
+		summarizeBy: none
+		sourceColumn: ClaveUE
+
+		annotation SummarizationSetBy = User
+
+	partition 'Unidad ejecutora' = m
+		mode: import
+		source =
+				let
+					Origen = Csv.Document(File.Contents(CarpetaDatos & "dim_unidad_ejecutora.csv"), [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+					Encabezados = Table.PromoteHeaders(Origen, [PromoteAllScalars = true]),
+					Tipos = Table.TransformColumnTypes(Encabezados, {{"jur", Int64.Type}, {"ue", Int64.Type}, {"ue_desc", type text}}, "en-US"),
+					Agregar0 = Table.AddColumn(Tipos, "ClaveUE", each Text.From([jur]) & "|" & Text.From([ue]), type text)
+				in
+					Agregar0
+

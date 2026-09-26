@@ -1,0 +1,955 @@
+jur,prog,prog_desc
+1,16,Formacion Y Sancion De Leyes
+2,16,Control Externo
+3,16,Defensa De Los Derechos
+3,17,Registro Publico De Bases De Datos Personales-Ley 1845
+3,18,Mecanismo Local Para La Prevencion De La Tortura - Ley 5787
+5,10,Asesoria General Tutelar
+5,20,Ministerio Publico De La Defensa
+5,30,Posicionamiento Institucional Y Gestion Administrativa
+5,31,Politica Criminal Integral Y Gestion Judicial
+5,32,Investigacion Y Relaciones Con La Fuerza De Seguridad
+5,33,Acceso A La Justicia Y Proteccion Integral A La Victima
+5,40,Comision De Administracion Conjunta De Representantes Del Ministerio Publico
+6,1,Actividades Centrales
+6,20,Tutela Judicial
+6,40,Centro De Formacion Judicial
+6,50,Oficina De Innovacion Y Gestion Judicial
+6,60,Oficina De Genero
+7,16,Actividades Especificas Del Consejo De La Magistratura
+7,17,"Justicia Contenciosa, Administrativa, Tributaria Y De Relaciones Del Consumo"
+7,18,"Justicia Penal, Contravencional Y De Faltas Y Penal Juvenil"
+7,19,Metodos Alternativos De Resolucion De Conflictos Y Justicia Vecinal
+7,20,Actividades Operativas Y Comunes Del Poder Judicial
+7,21,Centro De Justicia De La Mujer
+7,22,Justicia Electoral
+7,23,Justicia Laboral
+7,24,Justicia Civil
+8,16,Control Interno Del Gobierno Central Y Organismos Descentralizados
+9,1,Actividades Centrales
+9,11,Asuntos Fiscales Y Responsabilidad Estatal
+9,12,Asuntos Institucionales Y Empleo Publico
+9,16,Asuntos Fiscales Y Responsabilidad Estatal
+9,17,Asuntos Institucionales Y Empleo Publico
+9,19,Procuracion Inteligente Y Desarrollo Academico
+9,20,Dictamenes
+9,21,Asuntos Judiciales
+9,22,Procuracion Inteligente
+9,23,Desarrollo Academico
+20,1,Actividades Centrales
+20,2,Actividades Comunes
+20,3,Gestion De La Comuna 3
+20,4,Gestion De La Comuna 4
+20,5,Gestion De La Comuna 5
+20,6,Gestion De La Comuna 6
+20,7,Gestion De La Comuna 7
+20,8,Gestion De La Comuna 8
+20,9,Gestion De La Comuna 9
+20,10,Gestion De La Comuna 10
+20,11,Gestion De La Comuna 11
+20,12,Gestion De La Comuna 12
+20,13,Gestion De La Comuna 13
+20,14,Gestion De La Comuna 14
+20,15,Gestion De La Comuna 15
+20,16,Capacitacion Del Personal
+20,17,Acciones De La Subsecretaria De Medios
+20,18,Relacionamiento Politico
+20,19,Fondo De Emergencia Para Subsidios Por Inundacciones - Ley 1575
+20,20,Vida Independiente E Inclusion Economica
+20,21,Cable De La Ciudad
+20,22,Desarrollo Y Planificacion De Acciones Comunicacionales
+20,23,Competencias Comunales Y Talleres
+20,24,Opinion Publica
+20,25,Gestion De Espacios Publicos Para La Vinculacion Comunitaria
+20,26,Coordinacion Y Vinculacion Estrategica
+20,27,Analisis Y Datos
+20,28,Descentralizacion Y Gestion Institucional
+20,29,Coordinacion De Acciones De Comunicacion Y Enlace
+20,30,Comunicacion Digital
+20,31,Planificacion Estrategica
+20,32,Posicionamiento Y Gestion De Eventos
+20,33,Planificacion Y Vinculacion Estrategica De Eventos
+20,34,Coordinacion De Eventos Y Transformacion Territorial
+20,35,Colectividades Y Migrantes
+20,36,"Estrategia De La Comunicacion, Contenidos Y Produccion"
+20,37,Gestion De Gobierno
+20,38,Cuidado Y Puesta En Valor Del Arbolado
+20,39,Promocion De Derechos De Las Mujeres
+20,40,Talleres
+20,41,Competencias Comunales
+20,42,Defensa Y Proteccion Al Consumidor
+20,43,Habilitacion De Conductores
+20,44,Asuntos Publicos Territoriales
+20,45,Articulacion Y Fortalecimiento Territorial
+20,46,Cambio Cultural
+20,47,Obras Comunales
+20,48,Cuidado Y Puesta En Valor De Espacios Verdes Y Arbolado
+20,49,Servicios Mortuorios
+20,50,Cuidado Y Puesta En Valor De Espacios Verdes
+20,51,Promocion Y Bienestar Social
+20,52,Sistemas Alternativos A La Institucionalizacion
+20,53,Hogar De Residencia Permanente Y Transitoria
+20,54,Acciones Para Personas Mayores
+20,61,Vinculos Con Los Usuarios
+20,62,Control Tecnico De Los Servicios Publicos
+20,63,Actividades En Comunas
+20,64,Modernizacion Y Gestion De La Informacion
+20,65,Turismo De La Ciudad
+20,70,Conservacion De La Biodiversidad Y Patrimonio Historico
+20,71,Servicios De Emergencia
+20,72,"Promocion Y Proteccion De Los Derechos De Niñas, Niños Y Adolescentes"
+20,73,"Programas Especiales De Proteccion Para Niños, Niñas Y Adolescentes"
+20,74,Control E Intervencion De Jovenes En Conflicto Con La Ley Penal
+20,75,Cooperacion Con Provincias Y Municipios
+20,76,Asistencia A La NiÃ±ez Y Adolescencia
+20,77,Consolidacion De Vinculos
+20,80,Seguimiento Organismos De Control Y Acceso A La Informacion
+20,81,Programa Integral De Promocion De Los Derechos Lgbtiq
+20,82,Buenos Aires Convive
+20,83,Fortalecimiento De La Diversidad Cultural
+20,84,Gestion Animal
+20,85,Promocion Para El Desarrollo Sostenible
+20,86,Areas De Conservacion
+20,87,Sanidad Y Cuidado Responsable De Caninos Y Felinos Domesticos
+20,88,Conservacion De La Biodiversidad Y Patrimonio Historico
+20,89,"Gestion De Residuos, Areas Verdes Y Cuerpos De Agua"
+20,90,Politica Y Estrategia Ambiental
+20,91,Control Ambiental
+20,92,Evaluacion Tecnica
+20,93,Recoleccion Y Tratamiento De Raees
+20,94,Programa De Cambio Climatico
+20,95,Laboratorio De Analisis Y Calidad Ambiental
+20,96,Programa De Desarrollo Sustentable
+20,97,Intervenciones Veterinarias
+20,98,Redes Ambientales
+20,99,Programa De Residuos Sujeto A Manejo Especial
+20,100,Participacion Ciudadana Y Cercania
+20,101,Mediacion Vecinal
+20,102,Acciones Para La Restauracion Ecologica
+20,103,Estrategias De Accesibilidad
+20,104,Programas De Cooperacion Federal
+20,105,Representaciones De La Ciudad
+20,106,Certificacion De La Identidad Y Capacidad De Las Personas
+20,107,Asistencia Territorial
+20,108,Desarrollo Institucional
+20,109,Gestion De Asuntos Publicos Locales
+20,110,Planificacion Estrategica Territorial
+20,111,Relacionamiento Internacional
+20,112,Coordinacion De Relaciones Internacionales Y Cooperacion
+20,113,Proyeccion Internacional
+20,114,Analisis Prospectivo
+20,115,Relaciones Con Los Cultos
+20,116,Cooperacion Bilateral
+20,117,Cooperacion Multilateral
+20,118,Relaciones Institucionales
+20,119,Protocolo Y Ceremonial
+20,120,Relaciones Internacionales
+20,121,Relaciones Institucionales
+20,212,Politicas De Juventud
+20,300,Cooperacion Urbana Federal
+20,301,Intercambio De Gestion
+20,302,Relaciones Federales Y Productivas
+20,303,Upe Dialogo Social
+20,309,Politicas De Infraestructura Verde Urbana Y Desarrollo Sostenible
+20,310,Areas De Conservacion
+20,311,Restauracion Ecologica Y Recomposicion Ambiental
+20,312,Promocion Para El Desarrollo Sostenible
+21,1,Actividades Centrales
+21,2,Actividades Comunes
+21,3,Actividades Comunes
+21,4,Ctividades Comunes
+21,5,Actividades Comunes
+21,6,Actividades Comunes
+21,7,Actividades Comunes
+21,8,Actividades Comunes
+21,9,Actividades Comunes
+21,10,Actividades Comunes
+21,11,Gestion De La Comuna 11
+21,12,Gestion De La Comuna 12
+21,13,Gestion De La Comuna 13
+21,14,Gestion De La Comuna 14
+21,15,Gestion De La Comuna 15
+21,16,Capacitacion Del Personal
+21,17,"Planificacion, Evaluacion Y Coordinacion De Gestion"
+21,19,Garantias Al Derecho De Acceso A La Informacion
+21,20,Planificacion Y Control De La Gestion
+21,21,Planificacion Y Control De La Gestion
+21,22,Acciones Del Consejo Social
+21,23,Reciclado Y Economia Circular
+21,24,Operacion Del Reciclado De Residuos Urbanos
+21,25,Servicios De Higiene Urbana
+21,26,Control De Plagas
+21,28,Intervenciones De Fiscalizacion En La Via Publica Y De Recuperacion De Espacio Publico
+21,30,Catastro
+21,31,Registro De Obras E Instalaciones
+21,32,Aplicacion De Normas Referidas Al Planeamiento Urbano
+21,40,Catastro
+21,41,Registro De Obras E Instalaciones
+21,42,Aplicacion De Normas Referidas Al Planeamiento Urbano
+21,43,Corporacion Buenos Aires Sur S.E
+21,61,Defensa Y Proteccion Al Consumidor
+21,64,Intervenciones En El Espacio Publico Comunal
+21,69,Mantenimiento De Infraestructura Comunal
+21,70,Integracion Y Desarrollo Del Sur
+21,74,Coordinacion Y Gestion Comunal
+21,78,Vinculacion Operativa Con El Sistema Estadistico De Ciudad
+21,79,Relacionamiento Politico Y Gestion De Programas Transversales
+21,80,Colonias Deportivas Y Recreativas
+21,81,Promocion Y Desarrollo Deportivo
+21,82,Eventos Deportivos Y Recreativos
+21,83,Deporte Social Y Desarrollo Deportivo
+21,84,Infraestructura Deportiva
+21,85,"Recoleccion, Barrido E Higiene De La Ciudad De Buenos Aires"
+21,86,Deporte De Elite Y Alto Rendimiento
+21,87,Formacion Politica Y Social Para La Mejora De La Gestion Publica
+21,88,Autodromo De La Ciudad Autonoma De Buenos Aires
+21,89,Sistema Estadistico De La Ciudad
+21,90,Plan Nacional De Estadistica
+21,94,Desarrollo Y Calidad De Aplicaciones
+21,96,Infraestructura Informatica
+21,97,Estandarizacion De Aplicacion Y Tecnologia
+21,98,Seguridad Informatica
+21,103,Instrumentacion Y Seguimiento Del Plan Urbano Ambiental
+21,104,Difusion Y Capacitacion Del Plan Urbano Ambiental
+21,105,Formacion Ciudadana E Instrumentacion Y Seguimiento Del Plan Urbano Ambiental
+21,106,Cambio Cultural
+21,107,Ciudad Inteligente
+21,108,Gestion Documental Y Eficiencia Administrativa
+21,110,Experiencia Digital
+21,111,Gobierno E Identidad Digital
+21,116,Cuidado Y Puesta En Valor De Espacios Verdes Y Arbolado Publico
+21,117,Servicios Mortuorios
+21,118,Desarrollo Comunal
+21,123,Servicios Desconcentrados
+21,124,Atencion Ciudadana
+21,125,Habilitacion De Conductores
+21,126,Informacion Y Diagnostico Territorial
+21,127,Catastro
+21,128,Registro De Obras E Instalaciones
+21,129,Aplicacion De Normas Referidas Al Planeamiento Urbano
+21,130,"Actividades Comunes A Los Programas 131,147,148,149,151,152,153,154,155,156,157,158 Y 159"
+21,131,Subterraneos De Buenos Aires
+21,132,"Actividades Comunes A Los Programas 135, 138, 139, 140 Y 142"
+21,135,Obras De Ingenieria Y Arquitectura
+21,138,Obras De Infraestructura Urbana
+21,139,Programa De Gestion De Riesgo Hidrico (P.G.R.H)
+21,140,Desarrollo De La Infraestructura De La Red Pluvial
+21,142,Infraestructura De Sistemas De Transporte
+21,147,Coordinacion Gestion De La Movilidad
+21,148,Sistema De Estacionamiento Regulado
+21,149,Micromovilidad
+21,151,Ordenamiento Y Control De Transito Y Seguridad Vial
+21,152,Señalizacion Luminosa
+21,153,Señalamiento Vial
+21,154,Demarcacion Horizontal
+21,155,Coordinacion Planificacion De La Movilidad
+21,156,Planeamiento Del Transito Y Transporte Publico Y Privado De Pasajeros Y Cargas
+21,157,Regulacion Y Operacion Servicios De Transporte
+21,158,Diseño E Implementacion De Mejoras Para La Movilidad
+21,159,Infraestructura De La Movilidad
+21,161,Antropologia Urbana
+21,162,Proyectos De Arquitectura
+21,168,Planificacion Y Desarrollo Del Espacio Urbano
+21,175,Identidad Comunal
+21,176,Coordinacion De Servicios Al Ciudadano
+21,178,Politicas Publicas Basadas En Evidencia
+21,199,Innovacion Administrativa
+21,200,Informacion Y Diagnostico Territorial
+21,201,Antropologia Urbana
+21,202,Gestion Documental Y Eficiencia Administrativa
+21,240,Fondo De Emergencia Para Subsidios Por Inundaciones - Ley 1575
+24,1,Actividades Centrales
+24,2,Actividades Comunes
+24,3,Actividades Comunes
+24,4,Actividades Comunes
+24,5,Actividades Comunes
+24,9,Actividades Comunes
+24,16,Apoyo Al Sistema Penitenciario Y De Reintegracion Social
+24,17,Servicio Penitenciario Y De Reintegracion Social
+24,18,Politica Criminal Y Asuntos Penitenciarios
+24,23,Gestion Electoral
+24,25,Enlace Electoral
+24,43,Registro Publico De Comercio Y Contralor De Personas Juridicas
+24,90,Mediacion Vecinal
+24,91,Gestion De Habilitaciones Y Permisos
+24,92,Fiscalizacion De Actividades Comerciales
+24,93,Fiscalizacion De Obras E Instalaciones Complementarias
+24,94,"Fiscalizacion De Establecimientos, Alimentos Y Uta"
+24,95,"Capacitacion, Formacion Y Concientizacion Ciudadana"
+24,96,Analisis E Investigacion
+24,97,"Registro De Establecimientos, Productos Y Uta"
+24,98,Articulacion Laboral Federal
+24,99,Vinculacion Con La Comunidad
+24,100,Asuntos Gremiales Y Relacion Con Camaras Empresariales
+24,101,Registro De Actividades Economicas
+24,102,"Fortalecimiento, Promocion Y Difusion De Ddhhh"
+24,103,Conduccion Y Administracion De Programas De Empleo
+24,104,Servicios De Rubrica Y Registro
+24,105,Proteccion De Trabajo
+24,106,Control Del Cumplimiento De La Normativa Laboral
+24,107,Promocion De Las Negociaciones Laborales
+24,108,Lineamientos Del Ministerio De Justicia Y Seguridad
+24,109,Enlace Electoral
+24,110,Registros
+24,111,Administracion Ex Cassaba
+24,112,Registro De Deudores Alimentarios
+24,113,Administracion De Infracciones En La Ciudad
+24,114,Actividades Comunes
+24,115,Actividades Comunes
+24,116,Gestion Metropolitana
+24,117,Fortalecimiento De La Autonomia
+24,118,Acciones De La Subsecretaria De Justicia
+24,119,Innovacion Y Simplificacion De Procesos
+24,121,Transferencia De Competencias
+24,122,Politica Criminal Y Asuntos Penitenciarios
+24,123,Asuntos Registrales
+24,124,Asistencia A La Victima
+24,125,Metodos Alternativos De Resolucion De Conflictos
+24,126,Asuntos Politicos Y Electorales
+24,129,Politica Criminal Y Asuntos Penitenciarios
+24,130,Politica Criminal Y Asuntos Penitenciarios
+24,131,Trabajo Y Empleo
+24,132,Resolucion De Conflictos Individuales Y Colectivos
+24,133,Transferencia De Competencias Y Asuntos Interjurisdiccionales
+24,134,Innovacion Institucional Y Electoral
+24,135,Acciones De Acceso A Justicia
+24,185,Asuntos Interjurisdiccionales
+26,1,Actividades Centrales
+26,2,Actividades Comunes
+26,3,Actividades Comunes
+26,4,Actividades Comunes
+26,8,Actividades Comunes
+26,9,Actividades Comunes
+26,20,Soporte Operativo De Seguridad
+26,21,Mediacion Vecinal
+26,22,Registros
+26,23,Administracion De Infracciones En La Ciudad
+26,24,Violencia De Genero
+26,25,Acciones De La Subsecretaria De Justicia
+26,27,Lineamientos Del Ministerio De Justicia Y Seguridad
+26,28,Administracion Ex Cassaba
+26,29,Registro De Deudores Alimentarios
+26,30,Cooperacion E Intercambio De Informacion
+26,31,Busqueda De Personas
+26,33,"Compactacion, Descontaminacion Y Disposicion Final De Automotores"
+26,35,Coordinacion General Y Planificacion Estrategica
+26,36,Detenidos En El Sistema De Caba
+26,39,Unidad Enlace Consejo De Seguridad Y Prevencion Del Delito
+26,43,Registro Publico De Comercio Y Contralor De Personas Juridicas
+26,46,Coordinacion Operativa
+26,48,Coordinacion Operativa Del Cuerpo De Agentes De Prevencion
+26,49,Planeamiento De Emergencia Y Coordinacion De Bomberos
+26,51,Registro Verificacion De Autopartes
+26,52,Intervenciones En Emergencias En Via Publica
+26,53,Planificacion Y Control Defensa Civil
+26,54,Apoyo Logistico En Emergencias
+26,59,Policia De La Ciudad
+26,61,Acciones Instituto Superior De Seguridad Publica
+26,62,Formacion En Seguridad
+26,63,Iuse - Ley N° 5.689
+26,80,Informacion Y Estadistica Criminal
+26,81,Investigacion Criminal
+26,82,Planificacion De Seguridad Con Recursos No Policiales
+26,91,Gestion De Habilitaciones Y Permisos
+26,92,Fiscalizacion De Actividades Comerciales
+26,93,Fiscalizacion De Obras E Instalaciones Complementarias
+26,94,Fiscalizacion De Establecimientos Y Alimentos
+26,95,Capacitacion Manipulacion De Alimentos
+26,96,Analisis E Investigacion
+26,97,Registro De Establecimientos Y Productos
+26,170,Custodia Y Seguridad De Edificios Publicos
+26,171,Control De Prestadores De Seguridad Privada
+26,172,Control Y Fiscalizacion
+26,325,Convivencia Y Orden Publico
+26,326,Orden Publico Y Coordinacion De Agentes
+26,327,Politicas De Prevencion Del Delito
+26,328,Articulacion Comunal Y Participacion Ciudadana En Comisarias
+26,329,Prevencion Y Vinculacion Ciudadana En Seguridad
+28,1,Actividades Centrales
+28,2,Actividades Comunes A Los Programas 18 Y 43
+28,3,Actividades Comunes
+28,4,"Actividades Comunes A Los Programas 22, 42 Y 80"
+28,5,Actividades Comunes
+28,6,Actividades Comunes
+28,7,Actividades Comunes
+28,9,Actividades Comunes
+28,16,Estrategia De Vinculacion Federal
+28,17,Representaciones De La Ciudad
+28,19,Control Y Seguimiento De Gestion
+28,20,Certificacion De La Identidad Y Capacidad De Las Personas
+28,21,Programas De Cooperacion Federal
+28,22,Capacitacion Y Reforma Politica
+28,23,Gestion Electoral
+28,24,Asuntos Interjurisdiccionales
+28,25,Gestion Metropolitana
+28,26,Fortalecimiento De La Autonomia
+28,28,Articulacion Interinstitucional
+28,29,Estrategias De Accesibilidad
+28,30,Gestion Metropolitana
+28,31,Fortalecimiento De La Autonomia
+28,42,Coordinacion Institucional
+28,43,Asuntos Interjurisdiccionales Y Transferencias De Competencias
+28,75,Cooperacion Con Provincias Y Municipios
+28,76,Asuntos Metropolitanos
+28,77,Cuenca Matanza-Riachuelo
+28,80,Seguimiento Organismos De Control Y Acceso A La Informacion
+28,198,Formacion Politica Y Social Para La Mejora De La Gestion Publica
+29,1,Actividades Centrales
+29,2,Actividades Comunes
+29,3,Actividades Comunes
+29,4,Actividades Comunes
+29,5,Actividades Comunes
+29,6,Actividades Comunes
+29,7,Actividades Comunes
+29,8,Actividades Comunes
+29,9,Actividades Comunes
+29,10,Actividades Comunes
+29,12,Coordinacion General Y Planificacion Estrategica
+29,27,Comunicaciones Institucionales
+29,39,Unidad Enlace Consejo De Seguridad Y Prevencion Del Delito
+29,61,Acciones Instituto Superior De Seguridad Publica
+29,62,Formacion En Seguridad
+29,63,Iuse - Ley N° 5.689
+29,92,Comite De Seguridad En El Futbol De La Caba
+29,93,Seguridad En Eventos Publicos
+29,94,Investigacion Criminal
+29,95,"Programa De Descontaminacion, Compactacion Y Disposicion Final De Automotores"
+29,96,Tecnologia E Informatica
+29,97,Gestion De Capital Humano
+29,98,Acciones De Coordinacion
+29,99,Prevencion Y Vinculacion Ciudadana En Seguridad
+29,100,Policia De La Ciudad
+29,101,Gestion Administrativa
+29,102,Alcaidias
+29,103,Intervenciones En Emergencias En Via Publica
+29,104,Planificacion Y Control Defensa Civil
+29,105,Planeamiento De Emergencia Y Coordinacion De Bomberos
+29,106,Apoyo Logistico En Emergencias
+29,107,Violencia De Genero
+29,108,Analisis Estrategico
+29,109,Coordinacion Operativa Del Cuerpo De Agentes De Prevencion
+29,110,Coordinacion Operativa
+29,111,Informacion Y Estadistica Criminal
+29,112,Acciones De La Secretaria De Seguridad
+29,113,Planificacion De Seguridad Con Recursos No Policiales
+29,114,Articulacion Comunal Y Participacion Ciudadana En Comisarias
+29,115,Orden Publico Y Coordinacion De Agentes
+29,116,Custodia Y Seguridad De Edificios Publicos
+29,117,Control De Prestadores De Seguridad Privada
+29,118,Control Y Fiscalizacion
+31,1,Actividades Centrales
+31,2,Actividades Comunes
+31,3,Actividades Comunes
+31,10,Actividades Comunes
+31,11,Actividades Comunes
+31,28,Boleto Estudiantil
+31,33,Desarrollos Y Proyectos
+31,35,Infraestructura De Sistemas De Transporte
+31,36,Proyectos De Infraestructura Urbana
+31,37,Obras De Ingenieria Y Arquitectura
+31,38,Programa De Gestion De Riesgo Hidrico (P.G.R.H)
+31,39,Aplicacion Convenio Subsidio De Transporte
+31,40,Subterraneos De Buenos Aires
+31,41,Obras De Ingenieria Y Arquitectura
+31,42,Obras De Infraestructura Urbana
+31,43,Programa De Gestion De Riesgo Hidrico
+31,44,Desarrollo De La Infraestructura De La Red Pluvial
+31,45,Infraestructura Del Transporte
+31,46,Coordinacion Planificacion De La Movilidad
+31,47,Diseño E Implementacion De Mejoras Para La Movilidad
+31,48,Planeamiento Del Transito Y Transporte Publico Y Privado De Pasajeros Y Cargas
+31,49,Coordinacion Gestion De La Movilidad
+31,50,Micromovilidad
+31,51,Regulacion Y Operacion Servicios De Transporte
+31,52,Sistema De Estacionamiento Medido
+31,53,Sistema De Gestion De Acarreo
+31,54,Señalizacion Luminosa
+31,55,Señalamiento Vial
+31,56,Demarcacion Horizontal
+31,57,Infraestructura De La Movilidad
+31,58,Ordenamiento Y Control De Transito Y Seguridad Vial
+31,59,Sistemas De Movilidad Urbana En El Marco De La Transicion Energetica
+31,60,Coordinacion Planificacion De La Movilidad Y La Seguridad Vial
+31,61,Movilidad Y Seguridad Vial
+31,62,Transporte Automotor De Pasajeros
+31,63,Coordinacion Gestion De La Movilidad
+31,64,Sistemas De Movilidad Urbana En El Marco De La Transicion Energetica
+31,65,Señalamiento Vial
+31,66,Demarcacion Horizontal
+31,67,Diseño E Implementacion De Mejoras Para La Movilidad
+31,68,Fiscalizacion Del Transporte Publico De Pasajeros
+31,69,Infraestructura De La Movilidad
+31,70,Señalizacion Luminosa
+31,71,Sistema De Estacionamiento Medido
+31,72,Sistema De Gestion De Acarreo
+31,74,Sistema De Movilidad Urbana En El Marco De La Transicion Energetica
+31,75,Planificacion Y Desarrollo Del Espacio Urbano
+31,76,Antropologia Urbana
+31,77,Informacion Y Diagnostico Territorial
+31,78,Proyectos De Arquitectura
+35,1,Actividades Centrales
+35,2,Actividades Comunes
+35,3,Actividades Comunes
+35,4,Actividades Comunes
+35,5,Actividades Comunes
+35,6,Actividades Comunes
+35,9,Actividades Comunes
+35,10,Actividades Comunes
+35,11,Actividades Comunes
+35,13,Operacion De Reciclado De Residuos Urbanos
+35,14,Reciclado Y Economia Circular
+35,15,Regeneracion Urbana
+35,16,Gestion De Comunicacion
+35,17,Regeneracion Urbana
+35,18,Reciclado Y Economia Circular
+35,19,Operacion Del Reciclado De Residuos Urbanos
+35,22,Control De Gestion Y Reclamos
+35,23,"Tecnica, Administrativa Y Legal"
+35,24,Monitoreo Y Sistemas
+35,26,Obras De Regeneracion Urbana
+35,27,Parque De La Ciudad
+35,37,Mantenimiento Y Optimizacion Del Alumbrado Publico
+35,52,Servicios De Higiene Urbana
+35,57,Control De Plagas
+35,79,Mantenimiento De La Red Pluvial
+35,80,Orden E Higiene
+35,81,Obras De Regeneracion Urbana
+35,85,"Recoleccion, Barrido E Higiene De La Ciudad De Buenos Aires"
+35,88,Mejoramiento De Las Vias De Transito Peatonal Y Vehicular
+35,90,Intervencion En Vias Peatonales
+35,91,Obras En Vias Peatonales
+35,92,Permisos Y Ferias
+35,93,Reciclado Y Economia Circular
+35,94,Fiscalizacion De Vias Peatonales
+35,95,Intervenciones De Fiscalizacion En La Via Publica
+35,96,Intervenciones De Recuperacion Del Espacio Publico
+35,97,Operacion Del Reciclado De Residuos Urbanos
+35,121,Intervenciones De Recuperacion Del Espacio Publico
+35,124,Obras Comunales
+35,125,Intervenciones En El Espacio Publico Comunal
+35,126,Coordinacion Y Gestion Comunal
+35,127,Desarrollo Comunal
+35,128,Identidad Comunal
+35,129,Cuidado Y Puesta En Valor De Espacios Verdes Y Arbolado Publico
+35,130,Servicios Mortuorios
+35,131,Obras Comunales
+35,321,Conservacion Del Paisaje Urbano
+40,1,Actividades Centrales Ministerio De Salud
+40,5,Actividades Comunes
+40,7,Atencion Hospitalaria
+40,16,Politicas De Desarrollo Saludable
+40,22,Recursos Fisicos En Salud - Infraestructura
+40,23,Facturacion Y Cobranza De Los Efectores Publicos S.E.
+40,30,Ciudad Amigable Para Personas Mayores
+40,40,Hogar De Residencia Permanente Y Transitoria
+40,41,Promocion Social Y Bienestar
+40,42,Sistemas Alternativos A La Institucionalizacion
+40,43,Coordinacion Y Vinculacion Para Personas Mayores
+40,45,Instituto De Control De Zoonosis Luis Pasteur
+40,49,Sistema De Atencion Medica De Emergencia
+40,52,Atencion Medica General En Hospitales De Agudos
+40,54,Atencion Medica De Patologias Especificas
+40,55,Atencion Medica Materno Infantil
+40,56,Atencion Medica Oftalmologica
+40,57,Atencion Odontologica General
+40,59,Atencion De Rehabilitacion
+40,60,Salud Comunitaria - Acumar
+40,61,Promocion Y Cuidado De La Salud Del Niño
+40,62,Prevencion Y Proteccion En Salud Sexual
+40,63,Ente Autarquico Instituto Del Trasplante
+40,64,Gestion De Redes Y Programas De Salud
+40,65,Administracion Del Sistema De Salud
+40,70,"Atencion Primaria, Ambulatoria Y Comunitaria"
+40,71,Salud Comunitaria - Centros De Salud
+40,78,Acciones Para Personas Mayores
+40,85,Atencion De Salud Mental
+40,86,Hospital De Pediatria Juan Pedro Garrahan
+40,87,Facturacion Y Cobranza De Los Efectores Publicos S.E.
+40,88,Planificacion Sanitaria Y Gestion En Red
+45,1,Actividades Centrales
+45,2,Actividades Comunes
+45,3,Actividades Comunes
+45,4,Actividades Comunes
+45,5,Actividades Comunes
+45,6,Actividades Comunes
+45,7,Actividades Comunes
+45,8,Actividades Comunes
+45,9,Actividades Comunes
+45,18,Administracion Centralizada
+45,19,Fortalecimiento A Organizaciones De La Sociedad Civil
+45,20,Consejo Social
+45,21,Abordaje Territorial Barrio Padre Carlos Mugica
+45,22,Planificacion Y Control De Gestion
+45,23,Plan Integral De Estrategias Habitacionales
+45,25,Infraestructura Social
+45,26,Upe Urbanizacion Barrio Padre Carlos Mugica
+45,27,Intermediacion Laboral
+45,28,Asistencia Al Damnificado
+45,29,Asistencia A Familias De Alta Vulnerabilidad Social
+45,30,Asistencia Integral A Los Sin Techo
+45,31,Redes Por La Inclusion
+45,32,"Deteccion, Proteccion Y Asistencia A Victimas De Trata De Personas - Ley 2781"
+45,33,Infraestructura Y Vivienda
+45,34,Desarrollo Institucional Y Territorial
+45,35,Economia Popular Y Social
+45,36,Intermediacion Laboral
+45,37,Fondes-Fondo De La Economia Social Ley N° 6376
+45,38,Asistencia Tecnica Y Fomento A La Comercializacion De La Economia Social
+45,39,Economia Social Y Sociolaboral
+45,40,Asistencia Tecnica Y Fomento A La Comercializacion De La Economia Social
+45,41,Con Todo Derecho Ciudadania Porteña
+45,42,Desarrollo Integral De Los Primeros Años
+45,43,Asistencia A Familias De Alta Vulnerabilidad Social
+45,44,Asistencia Integral A Los Sin Techo
+45,45,Asistencia Inmediata Ante La Emergencia Social
+45,46,Promocion De Las Adolescencias
+45,47,Asistencia A Victimas De La Violencia
+45,48,"Deteccion, Proteccion Y Asistencia A Victimas De Trata De Personas - Ley 2781"
+45,49,Asistencia A Familias De Alta Vulnerabilidad Social
+45,50,Asistencia Integral A Los Sin Techo
+45,51,Asistencia Inmediata Ante La Emergencia Social
+45,52,Innovacion Para El Desarrollo Del Bienestar Integral
+45,53,Politicas Comunitarias Para Las Personas Mayores
+45,54,Sistemas Alternativos A La Institucionalizacion
+45,55,Hogar De Residencia Permanente Y Transitoria
+45,56,Economia Plateada
+45,57,Promocion De Derechos Para Personas Mayores - Proteger
+45,58,Red De Empresa
+45,59,Sistemas Alternativos A La Institucionalizacion
+45,61,Externacion Asistida
+45,62,Asistencia Social Descentralizada
+45,64,Asistencia Integral A Los Sin Techo
+45,65,Redes Por La Inclusion
+45,66,Asistencia A Familias De Alta Vulnerabilidad Social
+45,67,Fortalecimiento A Grupos Comunitarios
+45,68,Promocion De Las Adolescencias
+45,69,Asistencia A Victimas De La Violencia
+45,70,Fortalecimiento Politicas De Igualdad De Oportunidad
+45,71,Politicas Sociales En Adicciones Y Otras Practicas De Riesgo Adictivo
+45,72,Abordaje Territorial Barrio Padre Carlos Mugica
+45,73,Integracion Economica Y Social
+45,74,Control E Intervencion De Jovenes En Conflicto Con La Ley Penal
+45,75,Infraestructura Y Vivienda
+45,76,Infraestructura Social
+45,77,Recuperacion De La Traza De La Ex-Au3
+45,78,Inclusion De Personas Con Discapacidad
+45,80,Programa A La Par
+45,81,Asistencia Tecnica A La Economia Popular Y Social
+45,83,Fortalecimientos De Comercios Populares
+45,84,Desarrollo Integral De Los Primeros Años
+45,85,Red De Empresa
+45,100,Creditos Ley 341/964
+45,104,"Reintegracion, Integracion Y Transformacion De Villas"
+45,105,Rehabilitacion La Boca
+45,106,Rehabilitacion Conjuntos Urbanos
+45,108,Planes De Alquileres Ba
+45,109,Demanda General
+45,110,Creditos 1ra Vivienda
+45,112,Garantia Ba
+45,200,Desarrollo E Inclusion Social
+45,201,Redes Por La Inclusion
+45,202,Recuperacion De La Traza De La Ex-Au3
+45,203,Corporacion Buenos Aires Sur S.E
+50,1,Actividades Centrales
+50,2,Actividades Comunes
+50,3,Actividades Comunes
+50,4,Actividades Comunes
+50,7,Actividades Comunes
+50,8,Actividades Comunes
+50,10,Actividades Casa De La Cultura
+50,11,Incentivo A La Produccion Cultural
+50,12,Promocion Y Proteccion De Bares Notables
+50,13,Comision Preservacion Del Patrimonio De La Ciudad
+50,15,Usina Del Arte
+50,16,Actividades De Descentralizacion Y Acceso A La Cultura
+50,17,Politicas Culturales
+50,18,Actividades Casa De La Cultura
+50,19,Promocion Y Proteccion De Bares Notables
+50,20,Administracion Y Actividades Artistico Culturales
+50,21,Incentivo A La Produccion Cultural
+50,22,Comision Preservacion Del Patrimonio De La Ciudad
+50,23,Investigacion Y Proyectos Estrategicos Culturales
+50,25,Desarrollo Cultural Y Creativo
+50,26,"Administracion De Patrimonio, Museos Y Casco Historico"
+50,27,Administracion Del Complejo Teatral
+50,28,Industrias Creativas
+50,29,Artes Escenicas En El Complejo Teatral Buenos Aires
+50,30,Planificacion Y Seguimiento
+50,34,Enseñanza De Las Artes
+50,35,Difusion De Las Artes
+50,37,Divulgacion Y Preservacion Del Patrimonio De La Ciudad
+50,38,Comunicacion De La Cultura En Museos
+50,41,Puesta En Valor Del Casco Historico Y Su Entorno
+50,42,Escuela Taller Del Casco Historico
+50,43,"Comunicacion De Patrimonio, Museo Y Casco Historico"
+50,51,Usina Del Arte
+50,52,Festivales De La Ciudad
+50,53,Promocion Y Divulgacion Musical
+50,54,Difusion De Las Artes En El Centro Cultural Recoleta
+50,56,Formacion Artistica En El Complejo Teatral
+50,57,Nuevas Tendencias En El Centro Cultural General San Martin
+50,58,Formacion Artistica Instituto Superior De Arte
+50,59,Divulgacion De Las Expresiones Artisticas
+50,60,Acciones Para La Gestion Y Participacion De La Subsecretaria De Gestion Cultural
+50,62,Arte En Barrios
+50,63,Programa Cultural De La Niñez En La Ciudad De Buenos Aires
+50,66,Difusion De Las Artes En El Centro Cultural 25 De Mayo
+50,68,Programacion De Exposiciones Y Actividades Del Museo De Arte Moderno
+50,69,Programacion De Exposiciones Y Actividades Del Museo De Arte Moderno
+50,70,Administracion De Actividades Artistico Culturales
+50,71,Promocion De Actividades Culturales
+50,72,Programa Cultural En Barrios
+50,73,Premios Y Subsidios
+50,74,Promocion De La Lectura
+50,75,Infraestructura Cultural
+50,76,Cultura Y Derechos Humanos
+50,80,Cooperacion Cultural Internacional
+50,81,Usina Del Arte
+50,82,Festivales De La Ciudad
+50,84,Planetario De La Ciudad De Buenos Aires Galileo Galilei
+50,85,Cooperacion Cultural
+55,1,Actividades Centrales
+55,2,Actividades Comunes
+55,3,Actividades Comunes
+55,4,Actividades Comunes
+55,5,Actividades Comunes
+55,6,Actividades Comunes
+55,7,Evaluacion Integral De La Calidad Y Equidad Educativa
+55,9,Actividades Comunes
+55,10,Actividades Comunes Sscdoc
+55,11,Actividades Comunes Sstes
+55,19,Planeamiento Educativo
+55,21,Subsidio A Cooperadoras Escolares
+55,22,Inclusion Educativa
+55,23,Escuela Abierta
+55,24,Extension Y Capacitacion
+55,25,Escuelas Verdes
+55,26,Proyectos Y Tecnologia Educativa
+55,27,Infraestructura Y Tecnologia Educativa
+55,28,Boleto Estudiantil
+55,29,Plan Integral De Educacion Digital - Plan Sarmiento
+55,30,Habilidades Para El Futuro
+55,32,Sistema De Formacion Docente
+55,33,Educacion De Gestion Estatal
+55,34,Educacion Inicial
+55,35,Educacion Primaria
+55,36,Educacion Especial
+55,37,Educacion Media
+55,38,Educacion Artistica
+55,39,Educacion Del Adulto Y Del Adolescente
+55,41,Escuelas Normales
+55,42,Educacion Tecnica
+55,43,Educacion De Gestion Privada
+55,44,Becas Estudiantiles
+55,45,Escuelas Normales Y Artisticas
+55,46,Evaluacion Integral De La Calidad Y Equidad Educativa
+55,47,Estrategias Educativas
+55,48,Gestion Del Aprendizaje A Lo Largo De La Vida
+55,51,Asistencia Alimentaria Y Accion Comunitaria
+55,52,Subsidio A Cooperadoras Escolares
+55,53,Infraestructura Escolar
+55,54,Mitigacion De Riesgos Y Ley De Escuelas Seguras
+55,55,Equipamiento Mobiliario
+55,57,Administracion De Mantenimiento
+55,58,Mejora Y Cuidado De Edificios Escolares
+55,70,Administracion De Personal
+55,71,Carrera Docente
+55,72,Escuela De Maestros
+55,73,Comision Del Registro Y Evaluacion De Antecedentes Profesionales
+55,74,Innovacion Y Contenidos Educativos
+55,75,Escuela Abierta
+55,76,Extension Y Capacitacion
+55,77,Educacion Artistica
+55,78,Becas Estudiantiles
+55,79,Administracion De Personal
+55,80,Carrera Docente
+55,81,Escuela De Maestros
+55,82,Comision Del Registro Y Evaluacion De Antecedentes Profesionales
+55,83,Planeamiento Educativo
+55,84,Planetario Galileo Galilei
+55,85,Proyectos Y Tecnologia Educativa
+55,86,Sistemas De Gestion Escolar
+55,87,Escuelas Verdes
+55,88,Escuelas Normales
+55,89,Sistema De Formacion Docente
+60,1,Actividades Centrales
+60,2,Actividades Comunes
+60,3,Actividades Comunes
+60,6,Actividades Comunes
+60,11,Compra De Bienes Y Contratacion De Servicios
+60,12,Analisis De Redeterminaciones De Precios
+60,16,Capacitacion Del Personal
+60,20,Gestion De Recursos Humanos
+60,22,Flota Automotor Del Gobierno De La Ciudad De Buenos Aires
+60,23,Gestion Presupuestaria
+60,24,Sistema De Contabilidad Gubernamental
+60,25,Administracion De Los Fondos Del Gobierno De La Ciudad De Buenos Aires
+60,26,Administracion De La Deuda
+60,28,Relacion Con Organismos Multilaterales
+60,29,Desarrollo Funcional Del Sistema Sigaf
+60,30,Relaciones Fiscales Con Los Gobiernos Nacional Y Provinciales
+60,31,Administracion De Bienes
+60,40,"Relaciones Laborales, Legales Y Asuntos Previsionales"
+60,41,Gestion En La Estructura Remunerativa Del Personal
+60,42,Proteccion Y Prevencion En Medicina Laboral
+60,43,"Concursos, Legales Y Asuntos Previsionales"
+60,44,Planificacion Y Control Operativo
+60,45,Desarrollo Del Servicio Civil
+60,46,Relaciones Laborales
+60,83,Analisis De Proyectos Normativos Y De Gestion
+60,84,Relaciones Con La Comunidad
+60,85,Desarrollo Tecnologico
+60,86,Fiscalizacion
+60,87,Recaudacion Tributaria
+60,88,Desarrollo Y Actualizacion De La Legislacion Tributaria
+60,89,Sistema Estadistico De La Ciudad
+60,90,Plan Nacional De Estadistica
+60,92,Relocalizacion Y Gestion Integral De Edificios De Gobierno
+60,93,Concesiones Y Permisos
+70,1,Actividades Centrales
+70,2,Actividades Comunes
+70,3,Actividades Comunes
+70,5,Actividades Comunes
+70,6,Actividades Comunes A Los Programas 21 Y 22
+70,7,Actividades Comunes
+70,8,Actividades Comunes
+70,15,Colonias Deportivas Y Recreativas
+70,16,Colonias Deportivas Y Recreativas
+70,17,Promocion Y Desarrollo Deportivo
+70,18,Eventos Deportivos Y Recreativos
+70,19,Deporte Social Y Desarrollo Deportivo
+70,20,Infraestructura
+70,21,Insercion Laboral De La Mujer
+70,22,Inclusion Social
+70,23,Alto Rendimiento Y Legado
+70,24,Asuntos Gremiales Y Formacion Sindical
+70,25,Relaciones Interjurisdiccionales Vinculadas Al Desarrollo Pyme
+70,26,Coordinacion Gestion De Politicas Productivas
+70,27,Ente Publico No Estatal Parque De La Innovacion
+70,30,Eventos De Desarrollo Gastronomico
+70,31,Promocion De Politicas Gastronomicas
+70,32,Simplificacion Productiva
+70,33,Politicas De Desarrollo Gastronomico
+70,45,Politicas De Juventud
+70,47,Politicas Energeticas
+70,48,Parque De La Innovacion
+70,49,Territorio Pyme
+70,50,Registro De Actividades Economicas
+70,51,Resolucion De Conflictos Individuales Y Colectivos
+70,52,Conduccion Y Administracion De Programas De Empleo
+70,53,Servicios De Rubrica Y Registro
+70,54,Proteccion De Trabajo
+70,55,Control Del Cumplimiento De La Normativa Laboral
+70,56,Promocion De Las Negociaciones Laborales
+70,62,Promocion De Inversiones
+70,63,Desarrollo Productivo
+70,64,Fortalecimiento Del Ecosistema Emprendedor
+70,66,Estrategias Productivas
+70,68,Recuperacion De La Traza De La Ex-Au3
+70,70,Vinculacion Y Comunicacion
+70,71,Cooperacion Interjurisdiccional Para El Desarrollo Economico Y Productivo
+70,85,Ciencia Y Tecnologia
+70,86,Corporacion Buenos Aires Sur S.E
+70,87,Parque De La Ciudad
+75,1,Actividades Centrales
+75,3,Actividades Comunes
+75,5,Actividades Comunes
+75,16,Fomento Al Desarrollo Socio-Economico
+75,17,Gestion Administrativa Emprendedores
+75,18,"Gestion Administrativa Y Desarrollo De La Micro, Pequeñas Y Medianas Empresas"
+75,19,Planificacion Y Coordinacion De Gestion
+75,20,Gestion Tecnica Adminsitrativa Y Legal
+75,21,Ciencia Y Tecnologia
+75,23,Innovacion Productiva
+75,25,Proyectos De Industrias Creativas Audiovisuales Y Software
+75,65,Turismo De La Ciudad
+75,85,Innovacion Productiva
+75,86,Simplificacion Normativa
+75,87,Proyectos De Industrias Creativas Audiovisuales Y Software
+75,88,Estrategia Productiva Y Regimenes De Produccion
+75,89,Economia E Innovacion Social
+75,90,Actividades Comunes
+75,91,Gestion Administrativa De Desarrollo Gastronomico Y Eventos
+75,92,Gestion Administrativa De Desarrollo Gastronomico
+75,93,Politicas De Desarrollo Gastronomico
+75,94,Promocion De Inversiones Y Comercio Exterior
+75,95,Fortalecimiento Del Ecosistema Emprendedor
+75,96,Estrategias Productivas
+75,97,Ciencia Y Tecnologia
+75,99,Relaciones Interjurisdiccionales Vinculadas Al Desarrollo Pyme
+75,100,Territorio Pyme
+75,101,Politicas Energeticas
+75,102,Parque De La Innovacion
+75,103,Ente Publico No Estatal Parque De La Innovacion
+75,104,Proyectos De Innovacion Productiva
+75,105,Politicas De Desarrollo Y Promocion De Mercados Y Patios Gastronomicos
+75,106,Gestion De Estrategias Productivas
+75,110,Ba Producciones Internacionales
+75,198,"Desarrollo De La Micro, Pequeña Y Mediana Empresa"
+98,16,Intereses De La Deuda Publica
+98,17,Amortizacion De La Deuda Publica
+98,18,Recompra Y/O Canje De La Deuda Publica
+99,16,Otras Erogaciones No Asignables A Programas
+99,17,Aportes A Entes Publicos
+99,18,Aportes Con Fines Sociales
+99,19,R.A.D
+99,23,Ley 471
+99,25,Atencion Servicios Financieros Y Gastos Judiciales
+99,30,Cooperacion E Intercambio De Informacion
+99,31,Busqueda De Personas
+99,95,Aplicaciones Financieras
+99,281,Actividades Centrales
+99,285,Actividades Comunes
+99,289,Actividades Comunes
+99,508,Actividades Comunes
+99,706,Actividades Comunes
+99,708,Actividades Comunes
+99,2024,Asuntos Publicos
+99,2122,Acciones Del Consejo Social
+99,2186,Actividades Comunes
+99,2203,Actividades Comunes
+99,2208,Actividades Comunes
+99,2223,Igualdad De Genero Y Asuntos Institucionales
+99,2294,Actividades Comunes
+99,2442,Coordinacion Institucional
+99,2541,Actividades Centrales
+99,2545,Actividades Comunes
+99,2546,Actividades Comunes
+99,2811,Unidad De Proyeccion Federal Y Desarrollo Territorial
+99,2816,Subsecretaria De Asuntos Publicos Estrategicos
+99,2819,Control Y Seguimiento De Gestion
+99,2822,Capacitacion Y Reforma Politica
+99,2936,Detenidos En El Sistema De Caba
+99,4043,Coordinacion Y Vinculacion Para Personas Mayores
+99,4522,Planificacion Y Control De Gestion
+99,5030,Planificacion Y Seguimiento
+99,5075,Bienal Ee Arte Joven Ba
+99,5076,Cultura Y Derechos Humanos
+99,7021,Insercion Laboral De La Mujer
+99,7022,Inclusion Social
+99,7026,Coordinacion Gestion De Politicas Productivas
+99,7032,Simplificacion Productiva
+99,7070,Vinculacion Y Comunicacion
+99,7071,Cooperacion Interjurisdiccional Para El Desarrollo Economico Y Productivo
+99,7122,Articulacion Interjurisdiccional Del Deporte
+99,21110,Experiencia Digital
+99,21162,Proyectos De Arquitectura
+99,21178,Politicas Publicas Basadas En Evidencia
+99,21835,Politicas De Desarrollo Familiar
+99,22016,Planes Estrategicos De La Ciudad De Buenos Aires
+99,22019,Vinculacion Universitaria
+99,22020,Desarrollo Universitario
+99,22022,Estrategias Urbanas Y Redes De Ciudades
+99,22030,Relaciones Con El Tercer Sector Y Organismos Publicos
+99,22031,Relaciones Con El Sector Privado
+99,22053,Coordinacion De La Gestion Estrategica
+99,22054,Planificacion De La Calidad Institucional
+99,22303,Upe Dialogo Social
+99,22816,Estrategia De Vinculacion Federal
+99,25430,Comunicacion Interjurisdiccional
+99,25431,Vinculacion Directa
+99,25432,Comunicacion Con El Sector Privado Y El Tercer Sector
+99,25434,Comunicacion
+99,28111,Actividades Comunes
+99,29327,Politicas De Prevencion Del Delito
+99,29329,Prevencion Y Vinculacion Ciudadana En Seguridad

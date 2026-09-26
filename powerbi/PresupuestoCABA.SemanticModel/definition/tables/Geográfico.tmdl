@@ -1,0 +1,32 @@
+/// Ubicación de la UNIDAD QUE EJECUTA el gasto, no del lugar donde cae. La sede de gobierno está en Parque Patricios (comuna 4): sumar por esta columna NO dice cuánta plata va a cada barrio.
+table Geográfico
+	lineageTag: ee47437f-5d2c-55d0-9c99-847878550883
+
+	column geo
+		dataType: int64
+		isHidden
+		lineageTag: 84f0d3fe-38f2-5127-af8a-a2c8dcf3e28e
+		summarizeBy: none
+		sourceColumn: geo
+
+		annotation SummarizationSetBy = User
+
+	/// Ubicación de la UNIDAD QUE EJECUTA el gasto, no del lugar donde cae. La sede de gobierno está en Parque Patricios (comuna 4): sumar por esta columna NO dice cuánta plata va a cada barrio.
+	column 'Ubicación de la unidad ejecutora'
+		dataType: string
+		lineageTag: 1ffb573e-e07c-5140-a8e1-c9de105011d3
+		summarizeBy: none
+		sourceColumn: geo_desc
+
+		annotation SummarizationSetBy = User
+
+	partition Geográfico = m
+		mode: import
+		source =
+				let
+					Origen = Csv.Document(File.Contents(CarpetaDatos & "dim_geografico.csv"), [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+					Encabezados = Table.PromoteHeaders(Origen, [PromoteAllScalars = true]),
+					Tipos = Table.TransformColumnTypes(Encabezados, {{"geo", Int64.Type}, {"geo_desc", type text}}, "en-US")
+				in
+					Tipos
+

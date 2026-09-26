@@ -1,0 +1,110 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
+  "name": "resumen_finalidad",
+  "position": {
+    "x": 20,
+    "y": 200,
+    "z": 0,
+    "height": 250,
+    "width": 610,
+    "tabOrder": 0
+  },
+  "visual": {
+    "visualType": "clusteredBarChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Finalidad y función"
+                    }
+                  },
+                  "Property": "Finalidad"
+                }
+              },
+              "queryRef": "Finalidad y función.Finalidad",
+              "nativeQueryRef": "Finalidad"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Finalidad y función"
+                    }
+                  },
+                  "Property": "Función"
+                }
+              },
+              "queryRef": "Finalidad y función.Función",
+              "nativeQueryRef": "Función"
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Medidas"
+                    }
+                  },
+                  "Property": "Devengado real"
+                }
+              },
+              "queryRef": "_Medidas.Devengado real",
+              "nativeQueryRef": "Devengado real"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "_Medidas"
+                  }
+                },
+                "Property": "Devengado real"
+              }
+            },
+            "direction": "Descending"
+          }
+        ],
+        "isDefaultSort": false
+      }
+    },
+    "drillFilterOtherVisuals": true,
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Devengado real por finalidad y función'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

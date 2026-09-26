@@ -1,0 +1,31 @@
+/// Administración central u organismo descentralizado.
+table Carácter
+	lineageTag: d2e30ceb-e69a-5919-93d1-65238621585a
+
+	column car
+		dataType: int64
+		isHidden
+		lineageTag: fa62a3f3-da6d-5ce9-b46b-e6e95695f343
+		summarizeBy: none
+		sourceColumn: car
+
+		annotation SummarizationSetBy = User
+
+	column Carácter
+		dataType: string
+		lineageTag: be8b09b3-05a2-58c4-94e5-619ca44e2bb4
+		summarizeBy: none
+		sourceColumn: car_desc
+
+		annotation SummarizationSetBy = User
+
+	partition Carácter = m
+		mode: import
+		source =
+				let
+					Origen = Csv.Document(File.Contents(CarpetaDatos & "dim_caracter.csv"), [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+					Encabezados = Table.PromoteHeaders(Origen, [PromoteAllScalars = true]),
+					Tipos = Table.TransformColumnTypes(Encabezados, {{"car", Int64.Type}, {"car_desc", type text}}, "en-US")
+				in
+					Tipos
+

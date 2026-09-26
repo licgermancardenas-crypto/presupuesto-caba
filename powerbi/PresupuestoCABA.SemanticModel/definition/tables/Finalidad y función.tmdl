@@ -1,0 +1,59 @@
+/// Clasificación por finalidad y función: para qué se gasta.
+table 'Finalidad y función'
+	lineageTag: 2cd15053-014b-5be7-b322-f386965c3c4a
+
+	column fin
+		dataType: int64
+		isHidden
+		lineageTag: 35414cd3-c4a5-5156-87b0-de9eb5e5915b
+		summarizeBy: none
+		sourceColumn: fin
+
+		annotation SummarizationSetBy = User
+
+	column fun
+		dataType: int64
+		isHidden
+		lineageTag: 6b1e2c4a-50f3-55e9-85fb-dc61e1c33ba0
+		summarizeBy: none
+		sourceColumn: fun
+
+		annotation SummarizationSetBy = User
+
+	column Finalidad
+		dataType: string
+		lineageTag: 3cc676a2-d13a-5643-a699-ee70bd08ec09
+		summarizeBy: none
+		sourceColumn: fin_desc
+		sortByColumn: fin
+
+		annotation SummarizationSetBy = User
+
+	column Función
+		dataType: string
+		lineageTag: 5442e36f-8a54-5416-984e-31ab73c51000
+		summarizeBy: none
+		sourceColumn: fun_desc
+
+		annotation SummarizationSetBy = User
+
+	column ClaveFinFun
+		dataType: string
+		isHidden
+		lineageTag: 168d65b5-50ce-527b-af01-4ff7ccbe5c16
+		summarizeBy: none
+		sourceColumn: ClaveFinFun
+
+		annotation SummarizationSetBy = User
+
+	partition 'Finalidad y función' = m
+		mode: import
+		source =
+				let
+					Origen = Csv.Document(File.Contents(CarpetaDatos & "dim_finalidad_funcion.csv"), [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+					Encabezados = Table.PromoteHeaders(Origen, [PromoteAllScalars = true]),
+					Tipos = Table.TransformColumnTypes(Encabezados, {{"fin", Int64.Type}, {"fun", Int64.Type}, {"fin_desc", type text}, {"fun_desc", type text}}, "en-US"),
+					Agregar0 = Table.AddColumn(Tipos, "ClaveFinFun", each Text.From([fin]) & "|" & Text.From([fun]), type text)
+				in
+					Agregar0
+

@@ -1,0 +1,57 @@
+/// Un registro por ejercicio, con el factor que lleva sus pesos a pesos del mes indicado en 'Pesos de' (IPC INDEC, promedio anual).
+table Año
+	lineageTag: 37efd48b-dd8f-51cb-9745-0f911641adaa
+
+	column Año
+		dataType: int64
+		formatString: 0
+		lineageTag: 92fce3fa-ccdd-5952-8b21-ead63d3dd322
+		summarizeBy: none
+		sourceColumn: anio
+
+		annotation SummarizationSetBy = User
+
+	column 'IPC promedio'
+		dataType: double
+		formatString: #,0
+		lineageTag: 453ba186-aa75-5cb7-8695-2d4087e83845
+		summarizeBy: none
+		sourceColumn: ipc_promedio
+
+		annotation SummarizationSetBy = User
+
+	column 'Meses con IPC'
+		dataType: int64
+		lineageTag: 6911ccbe-56ef-5f40-a9ba-d79423f6d035
+		summarizeBy: none
+		sourceColumn: meses
+
+		annotation SummarizationSetBy = User
+
+	column 'Factor a pesos de hoy'
+		dataType: double
+		formatString: #,0
+		lineageTag: 92210a20-4940-57d2-8a97-d24ac0a8e675
+		summarizeBy: none
+		sourceColumn: factor
+
+		annotation SummarizationSetBy = User
+
+	column 'Pesos de'
+		dataType: string
+		lineageTag: ee68f0c0-907b-57fc-8110-c28efaca1e14
+		summarizeBy: none
+		sourceColumn: pesos_de
+
+		annotation SummarizationSetBy = User
+
+	partition Año = m
+		mode: import
+		source =
+				let
+					Origen = Csv.Document(File.Contents(CarpetaDatos & "ipc.csv"), [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+					Encabezados = Table.PromoteHeaders(Origen, [PromoteAllScalars = true]),
+					Tipos = Table.TransformColumnTypes(Encabezados, {{"anio", Int64.Type}, {"ipc_promedio", type number}, {"meses", Int64.Type}, {"factor", type number}, {"pesos_de", type text}}, "en-US")
+				in
+					Tipos
+

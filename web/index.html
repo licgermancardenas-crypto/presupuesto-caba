@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Presupuesto de la Ciudad</title>
+<meta name="description" content="Cuánto, en qué, quién y cómo gasta la Ciudad de Buenos Aires, 2022-2026, en pesos constantes.">
+<style>
+:root {
+  color-scheme: light;
+  --page: #f9f9f7;
+  --surface: #fcfcfb;
+  --ink: #0b0b0b;
+  --ink-2: #52514e;
+  --muted: #898781;
+  --grid: #e1e0d9;
+  --axis: #c3c2b7;
+  --ring: rgba(11,11,11,0.10);
+  --accent: #2a78d6;
+  --accent-soft: #cde2fb;
+  --mute-bar: #c3c2b7;
+  --hatch: #86b6ef;
+  --warn-bg: #fdf3dc;
+  --warn-ink: #6b4a00;
+  --seq-0: #f0efec; --seq-1: #cde2fb; --seq-2: #9ec5f4; --seq-3: #6da7ec;
+  --seq-4: #3987e5; --seq-5: #256abf; --seq-6: #184f95; --seq-7: #0d366b;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --page: #0d0d0d; --surface: #1a1a19; --ink: #ffffff; --ink-2: #c3c2b7; --muted: #898781;
+    --grid: #2c2c2a; --axis: #383835; --ring: rgba(255,255,255,0.10);
+    --accent: #3987e5; --accent-soft: #184f95; --mute-bar: #4a4a46; --hatch: #256abf;
+    --warn-bg: #2e2716; --warn-ink: #f2cf7a;
+    --seq-0: #262624; --seq-1: #104281; --seq-2: #184f95; --seq-3: #1c5cab;
+    --seq-4: #256abf; --seq-5: #3987e5; --seq-6: #6da7ec; --seq-7: #9ec5f4;
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --page: #0d0d0d; --surface: #1a1a19; --ink: #ffffff; --ink-2: #c3c2b7; --muted: #898781;
+  --grid: #2c2c2a; --axis: #383835; --ring: rgba(255,255,255,0.10);
+  --accent: #3987e5; --accent-soft: #184f95; --mute-bar: #4a4a46; --hatch: #256abf;
+  --warn-bg: #2e2716; --warn-ink: #f2cf7a;
+  --seq-0: #262624; --seq-1: #104281; --seq-2: #184f95; --seq-3: #1c5cab;
+  --seq-4: #256abf; --seq-5: #3987e5; --seq-6: #6da7ec; --seq-7: #9ec5f4;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background: var(--page); color: var(--ink);
+  font: 16px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+.wrap { max-width: 1080px; margin: 0 auto; padding: 0 16px; }
+header { padding: 48px 0 24px; }
+.eyebrow { font-size: 13px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+h1 { font-size: clamp(28px, 5vw, 44px); line-height: 1.1; letter-spacing: -0.02em; margin: 8px 0 12px; font-weight: 700; }
+.lead { color: var(--ink-2); max-width: 64ch; font-size: 17px; }
+
+/* barra de filtros */
+.filtros {
+  position: sticky; top: 0; z-index: 5; background: color-mix(in srgb, var(--page) 92%, transparent);
+  backdrop-filter: blur(6px); border-bottom: 1px solid var(--grid); padding: 10px 0;
+}
+.filtros .wrap { display: flex; flex-wrap: wrap; gap: 12px 24px; align-items: center; }
+.grupo { display: flex; align-items: center; gap: 8px; }
+.grupo > span { font-size: 13px; color: var(--muted); }
+.seg { display: inline-flex; border: 1px solid var(--axis); border-radius: 8px; overflow: hidden; }
+.seg button {
+  font: inherit; font-size: 14px; background: var(--surface); color: var(--ink-2); border: 0;
+  padding: 6px 12px; cursor: pointer; border-right: 1px solid var(--grid);
+}
+.seg button:last-child { border-right: 0; }
+.seg button[aria-pressed="true"] { background: var(--ink); color: var(--page); font-weight: 600; }
+.seg button:focus-visible, .tema:focus-visible, th button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.seg sup { font-size: 10px; }
+.tema { margin-left: auto; font: inherit; font-size: 13px; background: none; color: var(--ink-2); border: 1px solid var(--axis); border-radius: 8px; padding: 6px 10px; cursor: pointer; }
+
+/* tarjetas */
+.kpis { display: grid; grid-template-columns: minmax(0,2fr) repeat(3, minmax(0,1fr)); gap: 12px; margin: 24px 0 8px; }
+.kpi { background: var(--surface); border: 1px solid var(--ring); border-radius: 12px; padding: 16px 18px; }
+.kpi .lab { font-size: 13px; color: var(--ink-2); }
+.kpi .val { font-size: 26px; font-weight: 600; letter-spacing: -0.01em; margin-top: 4px; }
+.kpi.hero .val { font-size: 48px; line-height: 1.05; }
+.kpi .sub { font-size: 13px; color: var(--muted); margin-top: 4px; }
+.aviso {
+  background: var(--warn-bg); color: var(--warn-ink); border-radius: 8px; padding: 8px 12px;
+  font-size: 14px; margin-top: 8px; display: none;
+}
+.aviso.on { display: block; }
+
+section.card { background: var(--surface); border: 1px solid var(--ring); border-radius: 12px; padding: 24px; margin: 20px 0; }
+section.card h2 { font-size: 20px; letter-spacing: -0.01em; }
+section.card .bajada { color: var(--ink-2); font-size: 15px; margin: 4px 0 18px; max-width: 70ch; }
+.nota { font-size: 13px; color: var(--muted); margin-top: 14px; max-width: 80ch; }
+.dos { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 20px; }
+/* sin esto los textos nowrap estiran la grilla y la página se desborda en el celular */
+.kpis > *, .dos > *, .fila > * { min-width: 0; }
+.dos section.card { margin: 0; }
+
+/* barras horizontales */
+.barras { display: grid; gap: 6px; }
+.fila {
+  display: grid; grid-template-columns: minmax(120px, 34%) 1fr auto; gap: 10px; align-items: center;
+  font-size: 14px; padding: 2px 0; cursor: default; border-radius: 6px;
+}
+.fila:hover, .fila:focus-visible { background: color-mix(in srgb, var(--accent) 7%, transparent); outline: none; }
+.fila .et { color: var(--ink-2); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.fila .pista { height: 16px; position: relative; }
+.fila .barra { height: 16px; background: var(--accent); border-radius: 0 4px 4px 0; min-width: 2px; }
+.fila .num { font-variant-numeric: tabular-nums; color: var(--ink); white-space: nowrap; text-align: right; min-width: 9ch; }
+.fila .num small { color: var(--muted); margin-left: 6px; }
+
+/* columnas */
+svg text { font-family: inherit; }
+.col-chart { width: 100%; height: auto; display: block; }
+
+/* mapa de calor */
+.calor { width: 100%; border-collapse: separate; border-spacing: 2px; font-size: 13px; }
+.calor th { font-weight: 500; color: var(--muted); text-align: right; padding: 4px 6px; }
+.calor th:first-child { text-align: left; }
+.calor td { text-align: right; padding: 6px 8px; font-variant-numeric: tabular-nums; border-radius: 4px; }
+.calor td:first-child { text-align: left; color: var(--ink-2); background: none; padding-left: 0; white-space: nowrap; }
+
+/* tabla de programas */
+.herr { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 12px; }
+.herr input, .herr select {
+  font: inherit; font-size: 14px; padding: 7px 10px; border: 1px solid var(--axis); border-radius: 8px;
+  background: var(--page); color: var(--ink); min-width: 0;
+}
+.herr input { flex: 1 1 240px; }
+.herr select { flex: 0 1 320px; }
+.tabla-scroll { overflow-x: auto; }
+table.prog { width: 100%; border-collapse: collapse; font-size: 14px; }
+table.prog th { text-align: right; font-weight: 500; color: var(--muted); border-bottom: 1px solid var(--axis); padding: 0; white-space: nowrap; }
+table.prog th:first-child { text-align: left; }
+table.prog th button { font: inherit; color: inherit; background: none; border: 0; padding: 8px 6px; cursor: pointer; width: 100%; text-align: inherit; }
+table.prog th[aria-sort] button { color: var(--ink); font-weight: 600; }
+table.prog td { padding: 8px 6px; border-bottom: 1px solid var(--grid); text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+table.prog td:first-child { text-align: left; white-space: normal; min-width: 240px; }
+table.prog td:first-child small { display: block; color: var(--muted); font-size: 12px; }
+.mas { margin-top: 12px; font: inherit; font-size: 14px; background: none; border: 1px solid var(--axis); color: var(--ink); border-radius: 8px; padding: 7px 14px; cursor: pointer; }
+
+.tip {
+  position: fixed; pointer-events: none; z-index: 10; background: var(--surface); color: var(--ink);
+  border: 1px solid var(--ring); border-radius: 8px; padding: 10px 12px; font-size: 13px;
+  box-shadow: 0 6px 20px rgba(0,0,0,.14); max-width: 320px; opacity: 0; transition: opacity .1s;
+}
+.tip.on { opacity: 1; }
+.tip .t { color: var(--ink-2); margin-bottom: 6px; }
+.tip .r { display: flex; justify-content: space-between; gap: 16px; font-variant-numeric: tabular-nums; }
+.tip .r b { font-weight: 600; }
+.tip .r span { color: var(--muted); }
+
+footer { color: var(--ink-2); font-size: 14px; padding: 12px 0 64px; }
+footer h2 { font-size: 16px; color: var(--ink); margin: 16px 0 6px; }
+footer ul { padding-left: 18px; max-width: 80ch; }
+footer li { margin: 4px 0; }
+footer code { font-size: 13px; }
+a { color: var(--accent); }
+
+@media (max-width: 760px) {
+  .kpis { grid-template-columns: repeat(2, minmax(0,1fr)); }
+  .kpi .val { font-size: 22px; }
+  .kpi.hero { grid-column: 1 / -1; }
+  .kpi.hero .val { font-size: 40px; }
+  .dos { grid-template-columns: minmax(0,1fr); }
+  section.card { padding: 16px; }
+  .fila { grid-template-columns: minmax(96px, 38%) 1fr auto; font-size: 13px; }
+  .fila .num small { display: none; }
+  .tema { margin-left: 0; }
+}
+@media (prefers-reduced-motion: no-preference) { .fila .barra { transition: width .25s ease; } }
+</style>
+</head>
+<body>
+<header class="wrap">
+  <div class="eyebrow">Ciudad Autónoma de Buenos Aires · 2022–2026</div>
+  <h1>El presupuesto de la Ciudad</h1>
+  <p class="lead">Cuánto gasta el Gobierno porteño, en qué, quién lo gasta y cómo. Los montos están en
+    <strong id="lead-pesos">pesos de agosto de 2026</strong>, así los años se pueden comparar entre sí.</p>
+</header>
+
+<nav class="filtros" aria-label="Filtros">
+  <div class="wrap">
+    <div class="grupo"><span id="lab-anio">Año</span><div class="seg" id="anios" role="group" aria-labelledby="lab-anio"></div></div>
+    <div class="grupo"><span id="lab-pesos">Pesos</span>
+      <div class="seg" role="group" aria-labelledby="lab-pesos">
+        <button data-pesos="real" aria-pressed="true">Constantes</button>
+        <button data-pesos="nominal" aria-pressed="false">Corrientes</button>
+      </div>
+    </div>
+    <button class="tema" id="tema" type="button">Tema: auto</button>
+  </div>
+</nav>
+
+<main class="wrap">
+  <div class="kpis" id="kpis"></div>
+  <div class="aviso" id="aviso-2026">2026 está a mitad de camino: el archivo publicado llega a junio. El devengado es lo gastado
+    hasta ahí y la ejecución no se compara con la de un año cerrado.</div>
+
+  <section class="card">
+    <h2>Cuánto gasta la Ciudad, año por año</h2>
+    <p class="bajada" id="bajada-serie"></p>
+    <div id="serie"></div>
+  </section>
+
+  <section class="card">
+    <h2>En qué se gasta</h2>
+    <p class="bajada">Clasificación por finalidad y función: para qué es cada peso, sin importar qué ministerio lo
+      maneja. Es la forma más estable de comparar años, porque no depende del organigrama.</p>
+    <div class="barras" id="funciones"></div>
+  </section>
+
+  <div class="dos">
+    <section class="card">
+      <h2>Quién lo gasta</h2>
+      <p class="bajada">Por jurisdicción. Ojo al comparar años: en 2024 Seguridad se separó de Justicia y se creó
+        Movilidad e Infraestructura.</p>
+      <div class="barras" id="jurisdicciones"></div>
+    </section>
+    <section class="card">
+      <h2>Cómo se gasta</h2>
+      <p class="bajada">Por objeto del gasto: sueldos, compras, servicios contratados, obras y transferencias.</p>
+      <div class="barras" id="incisos"></div>
+    </section>
+  </div>
+
+  <section class="card">
+    <h2>Cómo cambió el reparto</h2>
+    <p class="bajada">Qué parte del gasto devengado se llevó cada función cada año. Leer por fila: si una función gana
+      peso, otra lo pierde.</p>
+    <div class="tabla-scroll"><table class="calor" id="calor"></table></div>
+    <p class="nota">2026 es a junio: el reparto de medio año puede diferir del anual (aguinaldos, obras que se certifican
+      a fin de año).</p>
+  </section>
+
+  <section class="card">
+    <h2>Las quince comunas</h2>
+    <p class="bajada">Gasto por habitante de cada comuna como unidad ejecutora: mantenimiento de espacio público,
+      arbolado, veredas y la gestión descentralizada. Es lo único del presupuesto que se reparte por barrio de forma
+      comparable.</p>
+    <div class="barras" id="comunas"></div>
+    <p class="nota">No es "toda la plata que va a cada barrio". El clasificador geográfico del presupuesto marca dónde
+      está la oficina que ejecuta y no dónde cae el gasto: con él, la comuna 4 (donde está la sede de gobierno) se
+      llevaría un tercio del total. Población: censo 2022.</p>
+  </section>
+
+  <section class="card">
+    <h2>Programa por programa</h2>
+    <p class="bajada">Los <span id="n-prog"></span> programas presupuestarios del año elegido. Se puede buscar y ordenar.</p>
+    <div class="herr">
+      <input type="search" id="buscar" placeholder="Buscar programa o jurisdicción" aria-label="Buscar programa o jurisdicción">
+      <select id="filtro-jur" aria-label="Jurisdicción"></select>
+    </div>
+    <div class="tabla-scroll">
+      <table class="prog">
+        <thead><tr>
+          <th data-k="prog_desc"><button>Programa</button></th>
+          <th data-k="sancionado"><button>Sancionado</button></th>
+          <th data-k="vigente"><button>Vigente</button></th>
+          <th data-k="devengado"><button>Devengado</button></th>
+          <th data-k="ejec"><button>Ejecución</button></th>
+        </tr></thead>
+        <tbody id="tbody"></tbody>
+      </table>
+    </div>
+    <button class="mas" id="mas" type="button">Mostrar más</button>
+  </section>
+</main>
+
+<footer class="wrap">
+  <h2>Cómo leer esto</h2>
+  <ul>
+    <li><strong>Sancionado</strong>: lo que aprobó la Legislatura en la ley de presupuesto. <strong>Vigente</strong>: el
+      crédito después de las modificaciones del año. <strong>Devengado</strong>: el gasto efectivamente comprometido y
+      recibido (el bien entregado, el servicio prestado, el sueldo liquidado).</li>
+    <li><strong>Ejecución</strong> = devengado sobre vigente.</li>
+    <li><strong>Pesos constantes</strong>: cada año se lleva a pesos de <span id="pie-pesos"></span> con el promedio
+      anual del IPC nacional (INDEC). Es una aproximación: el gasto no se reparte parejo en el año.</li>
+    <li>2022–2025 son años cerrados (cuarto trimestre). 2026 llega hasta el segundo trimestre.</li>
+  </ul>
+  <h2>Fuentes</h2>
+  <ul>
+    <li>Presupuesto ejecutado, Ministerio de Hacienda y Finanzas GCBA, en
+      <a href="https://data.buenosaires.gob.ar/dataset/presupuesto-ejecutado">BA Data</a>.</li>
+    <li>IPC nivel general, INDEC, vía la <a href="https://datos.gob.ar/series">API de series de tiempo</a>.</li>
+    <li>Población por comuna: Censo Nacional 2022.</li>
+  </ul>
+</footer>
+
+<div class="tip" id="tip" role="tooltip"></div>
+
+<script src="datos.js"></script>
+<script>
+(() => {
+  const D = window.DATOS;
+  const ANIOS = D.totales.map(t => t.anio);
+  const st = { anio: ANIOS.filter(a => D.corte[a] === "anual").pop(), pesos: "real", sort: { k: "devengado", dir: -1 },
+               q: "", jur: "", limite: 25 };
+
+  // ---------- formato ----------
+  const nf = (n, d = 0) => n.toLocaleString("es-AR", { minimumFractionDigits: d, maximumFractionDigits: d });
+  function plata(n, corto) {
+    const a = Math.abs(n);
+    if (a >= 1e12) return "$ " + nf(n / 1e12, 2) + (corto ? " bill." : " billones");
+    if (a >= 1e9) return "$ " + nf(n / 1e9, a >= 1e11 ? 0 : 1) + (corto ? " mil M" : " mil millones");
+    if (a >= 1e6) return "$ " + nf(n / 1e6, a >= 1e8 ? 0 : 1) + (corto ? " M" : " millones");
+    return "$ " + nf(n);
+  }
+  const pct = (x, d = 1) => isFinite(x) ? nf(100 * x, d) + " %" : "—";
+  const f = a => st.pesos === "real" ? D.factor[a] : 1;
+  const m = (r, k = "devengado") => r[k] * f(r.anio);
+  const titulo = s => s.toLowerCase().replace(/(^|\s|\()(\p{L})/gu, (x, p, c) => p + c.toUpperCase())
+    .replace(/\b(De|Del|La|Las|Los|Y|E|En|A|Al|Para|Por|Con|Sin|O)\b/g, w => w.toLowerCase())
+    .replace(/^(\p{L})/u, c => c.toUpperCase());
+  const MESES = ["enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre"];
+  const [pa, pm] = D.pesos_de.split("-");
+  const pesosDe = `${MESES[+pm - 1]} de ${pa}`;
+  const el = (tag, cls, txt) => { const e = document.createElement(tag); if (cls) e.className = cls; if (txt != null) e.textContent = txt; return e; };
+
+  // ---------- tooltip (siempre textContent: las etiquetas vienen del dataset) ----------
+  const tip = document.getElementById("tip");
+  function mostrar(ev, titulo, filas) {
+    tip.replaceChildren(el("div", "t", titulo));
+    for (const [k, v] of filas) { const r = el("div", "r"); r.append(el("b", null, v), el("span", null, k)); tip.append(r); }
+    tip.classList.add("on");
+    mover(ev);
+  }
+  function mover(ev) {
+    let x, y;
+    if (ev.clientX != null && ev.type !== "focus") { x = ev.clientX; y = ev.clientY; }
+    else { const b = ev.currentTarget.getBoundingClientRect(); x = b.left + b.width / 2; y = b.top; }
+    const w = tip.offsetWidth, h = tip.offsetHeight;
+    tip.style.left = Math.min(window.innerWidth - w - 8, Math.max(8, x + 14)) + "px";
+    tip.style.top = (y - h - 12 < 8 ? y + 18 : y - h - 12) + "px";
+  }
+  const ocultar = () => tip.classList.remove("on");
+  function conTip(nodo, fnTitulo, fnFilas) {
+    nodo.tabIndex = 0;
+    const on = ev => mostrar(ev, fnTitulo(), fnFilas());
+    nodo.addEventListener("pointerenter", on); nodo.addEventListener("pointermove", mover);
+    nodo.addEventListener("pointerleave", ocultar); nodo.addEventListener("focus", on); nodo.addEventListener("blur", ocultar);
+  }
+  const filasMontos = r => [
+    ["sancionado", plata(m(r, "sancionado"))], ["vigente", plata(m(r, "vigente"))],
+    ["devengado", plata(m(r))], ["ejecución", pct(r.devengado / r.vigente)]];
+
+  // ---------- filtros ----------
+  const segA = document.getElementById("anios");
+  for (const a of ANIOS) {
+    const b = el("button", null, String(a));
+    if (D.corte[a] !== "anual") { const s = el("sup", null, "*"); b.append(s); b.title = "Hasta " + D.corte[a]; }
+    b.dataset.anio = a;
+    b.onclick = () => { st.anio = a; st.limite = 25; render(); };
+    segA.append(b);
+  }
+  document.querySelectorAll("[data-pesos]").forEach(b => b.onclick = () => { st.pesos = b.dataset.pesos; render(); });
+  const temas = ["auto", "claro", "oscuro"];
+  let tema = 0;
+  try { tema = Math.max(0, temas.indexOf(localStorage.getItem("presu-tema") || "auto")); } catch (e) {}
+  const btnTema = document.getElementById("tema");
+  function aplicarTema() {
+    const t = temas[tema];
+    if (t === "auto") document.documentElement.removeAttribute("data-theme");
+    else document.documentElement.dataset.theme = t === "claro" ? "light" : "dark";
+    btnTema.textContent = "Tema: " + t;
+  }
+  btnTema.onclick = () => { tema = (tema + 1) % 3; try { localStorage.setItem("presu-tema", temas[tema]); } catch (e) {} aplicarTema(); };
+  aplicarTema();
+
+  // ---------- tarjetas ----------
+  function kpis() {
+    const t = D.totales.find(r => r.anio === st.anio);
+    const prev = D.totales.find(r => r.anio === st.anio - 1);
+    const box = document.getElementById("kpis");
+    box.replaceChildren();
+    const tarjeta = (cls, lab, val, sub, subCls) => {
+      const k = el("div", "kpi " + cls); k.append(el("div", "lab", lab), el("div", "val", val));
+      if (sub) k.append(el("div", "sub " + (subCls || ""), sub));
+      box.append(k);
+    };
+    const parcial = D.corte[st.anio] !== "anual";
+    let sub = null, subCls = "";
+    if (!parcial && prev) {
+      const v = (t.devengado * D.factor[t.anio]) / (prev.devengado * D.factor[prev.anio]) - 1;
+      sub = (v >= 0 ? "▲ " : "▼ ") + pct(Math.abs(v)) + " real contra " + prev.anio;
+    } else if (parcial) sub = "acumulado a junio";
+    tarjeta("hero", "Gasto devengado " + st.anio, plata(m(t)), sub, subCls);
+    tarjeta("", "Crédito vigente", plata(m(t, "vigente"), true), parcial ? "a junio" : "al cierre");
+    tarjeta("", "Sancionado por ley", plata(m(t, "sancionado"), true),
+      "el vigente lo supera en " + pct(t.vigente / t.sancionado - 1, 0));
+    tarjeta("", "Ejecución", pct(t.devengado / t.vigente), "devengado sobre vigente");
+    document.getElementById("aviso-2026").classList.toggle("on", parcial);
+  }
+
+  // ---------- serie por año (columnas SVG) ----------
+  function serie() {
+    const box = document.getElementById("serie");
+    const W = Math.max(300, box.clientWidth || 1000), H = W < 600 ? 240 : 280, ml = 4, mr = W < 600 ? 4 : 8, mt = 34, mb = 30;
+    const chico = W < 600;
+    const vals = D.totales.map(r => ({ r, v: m(r) }));
+    const max = Math.max(...vals.map(x => x.v), ...D.totales.map(r => m(r, "vigente")));
+    const paso = (W - ml - mr) / vals.length, bw = Math.min(56, paso * 0.5);
+    const y = v => mt + (H - mt - mb) * (1 - v / max);
+    const NS = "http://www.w3.org/2000/svg";
+    const s = document.createElementNS(NS, "svg");
+    s.setAttribute("viewBox", `0 0 ${W} ${H}`); s.setAttribute("class", "col-chart");
+    s.setAttribute("role", "img");
+    s.setAttribute("aria-label", "Gasto devengado por año: " + vals.map(x => x.r.anio + " " + plata(x.v)).join("; "));
+    const nodo = (t, a, txt) => { const n = document.createElementNS(NS, t); for (const k in a) n.setAttribute(k, a[k]); if (txt != null) n.textContent = txt; s.append(n); return n; };
+    const defs = nodo("defs", {});
+    const pat = document.createElementNS(NS, "pattern");
+    for (const [k, v] of Object.entries({ id: "rayas", width: 6, height: 6, patternUnits: "userSpaceOnUse", patternTransform: "rotate(45)" })) pat.setAttribute(k, v);
+    const pr = document.createElementNS(NS, "rect"); pr.setAttribute("width", 6); pr.setAttribute("height", 6); pr.setAttribute("fill", "var(--accent-soft)");
+    const pl = document.createElementNS(NS, "line"); for (const [k, v] of Object.entries({ x1: 0, y1: 0, x2: 0, y2: 6, stroke: "var(--hatch)", "stroke-width": 3 })) pl.setAttribute(k, v);
+    pat.append(pr, pl); defs.append(pat);
+    nodo("line", { x1: ml, x2: W - mr, y1: H - mb, y2: H - mb, stroke: "var(--axis)", "stroke-width": 1 });
+    vals.forEach(({ r, v }, i) => {
+      const cx = ml + paso * (i + 0.5), x = cx - bw / 2, top = y(v), h = H - mb - top;
+      const parcial = D.corte[r.anio] !== "anual", sel = r.anio === st.anio;
+      const fill = parcial ? "url(#rayas)" : sel ? "var(--accent)" : "var(--mute-bar)";
+      const rad = Math.min(4, h / 2);
+      nodo("path", { d: `M${x},${H - mb} V${top + rad} Q${x},${top} ${x + rad},${top} H${x + bw - rad} Q${x + bw},${top} ${x + bw},${top + rad} V${H - mb} Z`, fill });
+      if (parcial) { // el crédito vigente como techo de referencia del año en curso
+        const yv = y(m(r, "vigente"));
+        nodo("line", { x1: x - 6, x2: x + bw + 6, y1: yv, y2: yv, stroke: "var(--ink-2)", "stroke-width": 1.5 });
+        nodo("text", { x: chico ? x + bw + 6 : x + bw + 10, y: yv - (chico ? 6 : -4), "font-size": 12, fill: "var(--muted)", "text-anchor": chico ? "end" : "start" },
+          chico ? "vigente" : "vigente " + plata(m(r, "vigente"), true));
+      }
+      nodo("text", { x: cx, y: top - 8, "text-anchor": "middle", "font-size": chico ? 11 : 14, "font-weight": sel ? 600 : 400,
+                     fill: sel ? "var(--ink)" : "var(--ink-2)" }, plata(v, true));
+      nodo("text", { x: cx, y: H - mb + 20, "text-anchor": "middle", "font-size": 13, fill: sel ? "var(--ink)" : "var(--muted)",
+                     "font-weight": sel ? 600 : 400 }, r.anio + (parcial ? "*" : ""));
+      const hit = nodo("rect", { x: cx - paso / 2, y: mt - 20, width: paso, height: H - mt + 20, fill: "transparent", style: "cursor:pointer" });
+      conTip(hit, () => r.anio + (parcial ? " · a junio" : ""), () => filasMontos(r));
+      hit.addEventListener("click", () => { st.anio = r.anio; render(); });
+      hit.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); st.anio = r.anio; render(); } });
+    });
+    box.replaceChildren(s);
+    document.getElementById("bajada-serie").textContent = st.pesos === "real"
+      ? `Gasto devengado en pesos de ${pesosDe}. La columna rayada es 2026, gastado hasta junio; la línea marca su crédito vigente. Clic en un año para verlo en detalle.`
+      : "Gasto devengado en pesos de cada año. Con la inflación de estos años, la escalera sale casi toda de precios, no de más gasto: para comparar años usá pesos constantes.";
+  }
+
+  // ---------- barras horizontales ----------
+  function barras(id, filas, etiqueta, extra) {
+    const box = document.getElementById(id);
+    const tot = filas.reduce((s, r) => s + r.devengado, 0);
+    const orden = [...filas].sort((a, b) => b.devengado - a.devengado);
+    const max = orden.length ? m(orden[0]) : 1;
+    box.replaceChildren();
+    for (const r of orden) {
+      const fila = el("div", "fila");
+      const et = el("div", "et", etiqueta(r)); et.title = etiqueta(r);
+      const pista = el("div", "pista"), barra = el("div", "barra");
+      barra.style.width = Math.max(0.3, 100 * m(r) / max) + "%";
+      pista.append(barra);
+      const num = el("div", "num", plata(m(r), true)); num.append(el("small", null, pct(r.devengado / tot)));
+      fila.append(et, pista, num);
+      conTip(fila, () => etiqueta(r) + " · " + r.anio, () => [...filasMontos(r), ["del total", pct(r.devengado / tot)], ...(extra ? extra(r) : [])]);
+      box.append(fila);
+    }
+  }
+  const delAnio = arr => arr.filter(r => r.anio === st.anio && r.devengado > 0);
+
+  // ---------- mapa de calor ----------
+  function calor() {
+    const t = document.getElementById("calor");
+    const key = r => r.fin + "|" + r.fun;
+    const tot = Object.fromEntries(D.totales.map(r => [r.anio, r.devengado]));
+    const filas = {};
+    for (const r of D.funciones) {
+      const k = key(r);
+      (filas[k] ||= { nombre: titulo(r.fun_desc), fin: r.fin, v: {} }).v[r.anio] = r.devengado / tot[r.anio];
+    }
+    const lista = Object.values(filas).sort((a, b) => (b.v[st.anio] || 0) - (a.v[st.anio] || 0));
+    const maxv = Math.max(...lista.flatMap(f => Object.values(f.v)));
+    const hd = el("tr"); hd.append(el("th", null, "Función"));
+    for (const a of ANIOS) hd.append(el("th", null, a + (D.corte[a] !== "anual" ? "*" : "")));
+    t.replaceChildren(hd);
+    for (const f of lista) {
+      const tr = el("tr"); tr.append(el("td", null, f.nombre));
+      for (const a of ANIOS) {
+        const v = f.v[a];
+        const td = el("td", null, v == null ? "—" : nf(100 * v, 1));
+        if (v != null) {
+          // escala de raíz: las funciones chicas (turismo, trabajo) no quedan todas iguales
+          const paso = Math.min(7, Math.round(7 * Math.sqrt(v / maxv)));
+          td.style.background = `var(--seq-${paso})`;
+          td.style.color = paso >= 4 ? "#ffffff" : "var(--ink)";
+          if (a === st.anio) td.style.fontWeight = 600;
+        }
+        tr.append(td);
+      }
+      t.append(tr);
+    }
+  }
+
+  // ---------- comunas ----------
+  function comunas() {
+    const filas = delAnio(D.comunas);
+    const box = document.getElementById("comunas");
+    const ph = r => m(r) / r.poblacion;
+    const orden = [...filas].sort((a, b) => ph(b) - ph(a));
+    const max = ph(orden[0]);
+    box.replaceChildren();
+    for (const r of orden) {
+      const fila = el("div", "fila");
+      const pista = el("div", "pista"), barra = el("div", "barra");
+      barra.style.width = 100 * ph(r) / max + "%"; pista.append(barra);
+      const num = el("div", "num", "$ " + nf(ph(r))); num.append(el("small", null, "por hab."));
+      fila.append(el("div", "et", "Comuna " + r.comuna), pista, num);
+      conTip(fila, () => "Comuna " + r.comuna + " · " + r.anio, () => [
+        ["por habitante", "$ " + nf(ph(r))], ["devengado", plata(m(r))], ["ejecución", pct(r.devengado / r.vigente)],
+        ["habitantes (2022)", nf(r.poblacion)]]);
+      box.append(fila);
+    }
+  }
+
+  // ---------- tabla de programas ----------
+  const selJur = document.getElementById("filtro-jur");
+  function opcionesJur() {
+    const js = [...new Map(delAnio(D.jurisdicciones).map(r => [r.jur, r.jur_desc])).entries()]
+      .sort((a, b) => a[1].localeCompare(b[1], "es"));
+    if (!js.some(([j]) => String(j) === st.jur)) st.jur = "";
+    selJur.replaceChildren(new Option("Todas las jurisdicciones", ""));
+    for (const [j, d] of js) selJur.append(new Option(titulo(d), j));
+    selJur.value = st.jur;
+  }
+  selJur.onchange = () => { st.jur = selJur.value; st.limite = 25; tabla(); };
+  const buscar = document.getElementById("buscar");
+  buscar.oninput = () => { st.q = buscar.value.trim().toLowerCase(); st.limite = 25; tabla(); };
+  document.querySelectorAll("table.prog th").forEach(th => th.querySelector("button").onclick = () => {
+    const k = th.dataset.k;
+    st.sort = { k, dir: st.sort.k === k ? -st.sort.dir : (k === "prog_desc" ? 1 : -1) };
+    tabla();
+  });
+  document.getElementById("mas").onclick = () => { st.limite += 50; tabla(); };
+  const sinTildes = s => s.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
+  function tabla() {
+    let filas = D.programas.filter(r => r.anio === st.anio && (r.vigente > 0 || r.devengado > 0));
+    document.getElementById("n-prog").textContent = nf(filas.length);
+    if (st.jur) filas = filas.filter(r => String(r.jur) === st.jur);
+    if (st.q) { const q = sinTildes(st.q); filas = filas.filter(r => sinTildes(r.prog_desc + " " + r.jur_desc).includes(q)); }
+    const { k, dir } = st.sort;
+    const val = r => k === "ejec" ? (r.vigente ? r.devengado / r.vigente : -1) : r[k];
+    filas.sort((a, b) => k === "prog_desc" ? dir * a.prog_desc.localeCompare(b.prog_desc, "es") : dir * (val(a) - val(b)));
+    document.querySelectorAll("table.prog th").forEach(th => {
+      if (th.dataset.k === k) th.setAttribute("aria-sort", dir > 0 ? "ascending" : "descending"); else th.removeAttribute("aria-sort");
+    });
+    const tb = document.getElementById("tbody");
+    tb.replaceChildren();
+    for (const r of filas.slice(0, st.limite)) {
+      const tr = el("tr");
+      const c0 = el("td", null, titulo(r.prog_desc)); c0.append(el("small", null, titulo(r.jur_desc)));
+      tr.append(c0, el("td", null, plata(m(r, "sancionado"), true)), el("td", null, plata(m(r, "vigente"), true)),
+        el("td", null, plata(m(r), true)), el("td", null, pct(r.devengado / r.vigente, 0)));
+      tb.append(tr);
+    }
+    if (!filas.length) { const tr = el("tr"), td = el("td", null, "Ningún programa coincide con la búsqueda."); td.colSpan = 5; tr.append(td); tb.append(tr); }
+    const mas = document.getElementById("mas");
+    mas.style.display = filas.length > st.limite ? "" : "none";
+    mas.textContent = `Mostrar más (quedan ${nf(filas.length - st.limite)})`;
+  }
+
+  // ---------- todo junto ----------
+  function render() {
+    document.querySelectorAll("[data-anio]").forEach(b => b.setAttribute("aria-pressed", String(+b.dataset.anio === st.anio)));
+    document.querySelectorAll("[data-pesos]").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.pesos === st.pesos)));
+    document.getElementById("lead-pesos").textContent = st.pesos === "real" ? "pesos de " + pesosDe : "pesos corrientes de cada año";
+    document.getElementById("pie-pesos").textContent = pesosDe;
+    kpis(); serie();
+    barras("funciones", delAnio(D.funciones), r => titulo(r.fun_desc));
+    barras("jurisdicciones", delAnio(D.jurisdicciones), r => titulo(r.jur_desc));
+    barras("incisos", delAnio(D.incisos), r => titulo(r.inc_desc));
+    calor(); comunas(); opcionesJur(); tabla();
+  }
+  render();
+  let ancho = innerWidth;
+  addEventListener("resize", () => { if (innerWidth !== ancho) { ancho = innerWidth; serie(); } });
+})();
+</script>
+</body>
+</html>
