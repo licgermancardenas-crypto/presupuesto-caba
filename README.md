@@ -17,7 +17,7 @@ no se copia su tablero: los datos y las dos salidas se arman desde cero con dato
 | `scripts/01_armar_datos.py` | ETL: lee el crudo, arma el modelo estrella, baja el IPC y escribe los datos de la web |
 | `scripts/02_armar_powerbi.py` | Genera `powerbi/` desde cero (pisa lo que se haya tocado a mano en Desktop) |
 | `datos/` | `hechos.csv` + `dim_*.csv` + `ipc.csv`: el modelo que usa Power BI |
-| `web/` | `index.html` + `datos.js`: el monitor propio. Se abre con doble clic, sin servidor, y es lo que publica GitHub Pages |
+| `web/` | El monitor propio: `index.html` (todo el presupuesto) y `comunas.html` (mapa y detalle de las quince comunas), con `estilo.css` y `comun.js` compartidos y los datos en `datos.js`. Se abre con doble clic, sin servidor, y es lo que publican GitHub Pages y Vercel |
 | `powerbi/` | El mismo modelo como proyecto de Power BI (`.pbip`). Ver su README |
 
 ## Cómo se actualiza

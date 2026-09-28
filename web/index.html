@@ -5,228 +5,66 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Presupuesto de la Ciudad</title>
 <meta name="description" content="Cuánto, en qué, quién y cómo gasta la Ciudad de Buenos Aires, 2022-2026, en pesos constantes.">
-<style>
-:root {
-  color-scheme: light;
-  --page: #f9f9f7;
-  --surface: #fcfcfb;
-  --ink: #0b0b0b;
-  --ink-2: #52514e;
-  --muted: #898781;
-  --grid: #e1e0d9;
-  --axis: #c3c2b7;
-  --ring: rgba(11,11,11,0.10);
-  --accent: #2a78d6;
-  --accent-soft: #cde2fb;
-  --mute-bar: #c3c2b7;
-  --hatch: #86b6ef;
-  --warn-bg: #fdf3dc;
-  --warn-ink: #6b4a00;
-  --seq-0: #f0efec; --seq-1: #cde2fb; --seq-2: #9ec5f4; --seq-3: #6da7ec;
-  --seq-4: #3987e5; --seq-5: #256abf; --seq-6: #184f95; --seq-7: #0d366b;
-}
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    color-scheme: dark;
-    --page: #0d0d0d; --surface: #1a1a19; --ink: #ffffff; --ink-2: #c3c2b7; --muted: #898781;
-    --grid: #2c2c2a; --axis: #383835; --ring: rgba(255,255,255,0.10);
-    --accent: #3987e5; --accent-soft: #184f95; --mute-bar: #4a4a46; --hatch: #256abf;
-    --warn-bg: #2e2716; --warn-ink: #f2cf7a;
-    --seq-0: #262624; --seq-1: #104281; --seq-2: #184f95; --seq-3: #1c5cab;
-    --seq-4: #256abf; --seq-5: #3987e5; --seq-6: #6da7ec; --seq-7: #9ec5f4;
-  }
-}
-:root[data-theme="dark"] {
-  color-scheme: dark;
-  --page: #0d0d0d; --surface: #1a1a19; --ink: #ffffff; --ink-2: #c3c2b7; --muted: #898781;
-  --grid: #2c2c2a; --axis: #383835; --ring: rgba(255,255,255,0.10);
-  --accent: #3987e5; --accent-soft: #184f95; --mute-bar: #4a4a46; --hatch: #256abf;
-  --warn-bg: #2e2716; --warn-ink: #f2cf7a;
-  --seq-0: #262624; --seq-1: #104281; --seq-2: #184f95; --seq-3: #1c5cab;
-  --seq-4: #256abf; --seq-5: #3987e5; --seq-6: #6da7ec; --seq-7: #9ec5f4;
-}
-* { box-sizing: border-box; margin: 0; padding: 0; }
-body {
-  background: var(--page); color: var(--ink);
-  font: 16px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-}
-.wrap { max-width: 1080px; margin: 0 auto; padding: 0 16px; }
-header { padding: 48px 0 24px; }
-.eyebrow { font-size: 13px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
-h1 { font-size: clamp(28px, 5vw, 44px); line-height: 1.1; letter-spacing: -0.02em; margin: 8px 0 12px; font-weight: 700; }
-.lead { color: var(--ink-2); max-width: 64ch; font-size: 17px; }
-
-/* barra de filtros */
-.filtros {
-  position: sticky; top: 0; z-index: 5; background: color-mix(in srgb, var(--page) 92%, transparent);
-  backdrop-filter: blur(6px); border-bottom: 1px solid var(--grid); padding: 10px 0;
-}
-.filtros .wrap { display: flex; flex-wrap: wrap; gap: 12px 24px; align-items: center; }
-.grupo { display: flex; align-items: center; gap: 8px; }
-.grupo > span { font-size: 13px; color: var(--muted); }
-.seg { display: inline-flex; border: 1px solid var(--axis); border-radius: 8px; overflow: hidden; }
-.seg button {
-  font: inherit; font-size: 14px; background: var(--surface); color: var(--ink-2); border: 0;
-  padding: 6px 12px; cursor: pointer; border-right: 1px solid var(--grid);
-}
-.seg button:last-child { border-right: 0; }
-.seg button[aria-pressed="true"] { background: var(--ink); color: var(--page); font-weight: 600; }
-.seg button:focus-visible, .tema:focus-visible, th button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
-.seg sup { font-size: 10px; }
-.tema { margin-left: auto; font: inherit; font-size: 13px; background: none; color: var(--ink-2); border: 1px solid var(--axis); border-radius: 8px; padding: 6px 10px; cursor: pointer; }
-
-/* tarjetas */
-.kpis { display: grid; grid-template-columns: minmax(0,2fr) repeat(3, minmax(0,1fr)); gap: 12px; margin: 24px 0 8px; }
-.kpi { background: var(--surface); border: 1px solid var(--ring); border-radius: 12px; padding: 16px 18px; }
-.kpi .lab { font-size: 13px; color: var(--ink-2); }
-.kpi .val { font-size: 26px; font-weight: 600; letter-spacing: -0.01em; margin-top: 4px; }
-.kpi.hero .val { font-size: 48px; line-height: 1.05; }
-.kpi .sub { font-size: 13px; color: var(--muted); margin-top: 4px; }
-.aviso {
-  background: var(--warn-bg); color: var(--warn-ink); border-radius: 8px; padding: 8px 12px;
-  font-size: 14px; margin-top: 8px; display: none;
-}
-.aviso.on { display: block; }
-
-section.card { background: var(--surface); border: 1px solid var(--ring); border-radius: 12px; padding: 24px; margin: 20px 0; }
-section.card h2 { font-size: 20px; letter-spacing: -0.01em; }
-section.card .bajada { color: var(--ink-2); font-size: 15px; margin: 4px 0 18px; max-width: 70ch; }
-.nota { font-size: 13px; color: var(--muted); margin-top: 14px; max-width: 80ch; }
-.dos { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 20px; }
-/* sin esto los textos nowrap estiran la grilla y la página se desborda en el celular */
-.kpis > *, .dos > *, .fila > * { min-width: 0; }
-.dos section.card { margin: 0; }
-
-/* barras horizontales */
-.barras { display: grid; gap: 6px; }
-.fila {
-  display: grid; grid-template-columns: minmax(120px, 34%) 1fr auto; gap: 10px; align-items: center;
-  font-size: 14px; padding: 2px 0; cursor: default; border-radius: 6px;
-}
-.fila:hover, .fila:focus-visible { background: color-mix(in srgb, var(--accent) 7%, transparent); outline: none; }
-.fila .et { color: var(--ink-2); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.fila .pista { height: 16px; position: relative; }
-.fila .barra { height: 16px; background: var(--accent); border-radius: 0 4px 4px 0; min-width: 2px; }
-.fila .num { font-variant-numeric: tabular-nums; color: var(--ink); white-space: nowrap; text-align: right; min-width: 9ch; }
-.fila .num small { color: var(--muted); margin-left: 6px; }
-
-/* mapa de comunas */
-.mapa-barras { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: 24px; align-items: start; }
-.mapa svg { width: 100%; height: auto; display: block; max-height: 520px; }
-.mapa path { stroke: var(--surface); stroke-width: 3; stroke-linejoin: round; cursor: default; }
-.mapa path:focus-visible { outline: none; }
-.mapa path.activa, .mapa path:focus-visible { stroke: var(--ink); stroke-width: 5; }
-.mapa text { font-size: 26px; font-weight: 600; text-anchor: middle; dominant-baseline: central; pointer-events: none;
-  fill: var(--ink); stroke: var(--surface); stroke-width: 6px; stroke-linejoin: round; paint-order: stroke; }
-.fila.activa { background: color-mix(in srgb, var(--accent) 7%, transparent); }
-.leyenda { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--muted); margin-top: 10px; font-variant-numeric: tabular-nums; }
-.leyenda > span { white-space: nowrap; }
-.leyenda .escala { display: flex; flex: 0 1 180px; min-width: 60px; height: 10px; border-radius: 3px; overflow: hidden; }
-.leyenda .escala span { flex: 1; }
-
-/* columnas */
-svg text { font-family: inherit; }
-.col-chart { width: 100%; height: auto; display: block; }
-
-/* mapa de calor */
-.calor { width: 100%; border-collapse: separate; border-spacing: 2px; font-size: 13px; }
-.calor th { font-weight: 500; color: var(--muted); text-align: right; padding: 4px 6px; }
-.calor th:first-child { text-align: left; }
-.calor td { text-align: right; padding: 6px 8px; font-variant-numeric: tabular-nums; border-radius: 4px; }
-.calor td:first-child { text-align: left; color: var(--ink-2); background: none; padding-left: 0; white-space: nowrap; }
-
-/* tabla de programas */
-.herr { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 12px; }
-.herr input, .herr select {
-  font: inherit; font-size: 14px; padding: 7px 10px; border: 1px solid var(--axis); border-radius: 8px;
-  background: var(--page); color: var(--ink); min-width: 0;
-}
-.herr input { flex: 1 1 240px; }
-.herr select { flex: 0 1 320px; }
-.tabla-scroll { overflow-x: auto; }
-table.prog { width: 100%; border-collapse: collapse; font-size: 14px; }
-table.prog th { text-align: right; font-weight: 500; color: var(--muted); border-bottom: 1px solid var(--axis); padding: 0; white-space: nowrap; }
-table.prog th:first-child { text-align: left; }
-table.prog th button { font: inherit; color: inherit; background: none; border: 0; padding: 8px 6px; cursor: pointer; width: 100%; text-align: inherit; }
-table.prog th[aria-sort] button { color: var(--ink); font-weight: 600; }
-table.prog td { padding: 8px 6px; border-bottom: 1px solid var(--grid); text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
-table.prog td:first-child { text-align: left; white-space: normal; min-width: 240px; }
-table.prog td:first-child small { display: block; color: var(--muted); font-size: 12px; }
-.mas { margin-top: 12px; font: inherit; font-size: 14px; background: none; border: 1px solid var(--axis); color: var(--ink); border-radius: 8px; padding: 7px 14px; cursor: pointer; }
-
-.tip {
-  position: fixed; pointer-events: none; z-index: 10; background: var(--surface); color: var(--ink);
-  border: 1px solid var(--ring); border-radius: 8px; padding: 10px 12px; font-size: 13px;
-  box-shadow: 0 6px 20px rgba(0,0,0,.14); max-width: 320px; opacity: 0; transition: opacity .1s;
-}
-.tip.on { opacity: 1; }
-.tip .t { color: var(--ink-2); margin-bottom: 6px; }
-.tip .r { display: flex; justify-content: space-between; gap: 16px; font-variant-numeric: tabular-nums; }
-.tip .r b { font-weight: 600; }
-.tip .r span { color: var(--muted); }
-
-footer { color: var(--ink-2); font-size: 14px; padding: 12px 0 64px; }
-footer h2 { font-size: 16px; color: var(--ink); margin: 16px 0 6px; }
-footer ul { padding-left: 18px; max-width: 80ch; }
-footer li { margin: 4px 0; }
-footer code { font-size: 13px; }
-a { color: var(--accent); }
-
-@media (max-width: 760px) {
-  .kpis { grid-template-columns: repeat(2, minmax(0,1fr)); }
-  .kpi .val { font-size: 22px; }
-  .kpi.hero { grid-column: 1 / -1; }
-  .kpi.hero .val { font-size: 40px; }
-  .dos, .mapa-barras { grid-template-columns: minmax(0,1fr); }
-  .mapa svg { max-height: 420px; }
-  section.card { padding: 16px; }
-  .fila { grid-template-columns: minmax(96px, 38%) 1fr auto; font-size: 13px; }
-  .fila .num small { display: none; }
-  .tema { margin-left: 0; }
-}
-@media (prefers-reduced-motion: no-preference) { .fila .barra { transition: width .25s ease; } }
-</style>
+<link rel="stylesheet" href="estilo.css">
 </head>
 <body>
-<header class="wrap">
+<div class="app">
+<aside class="lateral" id="lateral">
+  <div class="marca"><a href="index.html" data-pagina>Presupuesto de la Ciudad</a><small>Buenos Aires · 2022–2026</small></div>
+  <button class="menu" id="menu" type="button" aria-expanded="false" aria-controls="secciones">Secciones</button>
+  <nav id="secciones" aria-label="Secciones">
+    <div class="tit">Monitor</div>
+    <a class="pagina" href="#resumen" aria-current="page">Todo el presupuesto</a>
+    <a class="sub" href="#serie-s">Año por año</a>
+    <a class="sub" href="#en-que">En qué se gasta</a>
+    <a class="sub" href="#quien">Quién y cómo</a>
+    <a class="sub" href="#reparto">Cómo cambió el reparto</a>
+    <a class="sub" href="#comunas-s">Las comunas</a>
+    <a class="sub" href="#programas">Programa por programa</a>
+    <a class="sub" href="#leer">Cómo leer esto</a>
+    <div class="tit">Territorio</div>
+    <a class="pagina" href="comunas.html" data-pagina>Mapa de las comunas</a>
+    <a class="sub" href="comunas.html#tabla" data-pagina>Las quince en una tabla</a>
+  </nav>
+  <div class="controles">
+    <div class="grupo"><span id="lab-anio">Año</span><div class="seg" id="anios" role="group" aria-labelledby="lab-anio"></div></div>
+    <div class="grupo"><span id="lab-pesos">Pesos</span>
+      <div class="seg" role="group" aria-labelledby="lab-pesos">
+        <button type="button" data-pesos="real" aria-pressed="true">Constantes</button>
+        <button type="button" data-pesos="nominal" aria-pressed="false">Corrientes</button>
+      </div>
+    </div>
+    <button class="tema" id="tema" type="button">Tema: auto</button>
+  </div>
+</aside>
+
+<div class="contenido">
+<header class="wrap" id="resumen">
   <div class="eyebrow">Ciudad Autónoma de Buenos Aires · 2022–2026</div>
   <h1>El presupuesto de la Ciudad</h1>
   <p class="lead">Cuánto gasta el Gobierno porteño, en qué, quién lo gasta y cómo. Los montos están en
     <strong id="lead-pesos">pesos de agosto de 2026</strong>, así los años se pueden comparar entre sí.</p>
 </header>
 
-<nav class="filtros" aria-label="Filtros">
-  <div class="wrap">
-    <div class="grupo"><span id="lab-anio">Año</span><div class="seg" id="anios" role="group" aria-labelledby="lab-anio"></div></div>
-    <div class="grupo"><span id="lab-pesos">Pesos</span>
-      <div class="seg" role="group" aria-labelledby="lab-pesos">
-        <button data-pesos="real" aria-pressed="true">Constantes</button>
-        <button data-pesos="nominal" aria-pressed="false">Corrientes</button>
-      </div>
-    </div>
-    <button class="tema" id="tema" type="button">Tema: auto</button>
-  </div>
-</nav>
-
 <main class="wrap">
   <div class="kpis" id="kpis"></div>
   <div class="aviso" id="aviso-2026">2026 está a mitad de camino: el archivo publicado llega a junio. El devengado es lo gastado
     hasta ahí y la ejecución no se compara con la de un año cerrado.</div>
 
-  <section class="card">
+  <section class="card" id="serie-s">
     <h2>Cuánto gasta la Ciudad, año por año</h2>
     <p class="bajada" id="bajada-serie"></p>
     <div id="serie"></div>
   </section>
 
-  <section class="card">
+  <section class="card" id="en-que">
     <h2>En qué se gasta</h2>
     <p class="bajada">Clasificación por finalidad y función: para qué es cada peso, sin importar qué ministerio lo
       maneja. Es la forma más estable de comparar años, porque no depende del organigrama.</p>
     <div class="barras" id="funciones"></div>
   </section>
 
-  <div class="dos">
+  <div class="dos" id="quien">
     <section class="card">
       <h2>Quién lo gasta</h2>
       <p class="bajada">Por jurisdicción. Ojo al comparar años: en 2024 Seguridad se separó de Justicia y se creó
@@ -240,7 +78,7 @@ a { color: var(--accent); }
     </section>
   </div>
 
-  <section class="card">
+  <section class="card" id="reparto">
     <h2>Cómo cambió el reparto</h2>
     <p class="bajada">Qué parte del gasto devengado se llevó cada función cada año. Leer por fila: si una función gana
       peso, otra lo pierde.</p>
@@ -249,11 +87,12 @@ a { color: var(--accent); }
       a fin de año).</p>
   </section>
 
-  <section class="card">
+  <section class="card" id="comunas-s">
     <h2>Las quince comunas</h2>
     <p class="bajada">Gasto por habitante de cada comuna como unidad ejecutora: mantenimiento de espacio público,
       arbolado, veredas y la gestión descentralizada. Es lo único del presupuesto que se reparte por barrio de forma
-      comparable. El mapa pinta lo mismo; la leyenda, debajo, va de la comuna que menos gasta a la que más.</p>
+      comparable. El mapa pinta lo mismo; la leyenda, debajo, va de la comuna que menos gasta a la que más. Clic en una
+      comuna para ver su detalle.</p>
     <div class="mapa-barras">
       <figure class="mapa">
         <div id="mapa"></div>
@@ -264,9 +103,10 @@ a { color: var(--accent); }
     <p class="nota">No es "toda la plata que va a cada barrio". El clasificador geográfico del presupuesto marca dónde
       está la oficina que ejecuta y no dónde cae el gasto: con él, la comuna 4 (donde está la sede de gobierno) se
       llevaría un tercio del total. Población: censo 2022.</p>
+    <a class="enlace-mapa" href="comunas.html" data-pagina>Ver el mapa grande y el detalle de cada comuna →</a>
   </section>
 
-  <section class="card">
+  <section class="card" id="programas">
     <h2>Programa por programa</h2>
     <p class="bajada">Los <span id="n-prog"></span> programas presupuestarios del año elegido. Se puede buscar y ordenar.</p>
     <div class="herr">
@@ -289,7 +129,7 @@ a { color: var(--accent); }
   </section>
 </main>
 
-<footer class="wrap">
+<footer class="wrap" id="leer">
   <h2>Cómo leer esto</h2>
   <ul>
     <li><strong>Sancionado</strong>: lo que aprobó la Legislatura en la ley de presupuesto. <strong>Vigente</strong>: el
@@ -309,86 +149,17 @@ a { color: var(--accent); }
     <li>Contorno de las comunas: <a href="https://data.buenosaires.gob.ar/dataset/comunas">BA Data</a>.</li>
   </ul>
 </footer>
+</div>
+</div>
 
 <div class="tip" id="tip" role="tooltip"></div>
 
 <script src="datos.js"></script>
+<script src="comun.js"></script>
 <script>
 (() => {
-  const D = window.DATOS;
-  const ANIOS = D.totales.map(t => t.anio);
-  const st = { anio: ANIOS.filter(a => D.corte[a] === "anual").pop(), pesos: "real", sort: { k: "devengado", dir: -1 },
-               q: "", jur: "", limite: 25 };
-
-  // ---------- formato ----------
-  const nf = (n, d = 0) => n.toLocaleString("es-AR", { minimumFractionDigits: d, maximumFractionDigits: d });
-  function plata(n, corto) {
-    const a = Math.abs(n);
-    if (a >= 1e12) return "$ " + nf(n / 1e12, 2) + (corto ? " bill." : " billones");
-    if (a >= 1e9) return "$ " + nf(n / 1e9, a >= 1e11 ? 0 : 1) + (corto ? " mil M" : " mil millones");
-    if (a >= 1e6) return "$ " + nf(n / 1e6, a >= 1e8 ? 0 : 1) + (corto ? " M" : " millones");
-    return "$ " + nf(n);
-  }
-  const pct = (x, d = 1) => isFinite(x) ? nf(100 * x, d) + " %" : "—";
-  const f = a => st.pesos === "real" ? D.factor[a] : 1;
-  const m = (r, k = "devengado") => r[k] * f(r.anio);
-  const titulo = s => s.toLowerCase().replace(/(^|\s|\()(\p{L})/gu, (x, p, c) => p + c.toUpperCase())
-    .replace(/\b(De|Del|La|Las|Los|Y|E|En|A|Al|Para|Por|Con|Sin|O)\b/g, w => w.toLowerCase())
-    .replace(/^(\p{L})/u, c => c.toUpperCase());
-  const MESES = ["enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre"];
-  const [pa, pm] = D.pesos_de.split("-");
-  const pesosDe = `${MESES[+pm - 1]} de ${pa}`;
-  const el = (tag, cls, txt) => { const e = document.createElement(tag); if (cls) e.className = cls; if (txt != null) e.textContent = txt; return e; };
-
-  // ---------- tooltip (siempre textContent: las etiquetas vienen del dataset) ----------
-  const tip = document.getElementById("tip");
-  function mostrar(ev, titulo, filas) {
-    tip.replaceChildren(el("div", "t", titulo));
-    for (const [k, v] of filas) { const r = el("div", "r"); r.append(el("b", null, v), el("span", null, k)); tip.append(r); }
-    tip.classList.add("on");
-    mover(ev);
-  }
-  function mover(ev) {
-    let x, y;
-    if (ev.clientX != null && ev.type !== "focus") { x = ev.clientX; y = ev.clientY; }
-    else { const b = ev.currentTarget.getBoundingClientRect(); x = b.left + b.width / 2; y = b.top; }
-    const w = tip.offsetWidth, h = tip.offsetHeight;
-    tip.style.left = Math.min(window.innerWidth - w - 8, Math.max(8, x + 14)) + "px";
-    tip.style.top = (y - h - 12 < 8 ? y + 18 : y - h - 12) + "px";
-  }
-  const ocultar = () => tip.classList.remove("on");
-  function conTip(nodo, fnTitulo, fnFilas) {
-    nodo.tabIndex = 0;
-    const on = ev => mostrar(ev, fnTitulo(), fnFilas());
-    nodo.addEventListener("pointerenter", on); nodo.addEventListener("pointermove", mover);
-    nodo.addEventListener("pointerleave", ocultar); nodo.addEventListener("focus", on); nodo.addEventListener("blur", ocultar);
-  }
-  const filasMontos = r => [
-    ["sancionado", plata(m(r, "sancionado"))], ["vigente", plata(m(r, "vigente"))],
-    ["devengado", plata(m(r))], ["ejecución", pct(r.devengado / r.vigente)]];
-
-  // ---------- filtros ----------
-  const segA = document.getElementById("anios");
-  for (const a of ANIOS) {
-    const b = el("button", null, String(a));
-    if (D.corte[a] !== "anual") { const s = el("sup", null, "*"); b.append(s); b.title = "Hasta " + D.corte[a]; }
-    b.dataset.anio = a;
-    b.onclick = () => { st.anio = a; st.limite = 25; render(); };
-    segA.append(b);
-  }
-  document.querySelectorAll("[data-pesos]").forEach(b => b.onclick = () => { st.pesos = b.dataset.pesos; render(); });
-  const temas = ["auto", "claro", "oscuro"];
-  let tema = 0;
-  try { tema = Math.max(0, temas.indexOf(localStorage.getItem("presu-tema") || "auto")); } catch (e) {}
-  const btnTema = document.getElementById("tema");
-  function aplicarTema() {
-    const t = temas[tema];
-    if (t === "auto") document.documentElement.removeAttribute("data-theme");
-    else document.documentElement.dataset.theme = t === "claro" ? "light" : "dark";
-    btnTema.textContent = "Tema: " + t;
-  }
-  btnTema.onclick = () => { tema = (tema + 1) % 3; try { localStorage.setItem("presu-tema", temas[tema]); } catch (e) {} aplicarTema(); };
-  aplicarTema();
+  const { D, ANIOS, st, nf, plata, pct, m, titulo, pesosDe, el, conTip, filasMontos } = P;
+  Object.assign(st, { sort: { k: "devengado", dir: -1 }, q: "", jur: "", limite: 25 });
 
   // ---------- tarjetas ----------
   function kpis() {
@@ -455,8 +226,8 @@ a { color: var(--accent); }
                      "font-weight": sel ? 600 : 400 }, r.anio + (parcial ? "*" : ""));
       const hit = nodo("rect", { x: cx - paso / 2, y: mt - 20, width: paso, height: H - mt + 20, fill: "transparent", style: "cursor:pointer" });
       conTip(hit, () => r.anio + (parcial ? " · a junio" : ""), () => filasMontos(r));
-      hit.addEventListener("click", () => { st.anio = r.anio; render(); });
-      hit.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); st.anio = r.anio; render(); } });
+      hit.addEventListener("click", () => { st.anio = r.anio; P.cambiar(); });
+      hit.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); st.anio = r.anio; P.cambiar(); } });
     });
     box.replaceChildren(s);
     document.getElementById("bajada-serie").textContent = st.pesos === "real"
@@ -529,6 +300,7 @@ a { color: var(--accent); }
     const filasC = r => [
       ["por habitante", "$ " + nf(ph(r))], ["devengado", plata(m(r))], ["ejecución", pct(r.devengado / r.vigente)],
       ["habitantes (2022)", nf(r.poblacion)]];
+    const porN = Object.fromEntries(filas.map(r => [r.comuna, r]));
     // la barra y la comuna del mapa se marcan juntas al pasar por cualquiera de las dos
     const marcar = (n, on) => document.querySelectorAll(`[data-comuna="${n}"]`).forEach(e => e.classList.toggle("activa", on));
     const enlazar = (nodo, r) => {
@@ -548,31 +320,14 @@ a { color: var(--accent); }
       box.append(fila);
     }
 
-    // mapa: siete tonos de la escala secuencial, repartidos parejo entre la comuna que menos y la que más
-    const min = ph(orden[orden.length - 1]);
-    const tono = v => max > min ? 1 + Math.min(6, Math.floor(7 * (v - min) / (max - min))) : 4;
-    const porN = Object.fromEntries(filas.map(r => [r.comuna, r]));
-    const { ancho, alto } = D.mapa;
-    const NS = "http://www.w3.org/2000/svg";
-    const s = document.createElementNS(NS, "svg");
-    s.setAttribute("viewBox", `-4 -4 ${ancho + 8} ${alto + 8}`);
-    s.setAttribute("role", "group");
-    s.setAttribute("aria-label", "Mapa de las quince comunas según gasto por habitante");
-    const nodo = (t, a, txt) => { const n = document.createElementNS(NS, t); for (const k in a) n.setAttribute(k, a[k]); if (txt != null) n.textContent = txt; s.append(n); return n; };
-    for (const c of D.mapa.comunas) {
-      const r = porN[c.comuna];
-      const p = nodo("path", { d: c.d, fill: r ? `var(--seq-${tono(ph(r))})` : "var(--seq-0)" });
-      if (r) { enlazar(p, r); p.setAttribute("aria-label", "Comuna " + r.comuna + ": $ " + nf(ph(r)) + " por habitante"); }
-    }
-    for (const c of D.mapa.comunas) {
-      nodo("text", { x: c.x, y: c.y }, c.comuna);
-    }
-    document.getElementById("mapa").replaceChildren(s);
-
-    const ley = document.getElementById("leyenda-mapa");
-    const escala = el("div", "escala");
-    for (let i = 1; i <= 7; i++) { const t = el("span"); t.style.background = `var(--seq-${i})`; escala.append(t); }
-    ley.replaceChildren(el("span", null, "$ " + nf(min)), escala, el("span", null, "$ " + nf(max)), el("span", null, "por hab."));
+    // mapa chico: clic en una comuna lleva a su detalle en la página del mapa
+    const { min: lo, max: hi } = P.mapa(document.getElementById("mapa"), {
+      valor: n => porN[n] ? ph(porN[n]) : null,
+      enlazar: (p, n) => { if (porN[n]) enlazar(p, porN[n]); p.style.cursor = "pointer"; },
+      alElegir: n => { location.href = `comunas.html?anio=${st.anio}&pesos=${st.pesos}#c=${n}`; },
+      rotulo: "Mapa de las quince comunas según gasto por habitante",
+    });
+    P.leyenda(document.getElementById("leyenda-mapa"), lo, hi, v => "$ " + nf(v), "por hab.");
   }
 
   // ---------- tabla de programas ----------
@@ -622,9 +377,9 @@ a { color: var(--accent); }
   }
 
   // ---------- todo junto ----------
+  let anioVisto = null;
   function render() {
-    document.querySelectorAll("[data-anio]").forEach(b => b.setAttribute("aria-pressed", String(+b.dataset.anio === st.anio)));
-    document.querySelectorAll("[data-pesos]").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.pesos === st.pesos)));
+    if (st.anio !== anioVisto) { anioVisto = st.anio; st.limite = 25; }
     document.getElementById("lead-pesos").textContent = st.pesos === "real" ? "pesos de " + pesosDe : "pesos corrientes de cada año";
     document.getElementById("pie-pesos").textContent = pesosDe;
     kpis(); serie();
@@ -633,7 +388,7 @@ a { color: var(--accent); }
     barras("incisos", delAnio(D.incisos), r => titulo(r.inc_desc));
     calor(); comunas(); opcionesJur(); tabla();
   }
-  render();
+  P.iniciar(render);
   let ancho = innerWidth;
   addEventListener("resize", () => { if (innerWidth !== ancho) { ancho = innerWidth; serie(); } });
 })();

@@ -208,6 +208,15 @@ pob = pd.read_csv(DATOS / "poblacion_comuna_2022.csv", index_col=0).poblacion
 c["poblacion"] = c.comuna.map(pob)
 web["comunas"] = c.round(0).to_dict("records")
 
+# en qué gasta cada comuna: casi todo es mantenimiento, reparación y limpieza
+# (partida principal 3.3); el resto se junta en personal y otros
+g = H.merge(com, on=["jur", "ue"]).assign(comuna=lambda x: x.ue_desc.str.extract(r"(\d+)")[0].astype(int))
+g["grupo"] = "otros"
+g.loc[g.inc == 1, "grupo"] = "personal"
+g.loc[(g.inc == 3) & (g.ppal == 3), "grupo"] = "mantenimiento"
+web["comunas_grupo"] = (g.groupby(["anio", "comuna", "grupo"], as_index=False).devengado.sum()
+                        .round(0).to_dict("records"))
+
 
 # el contorno de las comunas, ya proyectado y simplificado: la página sólo
 # dibuja los paths. Plano local (metros) y una unidad del SVG = 20 m; con la
@@ -241,12 +250,40 @@ def mapa():
             partes.append("M" + "L".join(f"{x},{y}" for x, y in pts) + "Z")
         return "".join(partes)
 
+    # el geojson trae los barrios sin tildes: se usan estos, controlados contra él
+    sin = lambda s: s.translate(str.maketrans("áéíóúÁÉÍÓÚ", "aeiouAEIOU")).lower().replace("gral.", "general").removeprefix("la ")  # noqa: E731
+    for f in feats:
+        n = int(f["properties"]["comuna"])
+        fuente = {sin(b.strip()) for b in f["properties"]["barrios"].split(",")}
+        assert fuente == {sin(b) for b in BARRIOS[n]}, f"barrios de la comuna {n}: {fuente}"
+    area = {int(f["properties"]["comuna"]): f["properties"]["area"] / 1e6 for f in feats}
+
     out = []
     for n, g in sorted(geos.items()):
         s = g.simplify(1, preserve_topology=True)
         pr = g.representative_point()
-        out.append({"comuna": n, "d": path(s), "x": round(pr.x - x0), "y": round(pr.y - y0)})
+        out.append({"comuna": n, "d": path(s), "x": round(pr.x - x0), "y": round(pr.y - y0),
+                    "km2": round(area[n], 1), "barrios": BARRIOS[n]})
     return {"ancho": round(x1 - x0), "alto": round(y1 - y0), "comunas": out}
+
+
+BARRIOS = {
+    1: ["Retiro", "San Nicolás", "Puerto Madero", "San Telmo", "Monserrat", "Constitución"],
+    2: ["Recoleta"],
+    3: ["Balvanera", "San Cristóbal"],
+    4: ["La Boca", "Barracas", "Parque Patricios", "Nueva Pompeya"],
+    5: ["Almagro", "Boedo"],
+    6: ["Caballito"],
+    7: ["Flores", "Parque Chacabuco"],
+    8: ["Villa Lugano", "Villa Riachuelo", "Villa Soldati"],
+    9: ["Liniers", "Mataderos", "Parque Avellaneda"],
+    10: ["Floresta", "Monte Castro", "Vélez Sársfield", "Versalles", "Villa Luro", "Villa Real"],
+    11: ["Villa del Parque", "Villa Devoto", "Villa General Mitre", "Villa Santa Rita"],
+    12: ["Coghlan", "Saavedra", "Villa Pueyrredón", "Villa Urquiza"],
+    13: ["Belgrano", "Colegiales", "Núñez"],
+    14: ["Palermo"],
+    15: ["Agronomía", "Chacarita", "Parque Chas", "La Paternal", "Villa Crespo", "Villa Ortúzar"],
+}
 
 
 web["mapa"] = mapa()

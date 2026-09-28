@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mapa de las comunas</title>
+<meta name="description" content="Cuánto gasta cada una de las quince comunas de Buenos Aires, 2022-2026: mapa, detalle por comuna y tabla.">
+<link rel="stylesheet" href="estilo.css">
+</head>
+<body>
+<div class="app">
+<aside class="lateral" id="lateral">
+  <div class="marca"><a href="index.html" data-pagina>Presupuesto de la Ciudad</a><small>Buenos Aires · 2022–2026</small></div>
+  <button class="menu" id="menu" type="button" aria-expanded="false" aria-controls="secciones">Secciones</button>
+  <nav id="secciones" aria-label="Secciones">
+    <div class="tit">Monitor</div>
+    <a class="pagina" href="index.html" data-pagina>Todo el presupuesto</a>
+    <a class="sub" href="index.html#serie-s" data-pagina>Año por año</a>
+    <a class="sub" href="index.html#en-que" data-pagina>En qué se gasta</a>
+    <a class="sub" href="index.html#quien" data-pagina>Quién y cómo</a>
+    <a class="sub" href="index.html#programas" data-pagina>Programa por programa</a>
+    <div class="tit">Territorio</div>
+    <a class="pagina" href="#mapa-s" aria-current="page">Mapa de las comunas</a>
+    <a class="sub" href="#tabla">Las quince en una tabla</a>
+    <a class="sub" href="#leer">Qué mide y qué no</a>
+  </nav>
+  <div class="controles">
+    <div class="grupo"><span id="lab-anio">Año</span><div class="seg" id="anios" role="group" aria-labelledby="lab-anio"></div></div>
+    <div class="grupo"><span id="lab-pesos">Pesos</span>
+      <div class="seg" role="group" aria-labelledby="lab-pesos">
+        <button type="button" data-pesos="real" aria-pressed="true">Constantes</button>
+        <button type="button" data-pesos="nominal" aria-pressed="false">Corrientes</button>
+      </div>
+    </div>
+    <button class="tema" id="tema" type="button">Tema: auto</button>
+  </div>
+</aside>
+
+<div class="contenido">
+<header class="wrap">
+  <div class="eyebrow">Presupuesto de la Ciudad · territorio</div>
+  <h1>Las quince comunas</h1>
+  <p class="lead">Cuánto gasta cada comuna como unidad ejecutora: mantenimiento del espacio público, arbolado, veredas y
+    la gestión descentralizada. Montos en <strong id="lead-pesos"></strong>. Clic en una comuna para ver su detalle.</p>
+</header>
+
+<main class="wrap">
+  <div class="aviso" id="aviso-2026">2026 está a mitad de camino: el archivo publicado llega a junio. El gasto por
+    habitante de 2026 es de medio año y no se compara con el de un año cerrado.</div>
+
+  <section class="card" id="mapa-s">
+    <div class="indicador">
+      <span id="lab-ind">Pintar el mapa según</span>
+      <div class="seg" id="indicadores" role="group" aria-labelledby="lab-ind"></div>
+    </div>
+    <div class="mapa-detalle">
+      <figure class="mapa mapa-grande">
+        <div id="mapa-g"></div>
+        <figcaption class="leyenda" id="ley-g"></figcaption>
+      </figure>
+      <div class="detalle" id="detalle" aria-live="polite"></div>
+    </div>
+  </section>
+
+  <section class="card" id="tabla">
+    <h2>Las quince en una tabla</h2>
+    <p class="bajada">Clic en una fila para verla en el mapa. Se puede ordenar por cualquier columna.</p>
+    <div class="tabla-scroll">
+      <table class="prog">
+        <thead><tr>
+          <th data-k="comuna"><button type="button">Comuna</button></th>
+          <th data-k="poblacion"><button type="button">Habitantes</button></th>
+          <th data-k="km2"><button type="button">km²</button></th>
+          <th data-k="dev"><button type="button">Devengado</button></th>
+          <th data-k="ph"><button type="button">Por hab.</button></th>
+          <th data-k="ejec"><button type="button">Ejecución</button></th>
+          <th data-k="var"><button type="button">Cambio real</button></th>
+        </tr></thead>
+        <tbody id="tbody"></tbody>
+      </table>
+    </div>
+    <p class="nota" id="nota-var"></p>
+  </section>
+</main>
+
+<footer class="wrap" id="leer">
+  <h2>Qué mide y qué no</h2>
+  <ul>
+    <li>Es el gasto de cada comuna <strong>como unidad ejecutora</strong>: lo que ejecuta la junta comunal, casi todo
+      contratos de mantenimiento, reparación y limpieza. Es lo único del presupuesto que se reparte por barrio de forma
+      comparable.</li>
+    <li>No es "toda la plata que va a cada barrio". Escuelas, hospitales, policía u obras grandes las ejecutan los
+      ministerios y no se pueden asignar a una comuna. El clasificador geográfico del presupuesto tampoco sirve: marca
+      dónde está la oficina que ejecuta, y con él la comuna 4, donde está la sede de gobierno, se llevaría un tercio del
+      total.</li>
+    <li>El gasto por habitante usa la población del censo 2022 para todos los años.</li>
+    <li>El <strong>cambio real</strong> compara el devengado con el del año anterior en pesos constantes, elijas los
+      pesos que elijas. 2026 no se compara: va a junio.</li>
+    <li>Los colores del mapa se reparten entre la comuna que menos y la que más en el año elegido: sirven para ordenar
+      las comunas dentro de un año, no para comparar años.</li>
+  </ul>
+  <h2>Fuentes</h2>
+  <ul>
+    <li>Presupuesto ejecutado, Ministerio de Hacienda y Finanzas GCBA, en
+      <a href="https://data.buenosaires.gob.ar/dataset/presupuesto-ejecutado">BA Data</a>.</li>
+    <li>IPC nivel general, INDEC, vía la <a href="https://datos.gob.ar/series">API de series de tiempo</a>.</li>
+    <li>Población por comuna: Censo Nacional 2022.</li>
+    <li>Contorno, superficie y barrios de las comunas: <a href="https://data.buenosaires.gob.ar/dataset/comunas">BA Data</a>.</li>
+  </ul>
+</footer>
+</div>
+</div>
+
+<div class="tip" id="tip" role="tooltip"></div>
+
+<script src="datos.js"></script>
+<script src="comun.js"></script>
+<script>
+(() => {
+  const { D, ANIOS, st, nf, plata, pct, m, pesosDe, el, parcial, conTip } = P;
+  const GEO = Object.fromEntries(D.mapa.comunas.map(c => [c.comuna, c]));
+  const hash = +(location.hash.match(/^#c=(\d+)$/) || [])[1];
+  Object.assign(st, { ind: "ph", orden: { k: "ph", dir: -1 }, sel: GEO[hash] ? hash : null });
+
+  const fila = (anio, n) => D.comunas.find(r => r.anio === anio && r.comuna === n);
+  // cambio real contra el año anterior: siempre en pesos constantes, y 2026 (a junio) no se compara
+  const cambio = (anio, n) => {
+    const a = fila(anio, n), b = fila(anio - 1, n);
+    if (!a || !b || parcial(anio) || parcial(anio - 1)) return null;
+    return (a.devengado * D.factor[anio]) / (b.devengado * D.factor[anio - 1]) - 1;
+  };
+  const IND = {
+    ph:   { nombre: "Por habitante", v: r => m(r) / r.poblacion, fmt: v => "$ " + nf(v), unidad: "por hab." },
+    dev:  { nombre: "Devengado", v: r => m(r), fmt: v => plata(v, true), unidad: "" },
+    km2:  { nombre: "Por km²", v: r => m(r) / GEO[r.comuna].km2, fmt: v => plata(v, true), unidad: "por km²" },
+    ejec: { nombre: "Ejecución", v: r => r.devengado / r.vigente, fmt: v => pct(v, 0), unidad: "del vigente" },
+  };
+  const segI = document.getElementById("indicadores");
+  for (const [k, ind] of Object.entries(IND)) {
+    const b = el("button", null, ind.nombre); b.type = "button"; b.dataset.ind = k;
+    b.onclick = () => { st.ind = k; dibujar(); };
+    segI.append(b);
+  }
+  function elegir(n, irAlMapa) {
+    st.sel = n;
+    history.replaceState(null, "", location.search + "#c=" + n);
+    dibujar();
+    if (irAlMapa) document.getElementById("mapa-s").scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
+  }
+  const marcar = (n, on) => document.querySelectorAll(`#mapa-g [data-comuna="${n}"]`).forEach(e => e.classList.toggle("activa", on));
+  const orden = (filas, fn) => [...filas].sort((a, b) => fn(b) - fn(a));
+
+  // ---------- mapa ----------
+  function mapa(filas) {
+    const ind = IND[st.ind];
+    const porN = Object.fromEntries(filas.map(r => [r.comuna, r]));
+    const rk = orden(filas, ind.v).map(r => r.comuna);
+    const { min, max } = P.mapa(document.getElementById("mapa-g"), {
+      valor: n => porN[n] ? ind.v(porN[n]) : null,
+      elegida: st.sel,
+      alElegir: n => elegir(n),
+      enlazar: (p, n) => {
+        const r = porN[n]; if (!r) return;
+        p.setAttribute("aria-label", `Comuna ${n}: ${ind.fmt(ind.v(r))} ${ind.unidad}`);
+        conTip(p, () => "Comuna " + n + " · " + GEO[n].barrios.join(", "), () => [
+          [ind.nombre.toLowerCase() + " " + r.anio, ind.fmt(ind.v(r))], ["puesto", (rk.indexOf(n) + 1) + " de 15"]]);
+        p.addEventListener("pointerenter", () => marcar(n, true));
+        p.addEventListener("pointerleave", () => marcar(n, false));
+      },
+      rotulo: "Mapa de las quince comunas según " + ind.nombre.toLowerCase() + ". Clic en una comuna para ver su detalle.",
+    });
+    P.leyenda(document.getElementById("ley-g"), min, max, ind.fmt, ind.unidad);
+  }
+
+  // ---------- detalle de la comuna elegida ----------
+  function detalle(filas) {
+    const box = document.getElementById("detalle");
+    const n = st.sel, r = filas.find(x => x.comuna === n), g = GEO[n];
+    const ph = x => m(x) / x.poblacion;
+    const rk = orden(filas, ph).map(x => x.comuna);
+    const vals = filas.map(ph).sort((a, b) => a - b), mediana = vals[Math.floor(vals.length / 2)];
+    box.replaceChildren();
+    box.append(el("h2", null, "Comuna " + n), el("div", "barrios", g.barrios.join(" · ")));
+    const ficha = el("div", "ficha");
+    ficha.append(el("span", null, nf(r.poblacion) + " habitantes"), el("span", null, nf(g.km2, 1) + " km²"),
+      el("span", null, nf(r.poblacion / g.km2) + " hab. por km²"));
+    box.append(ficha);
+    box.append(el("div", "grande", "$ " + nf(ph(r))));
+    const dif = ph(r) / mediana - 1;
+    box.append(el("div", "puesto", `por habitante en ${r.anio}${parcial(r.anio) ? " (a junio)" : ""} · ${rk.indexOf(n) + 1}.ª de 15 · ` +
+      (Math.abs(dif) < 0.005 ? "igual a la mediana de las comunas" : pct(Math.abs(dif), 0) + (dif > 0 ? " más" : " menos") + " que la mediana")));
+
+    const minis = el("div", "minis");
+    const mini = (lab, val) => { const k = el("div", "mini"); k.append(el("div", "lab", lab), el("div", "val", val)); minis.append(k); };
+    const cv = cambio(r.anio, n);
+    mini("Devengado", plata(m(r), true));
+    mini("Crédito vigente", plata(m(r, "vigente"), true));
+    mini("Ejecución", pct(r.devengado / r.vigente, 0));
+    mini("Cambio real contra " + (r.anio - 1), cv == null ? "—" : (cv >= 0 ? "▲ " : "▼ ") + pct(Math.abs(cv), 0));
+    box.append(minis);
+
+    box.append(el("h3", null, "Por habitante, año por año"));
+    box.append(serie(n));
+
+    box.append(el("h3", null, "En qué gasta en " + r.anio));
+    box.append(composicion(n, r.anio));
+  }
+
+  // columnas de la comuna, año por año, con una raya en el promedio de las quince
+  function serie(n) {
+    const W = 400, H = 180, mt = 30, mb = 24;
+    const NS = "http://www.w3.org/2000/svg";
+    const s = document.createElementNS(NS, "svg");
+    s.setAttribute("viewBox", `0 0 ${W} ${H}`); s.setAttribute("class", "col-chart");
+    const nodo = (t, a, txt) => { const x = document.createElementNS(NS, t); for (const k in a) x.setAttribute(k, a[k]); if (txt != null) x.textContent = txt; s.append(x); return x; };
+    const datos = ANIOS.map(a => {
+      const r = fila(a, n), todas = D.comunas.filter(x => x.anio === a);
+      const prom = todas.reduce((t, x) => t + m(x), 0) / todas.reduce((t, x) => t + x.poblacion, 0);
+      return { a, v: r ? m(r) / r.poblacion : 0, prom };
+    });
+    const max = Math.max(...datos.flatMap(d => [d.v, d.prom])) * 1.05;
+    const paso = W / datos.length, bw = Math.min(46, paso * 0.56);
+    const y = v => mt + (H - mt - mb) * (1 - v / max);
+    s.setAttribute("role", "img");
+    s.setAttribute("aria-label", `Comuna ${n}, gasto por habitante: ` + datos.map(d => `${d.a} $ ${nf(d.v)}`).join("; "));
+    const defs = nodo("defs", {});
+    defs.innerHTML = '<pattern id="rayas-c" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">' +
+      '<rect width="6" height="6" fill="var(--accent-soft)"/><line x1="0" y1="0" x2="0" y2="6" stroke="var(--hatch)" stroke-width="3"/></pattern>';
+    nodo("line", { x1: 0, x2: W, y1: H - mb, y2: H - mb, stroke: "var(--axis)" });
+    datos.forEach((d, i) => {
+      const cx = paso * (i + 0.5), x = cx - bw / 2, top = y(d.v), sel = d.a === st.anio;
+      nodo("rect", { x, y: top, width: bw, height: H - mb - top, rx: 3,
+        fill: parcial(d.a) ? "url(#rayas-c)" : sel ? "var(--accent)" : "var(--mute-bar)" });
+      nodo("line", { x1: x - 7, x2: x + bw + 7, y1: y(d.prom), y2: y(d.prom), stroke: "var(--ink)", "stroke-width": 2, "stroke-dasharray": "3 3" });
+      nodo("text", { x: cx, y: Math.min(top, y(d.prom)) - 8, "text-anchor": "middle", "font-size": 12, fill: sel ? "var(--ink)" : "var(--ink-2)", "font-weight": sel ? 600 : 400 },
+        nf(d.v / 1000) + " mil");
+      nodo("text", { x: cx, y: H - 6, "text-anchor": "middle", "font-size": 12, fill: sel ? "var(--ink)" : "var(--muted)", "font-weight": sel ? 600 : 400 },
+        d.a + (parcial(d.a) ? "*" : ""));
+      const hit = nodo("rect", { x: cx - paso / 2, y: 0, width: paso, height: H, fill: "transparent" });
+      conTip(hit, () => `Comuna ${n} · ${d.a}${parcial(d.a) ? " (a junio)" : ""}`,
+        () => [["por habitante", "$ " + nf(d.v)], ["promedio de las comunas", "$ " + nf(d.prom)]]);
+    });
+    const caja = el("div");
+    caja.append(s, el("div", "nota", "La raya punteada es el promedio de las quince comunas. 2026, rayado, va a junio." +
+      (st.pesos === "real" ? "" : " En pesos corrientes la suba es sobre todo inflación.")));
+    return caja;
+  }
+
+  const GRUPOS = [["mantenimiento", "Mantenimiento, reparación y limpieza", "var(--accent)"],
+                  ["personal", "Personal", "var(--seq-3)"], ["otros", "Otros", "var(--mute-bar)"]];
+  function composicion(n, anio) {
+    const g = Object.fromEntries(D.comunas_grupo.filter(x => x.anio === anio && x.comuna === n).map(x => [x.grupo, x.devengado]));
+    const tot = GRUPOS.reduce((t, [k]) => t + (g[k] || 0), 0);
+    const caja = el("div"), pila = el("div", "pila"), ley = el("div", "pila-ley");
+    for (const [k, nombre, color] of GRUPOS) {
+      const v = g[k] || 0; if (!v) continue;
+      const t = el("span"); t.style.flex = String(v / tot); t.style.background = color; pila.append(t);
+      const f = el("div"), i = el("i"); i.style.background = color;
+      f.append(i, el("span", null, nombre), el("b", null, plata(v * P.f(anio), true)), el("small", null, pct(v / tot, 0)));
+      ley.append(f);
+    }
+    caja.append(pila, ley);
+    return caja;
+  }
+
+  // ---------- tabla ----------
+  document.querySelectorAll("#tabla th").forEach(th => th.querySelector("button").onclick = () => {
+    const k = th.dataset.k;
+    st.orden = { k, dir: st.orden.k === k ? -st.orden.dir : (k === "comuna" ? 1 : -1) };
+    tabla(delAnio());
+  });
+  function tabla(filas) {
+    const val = {
+      comuna: r => r.comuna, poblacion: r => r.poblacion, km2: r => GEO[r.comuna].km2, dev: r => m(r),
+      ph: r => m(r) / r.poblacion, ejec: r => r.devengado / r.vigente, var: r => cambio(r.anio, r.comuna) ?? -Infinity,
+    };
+    const { k, dir } = st.orden;
+    const lista = [...filas].sort((a, b) => dir * (val[k](a) - val[k](b)));
+    document.querySelectorAll("#tabla th").forEach(th => {
+      if (th.dataset.k === k) th.setAttribute("aria-sort", dir > 0 ? "ascending" : "descending"); else th.removeAttribute("aria-sort");
+    });
+    const tb = document.getElementById("tbody");
+    tb.replaceChildren();
+    for (const r of lista) {
+      const tr = el("tr", "clic" + (r.comuna === st.sel ? " elegida" : ""));
+      tr.tabIndex = 0;
+      const c0 = el("td", null, "Comuna " + r.comuna); c0.append(el("small", null, GEO[r.comuna].barrios.join(", ")));
+      const cv = cambio(r.anio, r.comuna);
+      tr.append(c0, el("td", null, nf(r.poblacion)), el("td", null, nf(GEO[r.comuna].km2, 1)), el("td", null, plata(m(r), true)),
+        el("td", null, "$ " + nf(m(r) / r.poblacion)), el("td", null, pct(r.devengado / r.vigente, 0)),
+        el("td", null, cv == null ? "—" : (cv >= 0 ? "+" : "−") + pct(Math.abs(cv), 0)));
+      tr.onclick = () => elegir(r.comuna, true);
+      tr.onkeydown = e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); elegir(r.comuna, true); } };
+      tb.append(tr);
+    }
+    document.getElementById("nota-var").textContent = parcial(st.anio)
+      ? "Cambio real: 2026 va a junio y no se compara con un año cerrado."
+      : st.anio === ANIOS[0] ? `Cambio real: ${ANIOS[0]} es el primer año de la serie.`
+      : `Cambio real: devengado de ${st.anio} contra ${st.anio - 1}, en pesos constantes.`;
+  }
+
+  const delAnio = () => D.comunas.filter(r => r.anio === st.anio && r.devengado > 0);
+  function dibujar() {
+    const filas = delAnio();
+    if (!filas.some(r => r.comuna === st.sel)) st.sel = orden(filas, r => m(r) / r.poblacion)[0].comuna;
+    document.querySelectorAll("[data-ind]").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.ind === st.ind)));
+    document.getElementById("lead-pesos").textContent = st.pesos === "real" ? "pesos de " + pesosDe : "pesos corrientes de cada año";
+    document.getElementById("aviso-2026").classList.toggle("on", parcial(st.anio));
+    mapa(filas); detalle(filas); tabla(filas);
+  }
+  P.iniciar(dibujar);
+})();
+</script>
+</body>
+</html>
