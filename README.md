@@ -16,8 +16,9 @@ no se copia su tablero: los datos y las dos salidas se arman desde cero con dato
 |---|---|
 | `scripts/01_armar_datos.py` | ETL: lee el crudo, arma el modelo estrella, baja el IPC y escribe los datos de la web |
 | `scripts/02_armar_powerbi.py` | Genera `powerbi/` desde cero (pisa lo que se haya tocado a mano en Desktop) |
+| `scripts/03_armar_obras.py` | Arma `web/obras.js` para el mapa de obras desde BA Obras (otra fuente, sin cruce con el presupuesto) |
 | `datos/` | `hechos.csv` + `dim_*.csv` + `ipc.csv`: el modelo que usa Power BI |
-| `web/` | El monitor propio: `index.html` (todo el presupuesto) y `comunas.html` (mapa y detalle de las quince comunas), con `estilo.css` y `comun.js` compartidos. `hechos.js` es la tabla de hechos que la página filtra y suma en el navegador (año × jurisdicción × programa × obra × función × partida × fuente × comuna); `datos.js`, el IPC y el mapa. Todos los gráficos son filtros: clic en una barra recorta la página y baja de nivel (jurisdicción → programa → obra). Se abre con doble clic, sin servidor, y es lo que publican GitHub Pages y Vercel |
+| `web/` | El monitor propio: `index.html` (todo el presupuesto) `comunas.html` (mapa y detalle de las quince comunas) y `obras.html` (las obras de BA Obras en el mapa), con `estilo.css` y `comun.js` compartidos. `hechos.js` es la tabla de hechos que la página filtra y suma en el navegador (año × jurisdicción × programa × obra × función × partida × fuente × comuna); `datos.js`, el IPC y el mapa. Todos los gráficos son filtros: clic en una barra recorta la página y baja de nivel (jurisdicción → programa → obra). Se abre con doble clic, sin servidor, y es lo que publican GitHub Pages y Vercel |
 | `powerbi/` | El mismo modelo como proyecto de Power BI (`.pbip`). Ver su README |
 
 ## Cómo se actualiza
@@ -25,6 +26,7 @@ no se copia su tablero: los datos y las dos salidas se arman desde cero con dato
 ```
 python scripts/01_armar_datos.py
 python scripts/02_armar_powerbi.py   # sólo si cambió el modelo; si no, alcanza con refrescar en Desktop
+python scripts/03_armar_obras.py     # el mapa de obras (después del 01, que baja el contorno de las comunas)
 ```
 
 La primera vez baja el crudo de BA Data a `crudo/` (unos 140 MB, fuera de git). Si ya lo tenés

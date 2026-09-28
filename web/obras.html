@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mapa de obras</title>
+<meta name="description" content="Las obras del Gobierno de la Ciudad de Buenos Aires en el mapa: etapa, tipo, monto, avance y contratista, según BA Obras.">
+<link rel="stylesheet" href="estilo.css">
+</head>
+<body>
+<div class="app">
+<aside class="lateral" id="lateral">
+  <div class="marca"><a href="index.html" data-pagina>Presupuesto de la Ciudad</a><small>Buenos Aires · 2022–2026</small></div>
+  <button class="menu" id="menu" type="button" aria-expanded="false" aria-controls="secciones">Filtros y secciones</button>
+  <div class="controles">
+    <div class="grupo"><span id="lab-pesos">Montos</span>
+      <div class="seg" role="group" aria-labelledby="lab-pesos">
+        <button type="button" data-pesos="real" aria-pressed="true">De hoy</button>
+        <button type="button" data-pesos="nominal" aria-pressed="false">Del contrato</button>
+      </div>
+    </div>
+  </div>
+  <div class="filtros-lat filtros-obras">
+    <div class="tit">Filtros de obras</div>
+    <div class="grupo"><label for="o-grupo">Etapa</label><select id="o-grupo" data-f="grupo"></select></div>
+    <div class="grupo"><label for="o-tipo">Tipo</label><select id="o-tipo" data-f="tipo"></select></div>
+    <div class="grupo"><label for="o-area">Área responsable</label><select id="o-area" data-f="area"></select></div>
+    <div class="grupo"><label for="o-com">Comuna</label><select id="o-com" data-f="com"></select></div>
+    <div class="grupo"><label for="o-anio">Año de inicio</label><select id="o-anio" data-f="anio"></select></div>
+  </div>
+  <nav id="secciones" aria-label="Secciones">
+    <div class="tit">Monitor</div>
+    <a class="pagina" href="index.html" data-pagina>Todo el presupuesto</a>
+    <a class="sub" href="index.html#quien" data-pagina>Quién lo gasta</a>
+    <a class="sub" href="index.html#obras" data-pagina>Obra pública en el presupuesto</a>
+    <div class="tit">Territorio</div>
+    <a class="pagina" href="comunas.html" data-pagina>Mapa de las comunas</a>
+    <a class="pagina" href="#mapa-s" aria-current="page">Mapa de obras</a>
+    <a class="sub" href="#reparto-o">Por tipo, área y comuna</a>
+    <a class="sub" href="#lista">Todas las obras</a>
+    <a class="sub" href="#leer">Qué es y qué no</a>
+  </nav>
+  <button class="tema" id="tema" type="button">Tema: auto</button>
+</aside>
+
+<div class="contenido">
+<header class="wrap">
+  <div class="eyebrow">Presupuesto de la Ciudad · territorio</div>
+  <h1>El mapa de las obras</h1>
+  <p class="lead">Dónde están las obras del Gobierno porteño, en qué etapa quedaron, cuánto costó cada contrato y quién la
+    hace. Es el registro de BA Obras, que <strong>no está al día</strong>: llega hasta fines de 2024.</p>
+</header>
+
+<main class="wrap">
+  <div class="activos" id="activos-o" aria-live="polite"></div>
+  <div class="kpis" id="kpis-o"></div>
+
+  <section class="card" id="mapa-s">
+    <div class="mapa-detalle">
+      <figure class="mapa-obras">
+        <div id="mapa-o"></div>
+        <div class="zoom" id="zoom"></div>
+        <figcaption>
+          <div class="cats" id="cats" role="group" aria-label="Etapa"></div>
+          <p class="nota">Cada punto es una obra; el tamaño sigue el monto del contrato. Clic en un punto para ver la obra;
+            clic en una comuna para quedarse con sus obras y acercarse.</p>
+        </figcaption>
+      </figure>
+      <div class="detalle ficha-obra" id="ficha" aria-live="polite"></div>
+    </div>
+  </section>
+
+  <div class="dos" id="reparto-o">
+    <section class="card">
+      <h2>Por tipo</h2>
+      <p class="bajada">Cantidad de obras y monto de los contratos. Clic para filtrar.</p>
+      <div class="barras" id="b-tipo"></div>
+    </section>
+    <section class="card">
+      <h2>Por área responsable</h2>
+      <p class="bajada">Quién lleva adelante la obra. Clic para filtrar.</p>
+      <div class="barras" id="b-area"></div>
+    </section>
+  </div>
+  <div class="dos">
+    <section class="card">
+      <h2>Por comuna</h2>
+      <p class="bajada">Según dónde cae el punto de la obra. Clic para filtrar.</p>
+      <div class="barras" id="b-com"></div>
+    </section>
+    <section class="card">
+      <h2>Por año de inicio</h2>
+      <p class="bajada">Cuándo empezó cada obra. Clic para filtrar.</p>
+      <div class="barras" id="b-anio"></div>
+    </section>
+  </div>
+
+  <section class="card" id="lista">
+    <h2>Todas las obras</h2>
+    <p class="bajada"><span id="n-obras"></span> con los filtros puestos. Clic en una fila para verla en el mapa.</p>
+    <div class="herr">
+      <input type="search" id="buscar-o" placeholder="Buscar por nombre, barrio, dirección o empresa" aria-label="Buscar obras">
+    </div>
+    <div class="tabla-scroll">
+      <table class="prog">
+        <thead><tr>
+          <th data-k="nombre"><button type="button">Obra</button></th>
+          <th data-k="etapa"><button type="button">Etapa</button></th>
+          <th data-k="com"><button type="button">Comuna</button></th>
+          <th data-k="inicio"><button type="button">Inicio</button></th>
+          <th data-k="monto"><button type="button">Monto</button></th>
+          <th data-k="avance"><button type="button">Avance</button></th>
+        </tr></thead>
+        <tbody id="tbody-o"></tbody>
+      </table>
+    </div>
+    <button class="mas" id="mas-o" type="button">Mostrar más</button>
+  </section>
+</main>
+
+<footer class="wrap" id="leer">
+  <h2>Qué es y qué no</h2>
+  <ul>
+    <li>Es el registro de <strong>BA Obras</strong>, el observatorio de obras urbanas del Gobierno de la Ciudad: una fila
+      por obra con su ubicación, etapa, tipo, monto del contrato, fechas, avance y contratista.</li>
+    <li><strong>No está al día.</strong> La última obra registrada empieza a fines de 2024, y hay obras "en obra" con fin
+      previsto en 2023: la etapa es la última que se cargó, no necesariamente la de hoy.</li>
+    <li><strong>No se suma con el presupuesto.</strong> Es otra fuente y no comparte códigos con el presupuesto
+      ejecutado: una obra de este mapa no se puede ubicar en un programa ni en una obra del monitor.</li>
+    <li><strong>Montos</strong>: es el monto del contrato, en pesos de cuando empezó la obra ("del contrato"). "De hoy"
+      lo lleva a pesos de <span id="pie-pesos-o"></span> con el IPC mensual del INDEC, que arranca en diciembre de 2016:
+      las obras anteriores, o sin fecha de inicio, se muestran con el monto del contrato y se marcan con *.</li>
+    <li>La <strong>comuna</strong> sale del punto en el mapa, no de la columna de la fuente, que a veces dice "7, 8 y 9".
+      Las obras sin coordenadas, o con un punto fuera de la Ciudad, están en la lista pero no en el mapa.</li>
+    <li>Las <strong>etapas</strong> se agrupan en cuatro: en obra (en obra, en ejecución), por empezar (en licitación,
+      adjudicada, en proyecto, en armado de pliegos), frenada o caída (paralizada, rescindida, neutralizada,
+      desestimada) y finalizada.</li>
+  </ul>
+  <h2>Fuentes</h2>
+  <ul>
+    <li>BA Obras, Gobierno de la Ciudad, en <a href="https://data.buenosaires.gob.ar/dataset/ba-obras">BA Data</a>.</li>
+    <li>IPC nivel general, INDEC, vía la <a href="https://datos.gob.ar/series">API de series de tiempo</a>.</li>
+    <li>Contorno de las comunas: <a href="https://data.buenosaires.gob.ar/dataset/comunas">BA Data</a>.</li>
+  </ul>
+</footer>
+</div>
+</div>
+
+<div class="tip" id="tip" role="tooltip"></div>
+
+<script src="datos.js"></script>
+<script src="hechos.js"></script>
+<script src="obras.js"></script>
+<script src="comun.js"></script>
+<script>
+(() => {
+  const { D, GEO, st, nf, plata, pct, el, svgEl, conTip, alActivar } = P;
+  const O = window.OBRAS, C = O.cols, N = C.nombre.length;
+  const MESES = ["enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre"];
+  const [pa, pm] = O.pesos_de.split("-");
+  document.getElementById("pie-pesos-o").textContent = `${MESES[+pm - 1]} de ${pa}`;
+  const GRUPOS = { obra: "En obra", plan: "Por empezar", freno: "Frenada o caída", fin: "Finalizada" };
+  const anioDe = k => C.inicio[k] ? +C.inicio[k].slice(0, 4) : 0;
+  const mesAno = s => { if (!s) return "—"; const [a, m] = s.split("-"); return MESES[+m - 1] + " de " + a; };
+  const real = () => st.pesos === "real";
+  // monto a mostrar: de hoy si se puede llevar, si no el del contrato (y se marca)
+  const monto = k => real() ? (C.real[k] ?? C.monto[k]) : C.monto[k];
+  const aprox = k => real() && C.real[k] == null && C.monto[k] != null;
+  const fmtMonto = (k, corto) => C.monto[k] == null ? "sin dato" : plata(monto(k), corto) + (aprox(k) ? "*" : "");
+  const FILTROS = {
+    grupo: { nombre: "Etapa", de: k => C.grupo[k], et: v => GRUPOS[v], todas: "Todas las etapas" },
+    tipo: { nombre: "Tipo", de: k => C.tipo[k], et: v => O.tipos[v], todas: "Todos los tipos" },
+    area: { nombre: "Área", de: k => C.area[k], et: v => O.areas[v], todas: "Todas las áreas" },
+    com: { nombre: "Comuna", de: k => C.com[k], et: v => v ? "Comuna " + v : "Sin ubicación", todas: "Todas las comunas" },
+    anio: { nombre: "Inicio", de: anioDe, et: v => v ? String(v) : "Sin fecha", todas: "Todos los años" },
+  };
+  const fo = {};
+  const so = { sel: null, q: "", orden: { k: "monto", dir: -1 }, limite: 25 };
+  const pasa = (k, excluir) => { for (const f in fo) if (f !== excluir && FILTROS[f].de(k) !== fo[f]) return false; return true; };
+  const filtradas = excluir => { const out = []; for (let k = 0; k < N; k++) if (pasa(k, excluir)) out.push(k); return out; };
+  const poner = (f, v) => { if (fo[f] === v) delete fo[f]; else fo[f] = v; so.limite = 25; dibujar(); };
+
+  // ---------- panel: selectores con lo que queda disponible ----------
+  function selectores() {
+    for (const sel of document.querySelectorAll("[data-f]")) {
+      const f = sel.dataset.f, F = FILTROS[f];
+      const cuenta = new Map();
+      for (const k of filtradas(f)) { const v = F.de(k); cuenta.set(v, (cuenta.get(v) || 0) + 1); }
+      if (f in fo && !cuenta.has(fo[f])) cuenta.set(fo[f], 0);
+      let vals = [...cuenta.keys()];
+      vals.sort(f === "grupo" ? (a, b) => Object.keys(GRUPOS).indexOf(a) - Object.keys(GRUPOS).indexOf(b)
+        : f === "com" || f === "anio" ? (a, b) => (a || 99999) - (b || 99999) : (a, b) => F.et(a).localeCompare(F.et(b), "es"));
+      if (f === "anio") vals.reverse();
+      sel.replaceChildren(new Option(F.todas, ""));
+      for (const v of vals) sel.append(new Option(`${F.et(v)} (${nf(cuenta.get(v))})`, JSON.stringify(v)));
+      sel.value = f in fo ? JSON.stringify(fo[f]) : "";
+      sel.onchange = () => { if (sel.value) fo[f] = JSON.parse(sel.value); else delete fo[f]; so.limite = 25; dibujar(); };
+    }
+  }
+  function activos() {
+    const box = document.getElementById("activos-o");
+    const fs = Object.keys(FILTROS).filter(f => f in fo);
+    box.replaceChildren(); box.classList.toggle("on", fs.length > 0);
+    if (!fs.length) return;
+    box.append(el("span", "lab", "Filtrando"));
+    for (const f of fs) {
+      const b = el("button", "chip"); b.type = "button";
+      b.append(el("small", null, FILTROS[f].nombre), document.createTextNode(FILTROS[f].et(fo[f])), el("span", "x", "×"));
+      b.setAttribute("aria-label", `Quitar filtro ${FILTROS[f].nombre}: ${FILTROS[f].et(fo[f])}`);
+      b.onclick = () => { delete fo[f]; dibujar(); };
+      box.append(b);
+    }
+    const l = el("button", "limpiar", "Limpiar todo"); l.type = "button";
+    l.onclick = () => { for (const f in fo) delete fo[f]; dibujar(); };
+    box.append(l);
+  }
+
+  // ---------- tarjetas ----------
+  function kpis(ks) {
+    const box = document.getElementById("kpis-o");
+    const conMonto = ks.filter(k => C.monto[k] != null), enMapa = ks.filter(k => C.lat[k] != null);
+    const tot = conMonto.reduce((t, k) => t + monto(k), 0), n = ks.filter(k => C.grupo[k] === "obra");
+    const av = n.filter(k => C.avance[k] != null);
+    box.replaceChildren();
+    const tarjeta = (cls, lab, val, sub) => { const k = el("div", "kpi " + cls); k.append(el("div", "lab", lab), el("div", "val", val)); if (sub) k.append(el("div", "sub", sub)); box.append(k); };
+    tarjeta("hero", "Obras registradas", nf(ks.length), nf(enMapa.length) + " con lugar en el mapa");
+    tarjeta("", "Monto de los contratos", plata(tot, true), (real() ? "en pesos de hoy · " : "en pesos de cada contrato · ") + nf(conMonto.length) + " con monto");
+    tarjeta("", "En obra según la carga", nf(n.length), av.length ? "avance promedio " + pct(av.reduce((t, k) => t + C.avance[k], 0) / av.length / 100, 0) : null);
+    tarjeta("", "Frenadas o caídas", nf(ks.filter(k => C.grupo[k] === "freno").length), "paralizadas, rescindidas, desestimadas");
+  }
+
+  // ---------- mapa ----------
+  const { kx, ky, x0, y0 } = D.mapa.proy;
+  const X = k => C.lng[k] * kx - x0, Y = k => -C.lat[k] * ky - y0;
+  const cajaDe = n => { // bbox de la comuna a partir de su path
+    const nums = GEO[n].d.match(/-?\d+(\.\d+)?/g).map(Number);
+    const xs = nums.filter((_, i) => i % 2 === 0), ys = nums.filter((_, i) => i % 2 === 1);
+    return [Math.min(...xs), Math.min(...ys), Math.max(...xs), Math.max(...ys)];
+  };
+  function mapa(ks) {
+    const { ancho, alto } = D.mapa;
+    let vb = [-4, -4, ancho + 8, alto + 8];
+    if (fo.com) {
+      const [a, b, c, d] = cajaDe(fo.com), pad = 30, w = c - a + 2 * pad, h = d - b + 2 * pad;
+      // se conserva la proporción del mapa entero para que el recuadro no salte de tamaño
+      const esc = Math.max(w / vb[2], h / vb[3]), W = vb[2] * esc, H = vb[3] * esc;
+      vb = [(a + c) / 2 - W / 2, (b + d) / 2 - H / 2, W, H];
+    }
+    const k0 = vb[2] / (ancho + 8); // 1 en el mapa entero, menos al acercarse
+    const s = svgEl("svg", { viewBox: vb.join(" "), role: "group", "aria-label": "Mapa de obras. Clic en una comuna para acercarse; clic en un punto para ver la obra." });
+    for (const c of D.mapa.comunas) {
+      const p = svgEl("path", { d: c.d, class: fo.com === c.comuna ? "elegida" : "" });
+      p.setAttribute("aria-label", "Comuna " + c.comuna);
+      conTip(p, () => "Comuna " + c.comuna, () => [["obras", nf(ks.filter(k => C.com[k] === c.comuna).length)]],
+        fo.com === c.comuna ? "Clic para ver toda la ciudad" : "Clic para filtrar y acercarse");
+      alActivar(p, () => poner("com", c.comuna));
+      s.append(p);
+    }
+    for (const c of D.mapa.comunas) s.append(svgEl("text", { x: c.x, y: c.y, class: "num-c", "font-size": 30 * k0 }, c.comuna));
+    const pts = ks.filter(k => C.lat[k] != null);
+    const maxM = Math.max(1, ...pts.map(k => C.monto[k] != null ? monto(k) : 0));
+    const orden = { fin: 0, plan: 1, freno: 2, obra: 3 };
+    pts.sort((a, b) => orden[C.grupo[a]] - orden[C.grupo[b]] || (monto(b) || 0) - (monto(a) || 0));
+    let elegido = null;
+    for (const k of pts) {
+      const r = (3 + 11 * Math.sqrt((C.monto[k] != null ? monto(k) : 0) / maxM)) * k0;
+      const c = svgEl("circle", { cx: X(k), cy: Y(k), r, class: C.grupo[k] + (so.sel === k ? " elegida" : ""), "stroke-width": 1.2 * k0 });
+      c.setAttribute("aria-label", C.nombre[k]);
+      conTip(c, () => C.nombre[k], () => [[GRUPOS[C.grupo[k]], C.etapa[k]], [O.tipos[C.tipo[k]], "tipo"], [fmtMonto(k), "monto"],
+        ...(C.avance[k] != null && C.grupo[k] !== "fin" ? [[C.avance[k] + " %", "avance"]] : [])], "Clic para ver la obra");
+      alActivar(c, () => { so.sel = k; dibujar(); });
+      if (so.sel === k) elegido = c; else s.append(c);
+    }
+    if (elegido) { elegido.setAttribute("stroke-width", 3 * k0); s.append(elegido); }
+    document.getElementById("mapa-o").replaceChildren(s);
+    const z = document.getElementById("zoom");
+    z.replaceChildren();
+    if (fo.com) { const b = el("button", null, "Ver toda la ciudad"); b.type = "button"; b.onclick = () => { delete fo.com; dibujar(); }; z.append(b); }
+
+    // leyenda de etapas: también filtra
+    const cats = document.getElementById("cats");
+    cats.replaceChildren();
+    const cuenta = {}; for (const k of filtradas("grupo")) cuenta[C.grupo[k]] = (cuenta[C.grupo[k]] || 0) + 1;
+    for (const [g, nombre] of Object.entries(GRUPOS)) {
+      const b = el("button", "cat" + ("grupo" in fo && fo.grupo !== g ? " apagada" : "")); b.type = "button";
+      const i = el("i"); i.style.background = `var(--cat-${g})`;
+      b.append(i, document.createTextNode(`${nombre} · ${nf(cuenta[g] || 0)}`));
+      b.setAttribute("aria-pressed", String(fo.grupo === g));
+      b.onclick = () => poner("grupo", g);
+      cats.append(b);
+    }
+  }
+
+  // ---------- ficha de la obra elegida, o un resumen ----------
+  function ficha(ks) {
+    const box = document.getElementById("ficha");
+    box.replaceChildren();
+    const k = so.sel;
+    if (k == null) {
+      box.append(el("h2", null, fo.com ? "Comuna " + fo.com : "Toda la ciudad"));
+      box.append(el("p", "barrios", fo.com ? GEO[fo.com].barrios.join(" · ") : "Clic en un punto del mapa para ver la obra."));
+      box.append(el("h3", null, "Los contratos más grandes"));
+      const top = ks.filter(x => C.monto[x] != null).sort((a, b) => monto(b) - monto(a)).slice(0, 8);
+      const lista = el("div", "barras");
+      const max = top.length ? monto(top[0]) : 1;
+      for (const x of top) {
+        const fila = el("div", "fila clic");
+        const et = el("div", "et", C.nombre[x]); et.title = C.nombre[x];
+        const pista = el("div", "pista"), b = el("div", "barra"); b.style.width = 100 * monto(x) / max + "%";
+        b.style.background = `var(--cat-${C.grupo[x]})`; pista.append(b);
+        fila.append(et, pista, el("div", "num", fmtMonto(x, true)));
+        conTip(fila, () => C.nombre[x], () => [[C.etapa[x], "etapa"], [C.com[x] ? "Comuna " + C.com[x] : "sin ubicación", "lugar"]], "Clic para ver la obra");
+        alActivar(fila, () => { so.sel = x; dibujar(); });
+        lista.append(fila);
+      }
+      box.append(top.length ? lista : el("p", "vacio", "Ninguna obra con monto con estos filtros."));
+      return;
+    }
+    const v = el("button", "volver", "← Volver al resumen"); v.type = "button"; v.onclick = () => { so.sel = null; dibujar(); };
+    box.append(v, el("h2", null, C.nombre[k]));
+    if (C.entorno[k] && C.entorno[k] !== C.nombre[k]) box.append(el("div", "barrios", C.entorno[k]));
+    const et = el("div", "etiquetas");
+    const etq = (txt, color) => { const e = el("span", "etq", txt); if (color) { e.style.background = `color-mix(in srgb, var(--cat-${color}) 22%, transparent)`; e.style.color = "var(--ink)"; } et.append(e); };
+    etq(C.etapa[k], C.grupo[k]); etq(O.tipos[C.tipo[k]]);
+    box.append(et);
+    const dl = el("dl");
+    const fila = (t, d) => { if (d == null || d === "") return; dl.append(el("dt", null, t)); const dd = el("dd"); if (d instanceof Node) dd.append(d); else dd.textContent = d; dl.append(dd); };
+    fila("Área", O.areas[C.area[k]]);
+    fila("Dónde", [C.dir[k], C.barrio[k], C.com[k] ? "comuna " + C.com[k] : ""].filter(Boolean).join(" · ") || (C.lat[k] == null ? "sin ubicación" : ""));
+    if (C.monto[k] != null) {
+      fila("Monto del contrato", plata(C.monto[k]) + (C.inicio[k] ? " (" + mesAno(C.inicio[k]) + ")" : ""));
+      fila("En pesos de hoy", C.real[k] != null ? plata(C.real[k]) : "no se puede llevar: empezó antes de 2017 o no tiene fecha");
+    } else fila("Monto", "sin dato");
+    fila("Inicio", mesAno(C.inicio[k]));
+    fila("Fin previsto", mesAno(C.fin[k]));
+    if (C.avance[k] != null) {
+      const a = el("div"); a.append(document.createTextNode(C.avance[k] + " %"));
+      const barra = el("div", "avance"), s = el("span"); s.style.width = C.avance[k] + "%"; barra.append(s); a.append(barra);
+      fila("Avance", a);
+    }
+    fila("Empresa", C.empresa[k]);
+    fila("Contratación", C.contratacion[k]);
+    box.append(dl);
+    if (C.link[k]) { const a = el("a", "enlace-mapa", "Ver la ficha en BA Obras →"); a.href = C.link[k]; a.target = "_blank"; a.rel = "noopener noreferrer"; box.append(a); }
+    if (C.foto[k]) {
+      const img = el("img"); img.src = C.foto[k]; img.alt = "Foto de la obra: " + C.nombre[k]; img.loading = "lazy";
+      img.referrerPolicy = "no-referrer"; img.onerror = () => img.remove();
+      box.append(img);
+    }
+  }
+
+  // ---------- barras que filtran ----------
+  function barras(id, f, ks, max = 15) {
+    const box = document.getElementById(id), F = FILTROS[f];
+    const g = new Map();
+    for (const k of ks) { const v = F.de(k); const o = g.get(v) || g.set(v, { n: 0, m: 0 }).get(v); o.n++; if (C.monto[k] != null) o.m += monto(k); }
+    let items = [...g].map(([v, o]) => ({ v, ...o }));
+    items.sort(f === "anio" ? (a, b) => (b.v || 0) - (a.v || 0) : (a, b) => b.n - a.n);
+    items = items.slice(0, f === "anio" ? 30 : max);
+    const top = Math.max(1, ...items.map(x => x.n));
+    box.replaceChildren();
+    for (const x of items) {
+      const fila = el("div", "fila clic" + (fo[f] === x.v ? " elegida" : f in fo ? " apagada" : ""));
+      const et = el("div", "et", F.et(x.v)); et.title = F.et(x.v);
+      const pista = el("div", "pista"), b = el("div", "barra"); b.style.width = Math.max(0.5, 100 * x.n / top) + "%"; pista.append(b);
+      const num = el("div", "num", nf(x.n)); num.append(el("small", null, plata(x.m, true)));
+      fila.append(et, pista, num);
+      conTip(fila, () => F.et(x.v), () => [[nf(x.n), "obras"], [plata(x.m), "monto de los contratos"]], fo[f] === x.v ? "Clic para quitar el filtro" : "Clic para filtrar");
+      alActivar(fila, () => poner(f, x.v));
+      box.append(fila);
+    }
+    if (!items.length) box.append(el("p", "vacio", "Ninguna obra con estos filtros."));
+  }
+
+  // ---------- tabla ----------
+  const buscar = document.getElementById("buscar-o");
+  buscar.oninput = () => { so.q = buscar.value.trim(); so.limite = 25; tabla(filtradas()); };
+  document.querySelectorAll("#lista th").forEach(th => th.querySelector("button").onclick = () => {
+    const k = th.dataset.k;
+    so.orden = { k, dir: so.orden.k === k ? -so.orden.dir : (["nombre", "etapa", "com"].includes(k) ? 1 : -1) };
+    tabla(filtradas());
+  });
+  document.getElementById("mas-o").onclick = () => { so.limite += 50; tabla(filtradas()); };
+  const sinTildes = s => s.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
+  function tabla(ks) {
+    let filas = ks;
+    if (so.q) { const q = sinTildes(so.q); filas = filas.filter(k => sinTildes([C.nombre[k], C.entorno[k], C.barrio[k], C.dir[k], C.empresa[k]].join(" ")).includes(q)); }
+    document.getElementById("n-obras").textContent = nf(filas.length) + (filas.length === 1 ? " obra" : " obras");
+    const { k: ko, dir } = so.orden;
+    const val = {
+      nombre: k => C.nombre[k], etapa: k => GRUPOS[C.grupo[k]] + " " + C.etapa[k], com: k => C.com[k] || 99,
+      inicio: k => C.inicio[k] || "", monto: k => C.monto[k] == null ? -1 : monto(k), avance: k => C.avance[k] ?? -1,
+    }[ko];
+    filas = [...filas].sort((a, b) => { const x = val(a), y = val(b); return dir * (typeof x === "string" ? x.localeCompare(y, "es") : x - y); });
+    document.querySelectorAll("#lista th").forEach(th => {
+      if (th.dataset.k === ko) th.setAttribute("aria-sort", dir > 0 ? "ascending" : "descending"); else th.removeAttribute("aria-sort");
+    });
+    const tb = document.getElementById("tbody-o");
+    tb.replaceChildren();
+    for (const k of filas.slice(0, so.limite)) {
+      const tr = el("tr", "clic" + (so.sel === k ? " elegida" : "")); tr.tabIndex = 0;
+      const c0 = el("td", null, C.nombre[k]); c0.append(el("small", null, [O.tipos[C.tipo[k]], O.areas[C.area[k]]].join(" · ")));
+      tr.append(c0, el("td", null, C.etapa[k]), el("td", null, C.com[k] ? String(C.com[k]) : "—"),
+        el("td", null, C.inicio[k] ? C.inicio[k].split("-").reverse().join("/") : "—"), el("td", null, fmtMonto(k, true)),
+        el("td", null, C.avance[k] != null ? C.avance[k] + " %" : "—"));
+      alActivar(tr, () => { so.sel = k; dibujar(); document.getElementById("mapa-s").scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" }); });
+      tb.append(tr);
+    }
+    if (!filas.length) { const tr = el("tr"), td = el("td", null, "Ninguna obra coincide."); td.colSpan = 6; tr.append(td); tb.append(tr); }
+    const mas = document.getElementById("mas-o");
+    mas.style.display = filas.length > so.limite ? "" : "none";
+    mas.textContent = `Mostrar más (quedan ${nf(filas.length - so.limite)})`;
+  }
+
+  function dibujar() {
+    const ks = filtradas();
+    if (so.sel != null && !ks.includes(so.sel)) so.sel = null;
+    selectores(); activos(); kpis(ks); mapa(ks); ficha(ks);
+    barras("b-tipo", "tipo", filtradas("tipo")); barras("b-area", "area", filtradas("area"));
+    barras("b-com", "com", filtradas("com")); barras("b-anio", "anio", filtradas("anio"));
+    tabla(ks);
+  }
+  P.iniciar(dibujar);
+})();
+</script>
+</body>
+</html>

@@ -149,7 +149,7 @@ window.P = (() => {
   // ---------- panel lateral ----------
   let render = () => {};
   const segA = document.getElementById("anios");
-  for (const a of ANIOS) {
+  if (segA) for (const a of ANIOS) {
     const b = el("button", null, String(a));
     b.type = "button";
     if (parcial(a)) { b.append(el("sup", null, "*")); b.title = "Hasta " + D.corte[a]; }
@@ -159,8 +159,10 @@ window.P = (() => {
   }
   document.querySelectorAll("[data-pesos]").forEach(b => b.onclick = () => { st.pesos = b.dataset.pesos; cambio(); });
   const selM = document.getElementById("medida");
-  for (const [k, m] of Object.entries(MEDIDAS)) selM.append(new Option(m.nombre, k));
-  selM.onchange = () => { st.medida = selM.value; cambio(); };
+  if (selM) {
+    for (const [k, m] of Object.entries(MEDIDAS)) selM.append(new Option(m.nombre, k));
+    selM.onchange = () => { st.medida = selM.value; cambio(); };
+  }
 
   // selectores de filtro: cada uno ofrece sólo lo que tiene gasto con los demás filtros puestos
   const SELECTORES = [
@@ -243,7 +245,7 @@ window.P = (() => {
     });
     document.querySelectorAll("[data-anio]").forEach(b => b.setAttribute("aria-pressed", String(+b.dataset.anio === st.anio)));
     document.querySelectorAll("[data-pesos]").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.pesos === st.pesos)));
-    selM.value = st.medida;
+    if (selM) selM.value = st.medida;
     document.querySelectorAll(".lead-pesos").forEach(e => e.textContent = st.pesos === "real" ? "pesos de " + pesosDe : "pesos corrientes de cada año");
     const av = document.getElementById("aviso-2026");
     if (av) av.classList.toggle("on", parcial(st.anio));

@@ -294,7 +294,10 @@ def mapa():
         pr = g.representative_point()
         out.append({"comuna": n, "d": path(s), "x": round(pr.x - x0), "y": round(pr.y - y0),
                     "km2": round(area[n], 1), "barrios": BARRIOS[n], "poblacion": int(pob[n])})
-    return {"ancho": round(x1 - x0), "alto": round(y1 - y0), "comunas": out}
+    # la proyección viaja con el mapa: la página ubica puntos (lng, lat) en
+    # x = lng * kx - x0, y = -lat * ky - y0
+    return {"ancho": round(x1 - x0), "alto": round(y1 - y0), "comunas": out,
+            "proy": {"kx": kx, "ky": ky, "x0": x0, "y0": y0}}
 
 
 BARRIOS = {
