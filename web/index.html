@@ -110,6 +110,20 @@ section.card .bajada { color: var(--ink-2); font-size: 15px; margin: 4px 0 18px;
 .fila .num { font-variant-numeric: tabular-nums; color: var(--ink); white-space: nowrap; text-align: right; min-width: 9ch; }
 .fila .num small { color: var(--muted); margin-left: 6px; }
 
+/* mapa de comunas */
+.mapa-barras { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: 24px; align-items: start; }
+.mapa svg { width: 100%; height: auto; display: block; max-height: 520px; }
+.mapa path { stroke: var(--surface); stroke-width: 3; stroke-linejoin: round; cursor: default; }
+.mapa path:focus-visible { outline: none; }
+.mapa path.activa, .mapa path:focus-visible { stroke: var(--ink); stroke-width: 5; }
+.mapa text { font-size: 26px; font-weight: 600; text-anchor: middle; dominant-baseline: central; pointer-events: none;
+  fill: var(--ink); stroke: var(--surface); stroke-width: 6px; stroke-linejoin: round; paint-order: stroke; }
+.fila.activa { background: color-mix(in srgb, var(--accent) 7%, transparent); }
+.leyenda { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--muted); margin-top: 10px; font-variant-numeric: tabular-nums; }
+.leyenda > span { white-space: nowrap; }
+.leyenda .escala { display: flex; flex: 0 1 180px; min-width: 60px; height: 10px; border-radius: 3px; overflow: hidden; }
+.leyenda .escala span { flex: 1; }
+
 /* columnas */
 svg text { font-family: inherit; }
 .col-chart { width: 100%; height: auto; display: block; }
@@ -163,7 +177,8 @@ a { color: var(--accent); }
   .kpi .val { font-size: 22px; }
   .kpi.hero { grid-column: 1 / -1; }
   .kpi.hero .val { font-size: 40px; }
-  .dos { grid-template-columns: minmax(0,1fr); }
+  .dos, .mapa-barras { grid-template-columns: minmax(0,1fr); }
+  .mapa svg { max-height: 420px; }
   section.card { padding: 16px; }
   .fila { grid-template-columns: minmax(96px, 38%) 1fr auto; font-size: 13px; }
   .fila .num small { display: none; }
@@ -238,8 +253,14 @@ a { color: var(--accent); }
     <h2>Las quince comunas</h2>
     <p class="bajada">Gasto por habitante de cada comuna como unidad ejecutora: mantenimiento de espacio público,
       arbolado, veredas y la gestión descentralizada. Es lo único del presupuesto que se reparte por barrio de forma
-      comparable.</p>
-    <div class="barras" id="comunas"></div>
+      comparable. El mapa pinta lo mismo; la leyenda, debajo, va de la comuna que menos gasta a la que más.</p>
+    <div class="mapa-barras">
+      <figure class="mapa">
+        <div id="mapa"></div>
+        <figcaption class="leyenda" id="leyenda-mapa"></figcaption>
+      </figure>
+      <div class="barras" id="comunas"></div>
+    </div>
     <p class="nota">No es "toda la plata que va a cada barrio". El clasificador geográfico del presupuesto marca dónde
       está la oficina que ejecuta y no dónde cae el gasto: con él, la comuna 4 (donde está la sede de gobierno) se
       llevaría un tercio del total. Población: censo 2022.</p>
@@ -285,6 +306,7 @@ a { color: var(--accent); }
       <a href="https://data.buenosaires.gob.ar/dataset/presupuesto-ejecutado">BA Data</a>.</li>
     <li>IPC nivel general, INDEC, vía la <a href="https://datos.gob.ar/series">API de series de tiempo</a>.</li>
     <li>Población por comuna: Censo Nacional 2022.</li>
+    <li>Contorno de las comunas: <a href="https://data.buenosaires.gob.ar/dataset/comunas">BA Data</a>.</li>
   </ul>
 </footer>
 
@@ -503,6 +525,18 @@ a { color: var(--accent); }
     const ph = r => m(r) / r.poblacion;
     const orden = [...filas].sort((a, b) => ph(b) - ph(a));
     const max = ph(orden[0]);
+    const tituloC = r => "Comuna " + r.comuna + " · " + r.anio;
+    const filasC = r => [
+      ["por habitante", "$ " + nf(ph(r))], ["devengado", plata(m(r))], ["ejecución", pct(r.devengado / r.vigente)],
+      ["habitantes (2022)", nf(r.poblacion)]];
+    // la barra y la comuna del mapa se marcan juntas al pasar por cualquiera de las dos
+    const marcar = (n, on) => document.querySelectorAll(`[data-comuna="${n}"]`).forEach(e => e.classList.toggle("activa", on));
+    const enlazar = (nodo, r) => {
+      nodo.dataset.comuna = r.comuna;
+      conTip(nodo, () => tituloC(r), () => filasC(r));
+      for (const [ev, on] of [["pointerenter", true], ["focus", true], ["pointerleave", false], ["blur", false]])
+        nodo.addEventListener(ev, () => marcar(r.comuna, on));
+    };
     box.replaceChildren();
     for (const r of orden) {
       const fila = el("div", "fila");
@@ -510,11 +544,35 @@ a { color: var(--accent); }
       barra.style.width = 100 * ph(r) / max + "%"; pista.append(barra);
       const num = el("div", "num", "$ " + nf(ph(r))); num.append(el("small", null, "por hab."));
       fila.append(el("div", "et", "Comuna " + r.comuna), pista, num);
-      conTip(fila, () => "Comuna " + r.comuna + " · " + r.anio, () => [
-        ["por habitante", "$ " + nf(ph(r))], ["devengado", plata(m(r))], ["ejecución", pct(r.devengado / r.vigente)],
-        ["habitantes (2022)", nf(r.poblacion)]]);
+      enlazar(fila, r);
       box.append(fila);
     }
+
+    // mapa: siete tonos de la escala secuencial, repartidos parejo entre la comuna que menos y la que más
+    const min = ph(orden[orden.length - 1]);
+    const tono = v => max > min ? 1 + Math.min(6, Math.floor(7 * (v - min) / (max - min))) : 4;
+    const porN = Object.fromEntries(filas.map(r => [r.comuna, r]));
+    const { ancho, alto } = D.mapa;
+    const NS = "http://www.w3.org/2000/svg";
+    const s = document.createElementNS(NS, "svg");
+    s.setAttribute("viewBox", `-4 -4 ${ancho + 8} ${alto + 8}`);
+    s.setAttribute("role", "group");
+    s.setAttribute("aria-label", "Mapa de las quince comunas según gasto por habitante");
+    const nodo = (t, a, txt) => { const n = document.createElementNS(NS, t); for (const k in a) n.setAttribute(k, a[k]); if (txt != null) n.textContent = txt; s.append(n); return n; };
+    for (const c of D.mapa.comunas) {
+      const r = porN[c.comuna];
+      const p = nodo("path", { d: c.d, fill: r ? `var(--seq-${tono(ph(r))})` : "var(--seq-0)" });
+      if (r) { enlazar(p, r); p.setAttribute("aria-label", "Comuna " + r.comuna + ": $ " + nf(ph(r)) + " por habitante"); }
+    }
+    for (const c of D.mapa.comunas) {
+      nodo("text", { x: c.x, y: c.y }, c.comuna);
+    }
+    document.getElementById("mapa").replaceChildren(s);
+
+    const ley = document.getElementById("leyenda-mapa");
+    const escala = el("div", "escala");
+    for (let i = 1; i <= 7; i++) { const t = el("span"); t.style.background = `var(--seq-${i})`; escala.append(t); }
+    ley.replaceChildren(el("span", null, "$ " + nf(min)), escala, el("span", null, "$ " + nf(max)), el("span", null, "por hab."));
   }
 
   // ---------- tabla de programas ----------

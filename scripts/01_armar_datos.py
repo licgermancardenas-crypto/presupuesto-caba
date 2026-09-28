@@ -43,7 +43,8 @@ segundo trimestre de 2026. Se bajan solos a `crudo/` (unos 140 MB, fuera de git)
 la primera vez; otra carpeta con los mismos archivos se indica con la variable
 PRESUPUESTO_CRUDO (sirven también comprimidos en .gz). IPC INDEC, serie
 148.3_INIVELNAL_DICI_M_26 de la API de series de tiempo. Población por comuna:
-Censo 2022, en `datos/poblacion_comuna_2022.csv`.
+Censo 2022, en `datos/poblacion_comuna_2022.csv`. Contorno de las comunas: BA Data,
+`comunas.geojson`, que también se baja solo a `crudo/`.
 """
 from pathlib import Path
 import json
@@ -206,6 +207,49 @@ c = (H.merge(com, on=["jur", "ue"]).assign(comuna=lambda x: x.ue_desc.str.extrac
 pob = pd.read_csv(DATOS / "poblacion_comuna_2022.csv", index_col=0).poblacion
 c["poblacion"] = c.comuna.map(pob)
 web["comunas"] = c.round(0).to_dict("records")
+
+
+# el contorno de las comunas, ya proyectado y simplificado: la página sólo
+# dibuja los paths. Plano local (metros) y una unidad del SVG = 20 m; con la
+# tolerancia de una unidad las costuras entre comunas no se ven
+def mapa():
+    from shapely.geometry import shape
+    from shapely.ops import transform
+    import math
+    arch = CRUDO / "comunas.geojson"
+    if not arch.exists():
+        url = CDN.replace("ministerio-de-economia-y-finanzas/", "ministerio-de-educacion/comunas/comunas.geojson")
+        print("  bajando", url)
+        req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
+        arch.write_bytes(urllib.request.urlopen(req, timeout=120).read())
+    feats = json.loads(arch.read_text(encoding="utf-8"))["features"]
+    kx = 111320 * math.cos(math.radians(-34.61)) / 20
+    ky = 110574 / 20
+    geos = {int(f["properties"]["comuna"]): transform(lambda x, y: (x * kx, -y * ky), shape(f["geometry"]))
+            for f in feats}
+    x0 = min(g.bounds[0] for g in geos.values())
+    y0 = min(g.bounds[1] for g in geos.values())
+    x1 = max(g.bounds[2] for g in geos.values())
+    y1 = max(g.bounds[3] for g in geos.values())
+
+    def path(g):
+        partes = []
+        for p in getattr(g, "geoms", [g]):
+            if p.area < 50:  # islotes del Riachuelo y el puerto
+                continue
+            pts = [(round(x - x0), round(y - y0)) for x, y in p.exterior.coords[:-1]]
+            partes.append("M" + "L".join(f"{x},{y}" for x, y in pts) + "Z")
+        return "".join(partes)
+
+    out = []
+    for n, g in sorted(geos.items()):
+        s = g.simplify(1, preserve_topology=True)
+        pr = g.representative_point()
+        out.append({"comuna": n, "d": path(s), "x": round(pr.x - x0), "y": round(pr.y - y0)})
+    return {"ancho": round(x1 - x0), "alto": round(y1 - y0), "comunas": out}
+
+
+web["mapa"] = mapa()
 # un .js y no un .json: la página tiene que andar abierta con doble clic, y el
 # navegador no deja hacer fetch de un archivo local
 js = "window.DATOS = " + json.dumps(web, ensure_ascii=False, separators=(",", ":")) + ";\n"
