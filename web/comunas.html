@@ -11,19 +11,7 @@
 <div class="app">
 <aside class="lateral" id="lateral">
   <div class="marca"><a href="index.html" data-pagina>Presupuesto de la Ciudad</a><small>Buenos Aires · 2022–2026</small></div>
-  <button class="menu" id="menu" type="button" aria-expanded="false" aria-controls="secciones">Secciones</button>
-  <nav id="secciones" aria-label="Secciones">
-    <div class="tit">Monitor</div>
-    <a class="pagina" href="index.html" data-pagina>Todo el presupuesto</a>
-    <a class="sub" href="index.html#serie-s" data-pagina>Año por año</a>
-    <a class="sub" href="index.html#en-que" data-pagina>En qué se gasta</a>
-    <a class="sub" href="index.html#quien" data-pagina>Quién y cómo</a>
-    <a class="sub" href="index.html#programas" data-pagina>Programa por programa</a>
-    <div class="tit">Territorio</div>
-    <a class="pagina" href="#mapa-s" aria-current="page">Mapa de las comunas</a>
-    <a class="sub" href="#tabla">Las quince en una tabla</a>
-    <a class="sub" href="#leer">Qué mide y qué no</a>
-  </nav>
+  <button class="menu" id="menu" type="button" aria-expanded="false" aria-controls="secciones">Filtros y secciones</button>
   <div class="controles">
     <div class="grupo"><span id="lab-anio">Año</span><div class="seg" id="anios" role="group" aria-labelledby="lab-anio"></div></div>
     <div class="grupo"><span id="lab-pesos">Pesos</span>
@@ -32,8 +20,30 @@
         <button type="button" data-pesos="nominal" aria-pressed="false">Corrientes</button>
       </div>
     </div>
-    <button class="tema" id="tema" type="button">Tema: auto</button>
+    <div class="grupo"><label for="medida">Medir</label><select id="medida"></select></div>
   </div>
+  <div class="filtros-lat">
+    <div class="tit">Filtros</div>
+    <div class="grupo"><label for="f-jur">Jurisdicción</label><select id="f-jur"></select></div>
+    <div class="grupo"><label for="f-prog">Programa</label><select id="f-prog"></select></div>
+    <div class="grupo"><label for="f-obra">Obra</label><select id="f-obra"></select></div>
+    <div class="grupo"><label for="f-fun">Finalidad y función</label><select id="f-fun"></select></div>
+    <div class="grupo"><label for="f-inc">Objeto del gasto</label><select id="f-inc"></select></div>
+    <div class="grupo"><label for="f-fte">Fuente de financiamiento</label><select id="f-fte"></select></div>
+  </div>
+  <nav id="secciones" aria-label="Secciones">
+    <div class="tit">Monitor</div>
+    <a class="pagina" href="index.html" data-pagina>Todo el presupuesto</a>
+    <a class="sub" href="index.html#en-que" data-pagina>En qué se gasta</a>
+    <a class="sub" href="index.html#quien" data-pagina>Quién lo gasta</a>
+    <a class="sub" href="index.html#obras" data-pagina>Obra pública</a>
+    <a class="sub" href="index.html#programas" data-pagina>Programa por programa</a>
+    <div class="tit">Territorio</div>
+    <a class="pagina" href="#mapa-s" aria-current="page">Mapa de las comunas</a>
+    <a class="sub" href="#tabla">Las quince en una tabla</a>
+    <a class="sub" href="#leer">Qué mide y qué no</a>
+  </nav>
+  <button class="tema" id="tema" type="button">Tema: auto</button>
 </aside>
 
 <div class="contenido">
@@ -41,10 +51,11 @@
   <div class="eyebrow">Presupuesto de la Ciudad · territorio</div>
   <h1>Las quince comunas</h1>
   <p class="lead">Cuánto gasta cada comuna como unidad ejecutora: mantenimiento del espacio público, arbolado, veredas y
-    la gestión descentralizada. Montos en <strong id="lead-pesos"></strong>. Clic en una comuna para ver su detalle.</p>
+    la gestión descentralizada. Montos en <strong class="lead-pesos"></strong>. Clic en una comuna para ver su detalle.</p>
 </header>
 
 <main class="wrap">
+  <div class="activos" id="activos" aria-live="polite"></div>
   <div class="aviso" id="aviso-2026">2026 está a mitad de camino: el archivo publicado llega a junio. El gasto por
     habitante de 2026 es de medio año y no se compara con el de un año cerrado.</div>
 
@@ -71,7 +82,7 @@
           <th data-k="comuna"><button type="button">Comuna</button></th>
           <th data-k="poblacion"><button type="button">Habitantes</button></th>
           <th data-k="km2"><button type="button">km²</button></th>
-          <th data-k="dev"><button type="button">Devengado</button></th>
+          <th data-k="dev"><button type="button">Monto</button></th>
           <th data-k="ph"><button type="button">Por hab.</button></th>
           <th data-k="ejec"><button type="button">Ejecución</button></th>
           <th data-k="var"><button type="button">Cambio real</button></th>
@@ -96,6 +107,9 @@
     <li>El gasto por habitante usa la población del censo 2022 para todos los años.</li>
     <li>El <strong>cambio real</strong> compara el devengado con el del año anterior en pesos constantes, elijas los
       pesos que elijas. 2026 no se compara: va a junio.</li>
+    <li>Los <strong>filtros</strong> del panel también valen acá: con una fuente o un objeto del gasto elegido, cada
+      comuna muestra sólo esa parte. Si un filtro deja a las comunas sin gasto (por ejemplo, un ministerio), el mapa
+      queda vacío.</li>
     <li>Los colores del mapa se reparten entre la comuna que menos y la que más en el año elegido: sirven para ordenar
       las comunas dentro de un año, no para comparar años.</li>
   </ul>
@@ -114,26 +128,30 @@
 <div class="tip" id="tip" role="tooltip"></div>
 
 <script src="datos.js"></script>
+<script src="hechos.js"></script>
 <script src="comun.js"></script>
 <script>
 (() => {
-  const { D, ANIOS, st, nf, plata, pct, m, pesosDe, el, parcial, conTip } = P;
-  const GEO = Object.fromEntries(D.mapa.comunas.map(c => [c.comuna, c]));
+  const { D, dims, COL, ANIOS, GEO, st, nf, plata, pct, f, el, svgEl, parcial, conTip, alActivar, sumar, esEjec, MEDIDAS } = P;
   const hash = +(location.hash.match(/^#c=(\d+)$/) || [])[1];
-  Object.assign(st, { ind: "ph", orden: { k: "ph", dir: -1 }, sel: GEO[hash] ? hash : null });
+  Object.assign(st, { ind: esEjec() ? "ejec" : "ph", orden: { k: "ph", dir: -1 }, sel: GEO[hash] ? hash : null });
 
-  const fila = (anio, n) => D.comunas.find(r => r.anio === anio && r.comuna === n);
-  // cambio real contra el año anterior: siempre en pesos constantes, y 2026 (a junio) no se compara
-  const cambio = (anio, n) => {
-    const a = fila(anio, n), b = fila(anio - 1, n);
-    if (!a || !b || parcial(anio) || parcial(anio - 1)) return null;
-    return (a.devengado * D.factor[anio]) / (b.devengado * D.factor[anio - 1]) - 1;
+  // el monto que se mide: con "ejecución" elegida en el panel, los montos son devengado
+  const clave = () => ({ devengado: "d", vigente: "v", sancionado: "s", ejecucion: "d" })[st.medida];
+  const nombreMonto = () => esEjec() ? "devengado" : MEDIDAS[st.medida].nombre.toLowerCase();
+  const monto = (o, a = st.anio) => o[clave()] * f(a);
+  // cambio real del devengado contra el año anterior, con los filtros; 2026 (a junio) no se compara
+  const cambio = (n, anio = st.anio) => {
+    if (parcial(anio) || !ANIOS.includes(anio - 1) || parcial(anio - 1)) return null;
+    const a = P.comunas(anio).get(n), b = P.comunas(anio - 1).get(n);
+    if (!a || !b || !b.d) return null;
+    return (a.d * D.factor[anio]) / (b.d * D.factor[anio - 1]) - 1;
   };
   const IND = {
-    ph:   { nombre: "Por habitante", v: r => m(r) / r.poblacion, fmt: v => "$ " + nf(v), unidad: "por hab." },
-    dev:  { nombre: "Devengado", v: r => m(r), fmt: v => plata(v, true), unidad: "" },
-    km2:  { nombre: "Por km²", v: r => m(r) / GEO[r.comuna].km2, fmt: v => plata(v, true), unidad: "por km²" },
-    ejec: { nombre: "Ejecución", v: r => r.devengado / r.vigente, fmt: v => pct(v, 0), unidad: "del vigente" },
+    ph:   { nombre: "Por habitante", v: (o, n) => monto(o) / GEO[n].poblacion, fmt: v => "$ " + nf(v), unidad: "por hab." },
+    tot:  { nombre: "Total", v: o => monto(o), fmt: v => plata(v, true), unidad: "" },
+    km2:  { nombre: "Por km²", v: (o, n) => monto(o) / GEO[n].km2, fmt: v => plata(v, true), unidad: "por km²" },
+    ejec: { nombre: "Ejecución", v: o => o.v ? o.d / o.v : NaN, fmt: v => pct(v, 0), unidad: "del vigente" },
   };
   const segI = document.getElementById("indicadores");
   for (const [k, ind] of Object.entries(IND)) {
@@ -153,17 +171,19 @@
   // ---------- mapa ----------
   function mapa(filas) {
     const ind = IND[st.ind];
-    const porN = Object.fromEntries(filas.map(r => [r.comuna, r]));
-    const rk = orden(filas, ind.v).map(r => r.comuna);
+    const porN = Object.fromEntries(filas.map(r => [r.n, r]));
+    const rk = orden(filas, r => ind.v(r.o, r.n)).map(r => r.n);
     const { min, max } = P.mapa(document.getElementById("mapa-g"), {
-      valor: n => porN[n] ? ind.v(porN[n]) : null,
+      valor: n => porN[n] ? ind.v(porN[n].o, n) : null,
       elegida: st.sel,
-      alElegir: n => elegir(n),
+      alElegir: n => { if (porN[n]) elegir(n); },
       enlazar: (p, n) => {
-        const r = porN[n]; if (!r) return;
-        p.setAttribute("aria-label", `Comuna ${n}: ${ind.fmt(ind.v(r))} ${ind.unidad}`);
+        const r = porN[n];
+        if (!r) { p.setAttribute("aria-label", `Comuna ${n}: sin gasto con estos filtros`); return; }
+        p.setAttribute("aria-label", `Comuna ${n}: ${ind.fmt(ind.v(r.o, n))} ${ind.unidad}`);
         conTip(p, () => "Comuna " + n + " · " + GEO[n].barrios.join(", "), () => [
-          [ind.nombre.toLowerCase() + " " + r.anio, ind.fmt(ind.v(r))], ["puesto", (rk.indexOf(n) + 1) + " de 15"]]);
+          [ind.nombre.toLowerCase() + " " + st.anio, ind.fmt(ind.v(r.o, n))], ["puesto", (rk.indexOf(n) + 1) + " de " + filas.length]],
+          "Clic para ver su detalle");
         p.addEventListener("pointerenter", () => marcar(n, true));
         p.addEventListener("pointerleave", () => marcar(n, false));
       },
@@ -175,91 +195,96 @@
   // ---------- detalle de la comuna elegida ----------
   function detalle(filas) {
     const box = document.getElementById("detalle");
-    const n = st.sel, r = filas.find(x => x.comuna === n), g = GEO[n];
-    const ph = x => m(x) / x.poblacion;
-    const rk = orden(filas, ph).map(x => x.comuna);
+    const n = st.sel, r = filas.find(x => x.n === n), g = GEO[n];
+    const ph = x => monto(x.o) / GEO[x.n].poblacion;
+    const rk = orden(filas, ph).map(x => x.n);
     const vals = filas.map(ph).sort((a, b) => a - b), mediana = vals[Math.floor(vals.length / 2)];
     box.replaceChildren();
     box.append(el("h2", null, "Comuna " + n), el("div", "barrios", g.barrios.join(" · ")));
     const ficha = el("div", "ficha");
-    ficha.append(el("span", null, nf(r.poblacion) + " habitantes"), el("span", null, nf(g.km2, 1) + " km²"),
-      el("span", null, nf(r.poblacion / g.km2) + " hab. por km²"));
+    ficha.append(el("span", null, nf(g.poblacion) + " habitantes"), el("span", null, nf(g.km2, 1) + " km²"),
+      el("span", null, nf(g.poblacion / g.km2) + " hab. por km²"));
     box.append(ficha);
     box.append(el("div", "grande", "$ " + nf(ph(r))));
     const dif = ph(r) / mediana - 1;
-    box.append(el("div", "puesto", `por habitante en ${r.anio}${parcial(r.anio) ? " (a junio)" : ""} · ${rk.indexOf(n) + 1}.ª de 15 · ` +
+    box.append(el("div", "puesto", `${nombreMonto()} por habitante en ${st.anio}${parcial(st.anio) ? " (a junio)" : ""} · ${rk.indexOf(n) + 1}.ª de ${filas.length} · ` +
       (Math.abs(dif) < 0.005 ? "igual a la mediana de las comunas" : pct(Math.abs(dif), 0) + (dif > 0 ? " más" : " menos") + " que la mediana")));
 
     const minis = el("div", "minis");
     const mini = (lab, val) => { const k = el("div", "mini"); k.append(el("div", "lab", lab), el("div", "val", val)); minis.append(k); };
-    const cv = cambio(r.anio, n);
-    mini("Devengado", plata(m(r), true));
-    mini("Crédito vigente", plata(m(r, "vigente"), true));
-    mini("Ejecución", pct(r.devengado / r.vigente, 0));
-    mini("Cambio real contra " + (r.anio - 1), cv == null ? "—" : (cv >= 0 ? "▲ " : "▼ ") + pct(Math.abs(cv), 0));
+    const cv = cambio(n);
+    mini("Devengado", plata(r.o.d * f(st.anio), true));
+    mini("Crédito vigente", plata(r.o.v * f(st.anio), true));
+    mini("Ejecución", pct(r.o.d / r.o.v, 0));
+    mini("Cambio real contra " + (st.anio - 1), cv == null ? "—" : (cv >= 0 ? "▲ " : "▼ ") + pct(Math.abs(cv), 0));
     box.append(minis);
 
     box.append(el("h3", null, "Por habitante, año por año"));
     box.append(serie(n));
-
-    box.append(el("h3", null, "En qué gasta en " + r.anio));
-    box.append(composicion(n, r.anio));
+    box.append(el("h3", null, "En qué gasta en " + st.anio));
+    box.append(composicion(n));
   }
 
-  // columnas de la comuna, año por año, con una raya en el promedio de las quince
+  // columnas de la comuna, año por año, con una raya en el promedio de las comunas
   function serie(n) {
     const W = 400, H = 180, mt = 30, mb = 24;
-    const NS = "http://www.w3.org/2000/svg";
-    const s = document.createElementNS(NS, "svg");
-    s.setAttribute("viewBox", `0 0 ${W} ${H}`); s.setAttribute("class", "col-chart");
-    const nodo = (t, a, txt) => { const x = document.createElementNS(NS, t); for (const k in a) x.setAttribute(k, a[k]); if (txt != null) x.textContent = txt; s.append(x); return x; };
+    const s = svgEl("svg", { viewBox: `0 0 ${W} ${H}`, class: "col-chart", role: "img" });
+    const nodo = (t, a, txt) => s.appendChild(svgEl(t, a, txt));
     const datos = ANIOS.map(a => {
-      const r = fila(a, n), todas = D.comunas.filter(x => x.anio === a);
-      const prom = todas.reduce((t, x) => t + m(x), 0) / todas.reduce((t, x) => t + x.poblacion, 0);
-      return { a, v: r ? m(r) / r.poblacion : 0, prom };
+      const g = P.comunas(a), r = g.get(n);
+      let tm = 0, tp = 0;
+      for (const [k, o] of g) { tm += monto(o, a); tp += GEO[k].poblacion; }
+      return { a, v: r ? monto(r, a) / GEO[n].poblacion : 0, prom: tp ? tm / tp : 0 };
     });
-    const max = Math.max(...datos.flatMap(d => [d.v, d.prom])) * 1.05;
+    const max = Math.max(...datos.flatMap(d => [d.v, d.prom]), 1e-9) * 1.05;
     const paso = W / datos.length, bw = Math.min(46, paso * 0.56);
     const y = v => mt + (H - mt - mb) * (1 - v / max);
-    s.setAttribute("role", "img");
-    s.setAttribute("aria-label", `Comuna ${n}, gasto por habitante: ` + datos.map(d => `${d.a} $ ${nf(d.v)}`).join("; "));
+    s.setAttribute("aria-label", `Comuna ${n}, ${nombreMonto()} por habitante: ` + datos.map(d => `${d.a} $ ${nf(d.v)}`).join("; "));
     const defs = nodo("defs", {});
-    defs.innerHTML = '<pattern id="rayas-c" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">' +
-      '<rect width="6" height="6" fill="var(--accent-soft)"/><line x1="0" y1="0" x2="0" y2="6" stroke="var(--hatch)" stroke-width="3"/></pattern>';
+    const pat = svgEl("pattern", { id: "rayas-c", width: 6, height: 6, patternUnits: "userSpaceOnUse", patternTransform: "rotate(45)" });
+    pat.append(svgEl("rect", { width: 6, height: 6, fill: "var(--accent-soft)" }), svgEl("line", { x1: 0, y1: 0, x2: 0, y2: 6, stroke: "var(--hatch)", "stroke-width": 3 }));
+    defs.append(pat);
     nodo("line", { x1: 0, x2: W, y1: H - mb, y2: H - mb, stroke: "var(--axis)" });
     datos.forEach((d, i) => {
       const cx = paso * (i + 0.5), x = cx - bw / 2, top = y(d.v), sel = d.a === st.anio;
-      nodo("rect", { x, y: top, width: bw, height: H - mb - top, rx: 3,
+      nodo("rect", { x, y: top, width: bw, height: Math.max(0, H - mb - top), rx: 3,
         fill: parcial(d.a) ? "url(#rayas-c)" : sel ? "var(--accent)" : "var(--mute-bar)" });
-      nodo("line", { x1: x - 7, x2: x + bw + 7, y1: y(d.prom), y2: y(d.prom), stroke: "var(--ink)", "stroke-width": 2, "stroke-dasharray": "3 3" });
-      nodo("text", { x: cx, y: Math.min(top, y(d.prom)) - 8, "text-anchor": "middle", "font-size": 12, fill: sel ? "var(--ink)" : "var(--ink-2)", "font-weight": sel ? 600 : 400 },
-        nf(d.v / 1000) + " mil");
+      if (d.prom) nodo("line", { x1: x - 7, x2: x + bw + 7, y1: y(d.prom), y2: y(d.prom), stroke: "var(--ink)", "stroke-width": 2, "stroke-dasharray": "3 3" });
+      nodo("text", { x: cx, y: Math.min(top, d.prom ? y(d.prom) : top) - 8, "text-anchor": "middle", "font-size": 12,
+        fill: sel ? "var(--ink)" : "var(--ink-2)", "font-weight": sel ? 600 : 400 }, nf(d.v / 1000) + " mil");
       nodo("text", { x: cx, y: H - 6, "text-anchor": "middle", "font-size": 12, fill: sel ? "var(--ink)" : "var(--muted)", "font-weight": sel ? 600 : 400 },
         d.a + (parcial(d.a) ? "*" : ""));
-      const hit = nodo("rect", { x: cx - paso / 2, y: 0, width: paso, height: H, fill: "transparent" });
+      const hit = nodo("rect", { x: cx - paso / 2, y: 0, width: paso, height: H, fill: "transparent", style: "cursor:pointer" });
       conTip(hit, () => `Comuna ${n} · ${d.a}${parcial(d.a) ? " (a junio)" : ""}`,
-        () => [["por habitante", "$ " + nf(d.v)], ["promedio de las comunas", "$ " + nf(d.prom)]]);
+        () => [["por habitante", "$ " + nf(d.v)], ["promedio de las comunas", "$ " + nf(d.prom)]], "Clic para ver ese año");
+      alActivar(hit, () => { st.anio = d.a; P.cambiar(); });
     });
     const caja = el("div");
-    caja.append(s, el("div", "nota", "La raya punteada es el promedio de las quince comunas. 2026, rayado, va a junio." +
+    caja.append(s, el("div", "nota", "La raya punteada es el promedio de las comunas con gasto. 2026, rayado, va a junio." +
       (st.pesos === "real" ? "" : " En pesos corrientes la suba es sobre todo inflación.")));
     return caja;
   }
 
+  // en qué gasta: casi todo es mantenimiento, reparación y limpieza; el resto se junta en personal y otros
+  const MANT = dims.ppal.findIndex(p => /^mantenimiento/i.test(p[1].trim()) && /no personales/i.test(dims.inc[p[0]]));
+  const PERS = dims.inc.findIndex(x => /en personal/i.test(x));
   const GRUPOS = [["mantenimiento", "Mantenimiento, reparación y limpieza", "var(--accent)"],
                   ["personal", "Personal", "var(--seq-3)"], ["otros", "Otros", "var(--mute-bar)"]];
-  function composicion(n, anio) {
-    const g = Object.fromEntries(D.comunas_grupo.filter(x => x.anio === anio && x.comuna === n).map(x => [x.grupo, x.devengado]));
-    const tot = GRUPOS.reduce((t, [k]) => t + (g[k] || 0), 0);
+  function composicion(n) {
+    const g = sumar({ por: k => COL.ppal[k] === MANT ? "mantenimiento" : COL.inc[k] === PERS ? "personal" : "otros",
+                      filtro: k => COL.com[k] === n });
+    const val = k => g.has(k) ? monto(g.get(k)) : 0;
+    const tot = GRUPOS.reduce((t, [k]) => t + Math.max(0, val(k)), 0);
     const caja = el("div"), pila = el("div", "pila"), ley = el("div", "pila-ley");
     for (const [k, nombre, color] of GRUPOS) {
-      const v = g[k] || 0; if (!v) continue;
+      const v = val(k); if (v <= 0) continue;
       const t = el("span"); t.style.flex = String(v / tot); t.style.background = color; pila.append(t);
-      const f = el("div"), i = el("i"); i.style.background = color;
-      f.append(i, el("span", null, nombre), el("b", null, plata(v * P.f(anio), true)), el("small", null, pct(v / tot, 0)));
-      ley.append(f);
+      const fl = el("div"), i = el("i"); i.style.background = color;
+      fl.append(i, el("span", null, nombre), el("b", null, plata(v, true)), el("small", null, pct(v / tot, 0)));
+      ley.append(fl);
     }
     caja.append(pila, ley);
+    if (!tot) caja.append(el("p", "vacio", "Sin gasto con estos filtros."));
     return caja;
   }
 
@@ -271,41 +296,48 @@
   });
   function tabla(filas) {
     const val = {
-      comuna: r => r.comuna, poblacion: r => r.poblacion, km2: r => GEO[r.comuna].km2, dev: r => m(r),
-      ph: r => m(r) / r.poblacion, ejec: r => r.devengado / r.vigente, var: r => cambio(r.anio, r.comuna) ?? -Infinity,
+      comuna: r => r.n, poblacion: r => GEO[r.n].poblacion, km2: r => GEO[r.n].km2, dev: r => monto(r.o),
+      ph: r => monto(r.o) / GEO[r.n].poblacion, ejec: r => r.o.v ? r.o.d / r.o.v : -1, var: r => cambio(r.n) ?? -Infinity,
     };
     const { k, dir } = st.orden;
     const lista = [...filas].sort((a, b) => dir * (val[k](a) - val[k](b)));
     document.querySelectorAll("#tabla th").forEach(th => {
       if (th.dataset.k === k) th.setAttribute("aria-sort", dir > 0 ? "ascending" : "descending"); else th.removeAttribute("aria-sort");
     });
+    document.querySelector('#tabla th[data-k="dev"] button').textContent = esEjec() ? "Devengado" : MEDIDAS[st.medida].nombre.replace("Crédito vigente", "Vigente");
     const tb = document.getElementById("tbody");
     tb.replaceChildren();
     for (const r of lista) {
-      const tr = el("tr", "clic" + (r.comuna === st.sel ? " elegida" : ""));
+      const tr = el("tr", "clic" + (r.n === st.sel ? " elegida" : ""));
       tr.tabIndex = 0;
-      const c0 = el("td", null, "Comuna " + r.comuna); c0.append(el("small", null, GEO[r.comuna].barrios.join(", ")));
-      const cv = cambio(r.anio, r.comuna);
-      tr.append(c0, el("td", null, nf(r.poblacion)), el("td", null, nf(GEO[r.comuna].km2, 1)), el("td", null, plata(m(r), true)),
-        el("td", null, "$ " + nf(m(r) / r.poblacion)), el("td", null, pct(r.devengado / r.vigente, 0)),
+      const c0 = el("td", null, "Comuna " + r.n); c0.append(el("small", null, GEO[r.n].barrios.join(", ")));
+      const cv = cambio(r.n);
+      tr.append(c0, el("td", null, nf(GEO[r.n].poblacion)), el("td", null, nf(GEO[r.n].km2, 1)), el("td", null, plata(monto(r.o), true)),
+        el("td", null, "$ " + nf(monto(r.o) / GEO[r.n].poblacion)), el("td", null, pct(r.o.d / r.o.v, 0)),
         el("td", null, cv == null ? "—" : (cv >= 0 ? "+" : "−") + pct(Math.abs(cv), 0)));
-      tr.onclick = () => elegir(r.comuna, true);
-      tr.onkeydown = e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); elegir(r.comuna, true); } };
+      alActivar(tr, () => elegir(r.n, true));
       tb.append(tr);
     }
     document.getElementById("nota-var").textContent = parcial(st.anio)
       ? "Cambio real: 2026 va a junio y no se compara con un año cerrado."
       : st.anio === ANIOS[0] ? `Cambio real: ${ANIOS[0]} es el primer año de la serie.`
-      : `Cambio real: devengado de ${st.anio} contra ${st.anio - 1}, en pesos constantes.`;
+      : `Cambio real: devengado de ${st.anio} contra ${st.anio - 1}, en pesos constantes y con los filtros puestos.`;
   }
 
-  const delAnio = () => D.comunas.filter(r => r.anio === st.anio && r.devengado > 0);
+  const delAnio = () => [...P.comunas()].map(([n, o]) => ({ n, o })).filter(r => r.o.d > 0 || r.o.v > 0);
   function dibujar() {
     const filas = delAnio();
-    if (!filas.some(r => r.comuna === st.sel)) st.sel = orden(filas, r => m(r) / r.poblacion)[0].comuna;
     document.querySelectorAll("[data-ind]").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.ind === st.ind)));
-    document.getElementById("lead-pesos").textContent = st.pesos === "real" ? "pesos de " + pesosDe : "pesos corrientes de cada año";
-    document.getElementById("aviso-2026").classList.toggle("on", parcial(st.anio));
+    const box = document.getElementById("detalle");
+    if (!filas.length) {
+      P.mapa(document.getElementById("mapa-g"), { valor: () => null, rotulo: "Mapa de las comunas: sin gasto con estos filtros" });
+      document.getElementById("ley-g").replaceChildren();
+      box.replaceChildren(el("h2", null, "Sin datos"), el("p", "vacio",
+        "Las comunas no ejecutan gasto con estos filtros en " + st.anio + ". Probá sacar alguno: las comunas gastan casi todo en mantenimiento del espacio público."));
+      document.getElementById("tbody").replaceChildren();
+      return;
+    }
+    if (!filas.some(r => r.n === st.sel)) st.sel = orden(filas, r => monto(r.o) / GEO[r.n].poblacion)[0].n;
     mapa(filas); detalle(filas); tabla(filas);
   }
   P.iniciar(dibujar);

@@ -12,7 +12,8 @@ Un modelo estrella que leen las dos salidas del proyecto (la web y Power BI):
                             NOMINALES
   datos/dim_*.csv           las descripciones de cada código
   datos/ipc.csv             el factor que lleva cada año a pesos de hoy
-  web/datos.json            los agregados que dibuja la página
+  web/datos.js, hechos.js   lo que lee la página: la tabla de hechos que filtra
+                            y suma en el navegador, el IPC y el mapa
 
 LOS PESOS
 ---------
@@ -175,47 +176,76 @@ print(f"\nhechos: {len(H):,} filas · pesos de {ult_mes}")
 print((T[MONTOS] / 1e12).round(2).assign(**{"ejec %": T["ejecucion_%"].round(1),
                                                "deveng. real": T.devengado_real_billones.round(2)}).to_string())
 
-# ---- agregados para la web -------------------------------------------------
-H["jur_desc"] = H.jur.map(J.set_index("jur").jur_desc)
-H = H.merge(F, on=["fin", "fun"]).merge(O, on=["inc", "ppal"]).merge(P, on=["jur", "prog"])
-
-
-def agg(por, top=None):
-    g = H.groupby(["anio"] + por, as_index=False)[MONTOS].sum()
-    if top:
-        g = g.sort_values("vigente", ascending=False).groupby("anio").head(top)
-    return g.round(0).to_dict("records")
-
-
-web = {
-    "pesos_de": ult_mes,
-    "factor": I.factor.round(6).to_dict(),
-    "corte": CORTE,
-    "totales": agg([]),
-    "jurisdicciones": agg(["jur", "jur_desc"]),
-    "finalidades": agg(["fin", "fin_desc"]),
-    "funciones": agg(["fin", "fin_desc", "fun", "fun_desc"]),
-    "incisos": agg(["inc", "inc_desc"]),
-    "programas": agg(["jur", "jur_desc", "prog", "prog_desc"]),
-}
-# las quince comunas como UNIDADES EJECUTORAS (lo comparable entre barrios), con
-# la población del censo 2022 para el gasto por habitante
+# ---- datos de la web ---------------------------------------------------------
+# La web filtra y suma en el navegador: recibe una tabla de hechos chica (año x
+# jurisdicción x programa x obra x función x partida principal x fuente x comuna)
+# con cada dimensión como índice a una lista de descripciones. Los montos van en
+# miles de pesos NOMINALES; la página los lleva a pesos constantes con `factor`.
+for c in ["proy", "obra"]:
+    R[c] = pd.to_numeric(R[c], errors="coerce").fillna(0).astype(int)
+# las quince comunas como UNIDADES EJECUTORAS (lo comparable entre barrios)
 ue = pd.read_csv(DATOS / "dim_unidad_ejecutora.csv")
-com = ue[ue.ue_desc.str.fullmatch(r"Comuna \d{1,2}", case=False)]
-c = (H.merge(com, on=["jur", "ue"]).assign(comuna=lambda x: x.ue_desc.str.extract(r"(\d+)")[0].astype(int))
-     .groupby(["anio", "comuna"], as_index=False)[MONTOS].sum())
-pob = pd.read_csv(DATOS / "poblacion_comuna_2022.csv", index_col=0).poblacion
-c["poblacion"] = c.comuna.map(pob)
-web["comunas"] = c.round(0).to_dict("records")
+com = ue[ue.ue_desc.str.fullmatch(r"Comuna \d{1,2}", case=False)].copy()
+com["com"] = com.ue_desc.str.extract(r"(\d+)")[0].astype(int)
+R = R.merge(com[["jur", "ue", "com"]], on=["jur", "ue"], how="left")
+R["com"] = R.com.fillna(0).astype(int)
+R.loc[R.obra == 0, "proy"] = 0  # el proyecto sólo interesa para identificar la obra
 
-# en qué gasta cada comuna: casi todo es mantenimiento, reparación y limpieza
-# (partida principal 3.3); el resto se junta en personal y otros
-g = H.merge(com, on=["jur", "ue"]).assign(comuna=lambda x: x.ue_desc.str.extract(r"(\d+)")[0].astype(int))
-g["grupo"] = "otros"
-g.loc[g.inc == 1, "grupo"] = "personal"
-g.loc[(g.inc == 3) & (g.ppal == 3), "grupo"] = "mantenimiento"
-web["comunas_grupo"] = (g.groupby(["anio", "comuna", "grupo"], as_index=False).devengado.sum()
-                        .round(0).to_dict("records"))
+POR = ["anio", "jur", "prog", "proy", "obra", "fin", "fun", "inc", "ppal", "fte", "com"]
+X = R.groupby(POR, as_index=False)[MONTOS].sum()
+X = X[(X[MONTOS] != 0).any(axis=1)].sort_values(POR).reset_index(drop=True)
+# control: la tabla de la web suma lo mismo que el modelo
+assert ((X.groupby("anio")[MONTOS].sum() - T[MONTOS]).abs() < 1).all().all()
+
+
+def indice(claves, desc):
+    """Lista de descripciones (la del último año en que aparece cada clave) y el
+    índice de cada fila de X en esa lista."""
+    t = (R.sort_values("anio").groupby(claves).tail(1)[claves + [desc]]
+         .sort_values(claves).reset_index(drop=True))
+    t["i"] = range(len(t))
+    return t, X.merge(t, on=claves, how="left")["i"].astype(int).to_numpy()
+
+
+tJ, iJ = indice(["jur"], "jur_desc")
+tP, iP = indice(["jur", "prog"], "prog_desc")
+tFi, _ = indice(["fin"], "fin_desc")
+tF, iF = indice(["fin", "fun"], "fun_desc")
+tI, _ = indice(["inc"], "inc_desc")
+tO, iO = indice(["inc", "ppal"], "ppal_desc")
+tT, iT = indice(["fte"], "fte_desc")
+obras = R[R.obra > 0]
+tOb = (obras.sort_values("anio").groupby(["jur", "prog", "proy", "obra"]).tail(1)
+       [["jur", "prog", "proy", "obra", "obra_desc"]].sort_values(["jur", "prog", "proy", "obra"]).reset_index(drop=True))
+tOb["i"] = range(len(tOb))
+iOb = X.merge(tOb, on=["jur", "prog", "proy", "obra"], how="left")["i"].fillna(-1).astype(int).to_numpy()
+pos = lambda t, claves: {tuple(k): i for i, k in zip(t.i, t[claves].itertuples(index=False))}  # noqa: E731
+posJ, posP, posFi, posI = pos(tJ, ["jur"]), pos(tP, ["jur", "prog"]), pos(tFi, ["fin"]), pos(tI, ["inc"])
+miles = lambda c: (X[c] / 1000).round().astype("int64").tolist()  # noqa: E731
+
+hechos = {
+    "dims": {
+        "jur": tJ.jur_desc.tolist(),
+        "prog": [[posJ[(j,)], d] for j, d in zip(tP.jur, tP.prog_desc)],
+        "obra": [[posP[(j, p)], d] for j, p, d in zip(tOb.jur, tOb.prog, tOb.obra_desc)],
+        "fin": tFi.fin_desc.tolist(),
+        "fun": [[posFi[(f,)], d] for f, d in zip(tF.fin, tF.fun_desc)],
+        "inc": tI.inc_desc.tolist(),
+        "ppal": [[posI[(i,)], d] for i, d in zip(tO.inc, tO.ppal_desc)],
+        "fte": tT.fte_desc.tolist(),
+    },
+    # X viene ordenada por año: alcanza con cuántas filas tiene cada uno
+    "anios": [[int(a), int(n)] for a, n in X.anio.value_counts().sort_index().items()],
+    "cols": {"prog": iP.tolist(), "obra": iOb.tolist(), "fun": iF.tolist(),
+             "ppal": iO.tolist(), "fte": iT.tolist(), "com": X.com.tolist(),
+             "s": miles("sancionado"), "v": miles("vigente"), "d": miles("devengado")},
+}
+(WEB / "hechos.js").write_text("window.HECHOS = " + json.dumps(hechos, ensure_ascii=False, separators=(",", ":")) + ";\n",
+                               encoding="utf-8")
+print(f"\nweb: {len(X):,} filas de hechos, {len(tOb):,} obras")
+
+pob = pd.read_csv(DATOS / "poblacion_comuna_2022.csv", index_col=0).poblacion
+web = {"pesos_de": ult_mes, "factor": I.factor.round(6).to_dict(), "corte": CORTE}
 
 
 # el contorno de las comunas, ya proyectado y simplificado: la página sólo
@@ -263,7 +293,7 @@ def mapa():
         s = g.simplify(1, preserve_topology=True)
         pr = g.representative_point()
         out.append({"comuna": n, "d": path(s), "x": round(pr.x - x0), "y": round(pr.y - y0),
-                    "km2": round(area[n], 1), "barrios": BARRIOS[n]})
+                    "km2": round(area[n], 1), "barrios": BARRIOS[n], "poblacion": int(pob[n])})
     return {"ancho": round(x1 - x0), "alto": round(y1 - y0), "comunas": out}
 
 
@@ -292,4 +322,6 @@ web["mapa"] = mapa()
 js = "window.DATOS = " + json.dumps(web, ensure_ascii=False, separators=(",", ":")) + ";\n"
 (WEB / "datos.js").write_text(js, encoding="utf-8")
 (WEB / "datos.json").unlink(missing_ok=True)
-print("\n->", DATOS, "\n->", WEB / "datos.js", f"({(WEB / 'datos.js').stat().st_size / 1e3:.0f} kB)")
+print("\n->", DATOS)
+for a in ["datos.js", "hechos.js"]:
+    print("->", WEB / a, f"({(WEB / a).stat().st_size / 1e3:.0f} kB)")
